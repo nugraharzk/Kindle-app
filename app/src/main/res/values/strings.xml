@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">KINDLE</string>
+
+    <string name="home">Beranda</string>
+    <string name="homecaps">BERANDA</string>
+    <string name="calendar">Acara</string>
+    <string name="calendarcaps">ACARA</string>
+    <string name="feeds">Status</string>
+    <string name="feedscaps">STATUS</string>
+    <string name="messages">Pesan</string>
+    <string name="messagescaps">PESAN</string>
+    <string name="profile">Profil</string>
+    <string name="profilecaps">PROFIL</string>
+
+
+    <string name="log_but">Log in</string>
+
+    <string name="sig_intro">Bertetangga kini lebih asyik, Tunggu Apalagi Daftar Sekarang Juga</string>
+
+    <string name="sig_but">Sign up</string>
+
+    <string name="hint_login">Username/Email</string>
+    <string name="hint_nik">NIK</string>
+    <string name="hint_mail">Email</string>
+    <string name="hint_pass">Password</string>
+    <string name="hint_name">Nama</string>
+    <string name="hint_username">Username</string>
+    <string name="signmess">Sudah punya akun?</string>
+    <string name="link_tosign"> daftar sekarang</string>
+    <string name="logmess">Belum punya akun?</string>
+    <string name="link_tologin">masuk sekarang</string>
+
+    <string name="tagline">Login untuk berkomunikasi</string>
+    <string name="search">Search</string>
+
+    <string name="loading">Loading .....</string>
+
+    <string name="def_name">Person Name</string>
+    <string name="def_chat">Hey fellas, it is....</string>
+    <string name="def_hour">00.00</string>
+    <string name="moments">some moments ago</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.</string>
+
+    <string name="tempat">Tempat :</string>
+    <string name="waktu">Waktu :</string>
+    <string name="Penyelenggara">Penyelenggara :</string>
+
+    <string name="tgl_def">11</string>
+    <string name="month_def">Nov</string>
+    <string name="event">Free Discount</string>
+    <string name="urgensi">Penting</string>
+    <string name="tempat_def">Bandung</string>
+    <string name="waktu_def">15.30–16.00</string>
+    <string name="Penyelenggara_def">Pak RT</string>
+
+    <string name="add_stat">Ada Apa Hari ini?</string>
+    <string name="save">Simpan</string>
+
+    <string name="hint_judul">Judul</string>
+    <string name="hint_desk">Deskripsi</string>
+    <string name="hint_waktu">Waktu</string>
+    <string name="hint_urgensi">Urgensi</string>
+</resources>

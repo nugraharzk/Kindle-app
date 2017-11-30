@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="edu.upi.mobprogproject.content.HomeFragment">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:ignore="RtlHardcoded">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/searchView"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/rt"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/textView15"
+                android:contentDescription="@string/app_name"
+                android:maxHeight="30dip"
+                android:minHeight="30dip"
+                android:paddingRight="10dp"
+                android:src="@drawable/two"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/notif"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="11dp"
+                android:contentDescription="@string/app_name"
+                android:maxHeight="30dip"
+                android:minHeight="30dip"
+                android:paddingRight="10dp"
+                android:src="@drawable/bell"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="118dp"
+                android:layout_toEndOf="@+id/rt"
+                android:maxHeight="40dip"
+                android:minHeight="40dip"
+                android:src="@drawable/logo" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <Button
+        android:id="@+id/urgentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="TOMBOL URGEN"
+        android:background="@drawable/urgen_btn"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:fontFamily="@font/roboto"
+        android:textColor="#FFF" />
+
+
+</RelativeLayout>
