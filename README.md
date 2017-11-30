@@ -1,1 +1,3 @@
-# kindle
+# KINDLE
+the MobProg project
+
