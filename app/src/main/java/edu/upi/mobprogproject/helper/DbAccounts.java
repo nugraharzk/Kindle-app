@@ -45,7 +45,7 @@ public class DbAccounts {
         Accounts K = new Accounts();
 
         //kolom yang diambil
-        String[] cols = new String[]{"username", "password"};
+        String[] cols = new String[]{"username", "password", "email"};
         //parameter, akan mengganti ? pada NAMA=?
         String[] param = {user, password, user, password};
 
@@ -55,6 +55,7 @@ public class DbAccounts {
             cur.moveToFirst();
             K.setUsername(cur.getString(0));
             K.setPassword(cur.getString(1));
+            K.setEmail(cur.getString(2));
         }
         cur.close();
         return K;
