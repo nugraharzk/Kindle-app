@@ -1,12 +1,13 @@
 package edu.upi.mobprogproject.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,9 +17,9 @@ import java.lang.reflect.Field;
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.adapter.CustomViewPager;
 import edu.upi.mobprogproject.adapter.ViewPagerAdapter;
-import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.CalendarFragment;
 import edu.upi.mobprogproject.content.FeedsFragment;
+import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.MessageFragment;
 import edu.upi.mobprogproject.content.ProfileFragment;
 
@@ -37,7 +38,6 @@ public class HomeActivity extends AppCompatActivity {
     ProfileFragment profileFragment;
 
     MenuItem prevMenuItem;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +109,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
         homeFragment = new HomeFragment();
         chatFragment = new CalendarFragment();
         feedsFragment = new FeedsFragment();
@@ -143,5 +142,10 @@ public class HomeActivity extends AppCompatActivity {
         } catch (IllegalAccessException e) {
             Log.e("BNVHelper", "Unable to change value of shift mode", e);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

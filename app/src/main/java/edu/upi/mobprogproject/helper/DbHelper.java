@@ -76,7 +76,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
     private static final String CREATE_TABLE_STATUS =
             "CREATE TABLE STATUS(id_status INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, " +
-                    "status TEXT, waktu TEXT NOT NULL, like INTEGER NOT NULL," +
+                    "status TEXT NOT NULL, waktu TEXT NOT NULL, like INTEGER NOT NULL," +
                     "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
     private static final String CREATE_TABLE_COMMENT =
             "CREATE TABLE COMMENT(id_komentar INTEGER PRIMARY KEY AUTOINCREMENT, id_status INTEGER NOT NULL, " +

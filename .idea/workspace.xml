@@ -15,11 +15,17 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbAccounts.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbAccounts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/HomeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addStatusActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addStatusActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/FeedsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/FeedsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbStatus.java" afterPath="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbStatus.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,47 +52,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HomeFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/HomeFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-540">
-              <caret line="57" column="12" lean-forward="false" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeedsFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FeedsFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/FeedsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="85" column="36" lean-forward="false" selection-start-line="85" selection-start-column="36" selection-end-line="85" selection-end-column="36" />
+            <state relative-caret-position="120">
+              <caret line="57" column="42" lean-forward="false" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
               <folding>
-                <element signature="e#2285#2517#0" expanded="true" />
-                <element signature="e#2516#2517#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#4147#4148#0" expanded="true" />
+                <element signature="e#4176#4177#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-237">
-              <caret line="74" column="90" lean-forward="false" selection-start-line="74" selection-start-column="90" selection-end-line="74" selection-end-column="90" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_signup.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
+      <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="22" column="8" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-              <folding>
-                <element signature="e#4489#4512#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="400">
+              <caret line="20" column="43" lean-forward="false" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
           <provider selected="true" editor-type-id="android-designer2">
@@ -97,60 +82,36 @@
       <file leaf-file-name="HomeActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+            <state relative-caret-position="323">
+              <caret line="148" column="9" lean-forward="false" selection-start-line="148" selection-start-column="9" selection-end-line="148" selection-end-column="9" />
+              <folding>
+                <element signature="e#1979#3078#0" expanded="true" />
+                <element signature="e#3077#3078#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addStatusActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addStatusActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="377">
+              <caret line="65" column="4" lean-forward="false" selection-start-line="65" selection-start-column="4" selection-end-line="70" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignupActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/SignupActivity.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="75" column="32" lean-forward="false" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
+            <state relative-caret-position="144">
+              <caret line="39" column="17" lean-forward="false" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Accounts.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Accounts.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="817">
-              <caret line="98" column="26" lean-forward="false" selection-start-line="98" selection-start-column="26" selection-end-line="98" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbUsers.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbUsers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-20">
-              <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbAccounts.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbAccounts.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="57" column="38" lean-forward="false" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
-              <folding />
-            </state>
+          <provider editor-type-id="android-manifest">
+            <state />
           </provider>
         </entry>
       </file>
@@ -1926,13 +1887,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-v22/fragment_message.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/searchbg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/ChatHeader.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_message.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/adapter/ChatHeaderAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/img.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/rectangle.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/profile_img.xml" />
@@ -1954,7 +1913,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_event.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_feeds.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_calendar.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/ProfileFragment.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
@@ -1964,19 +1922,22 @@
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Events.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Users.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbUsers.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbStatus.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbComments.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbEvents.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/CalendarFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/FeedsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addEventActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addStatusActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Accounts.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/SignupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbAccounts.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbStatus.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addStatusActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/FeedsFragment.java" />
       </list>
     </option>
   </component>
@@ -2174,6 +2135,10 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -2294,7 +2259,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512092283484" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512110429054" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2342,7 +2307,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512092283485" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512110429054" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2504,7 +2469,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512092283488" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1512110429058" />
       </method>
     </configuration>
     <list size="1">
@@ -2599,7 +2564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512091457686</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="shared preference fix">
+      <created>1512092303375</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1512092303375</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2615,7 +2587,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6678261" sideWeight="0.5030349" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6695652" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869565" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6678261" sideWeight="0.4969651" order="9" side_tool="false" content_ui="tabs" />
@@ -2628,7 +2600,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39826086" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.9095652" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2640,12 +2612,12 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328152" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869565" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6683938" sideWeight="0.5030349" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6678261" sideWeight="0.5030349" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6678261" sideWeight="0.4969651" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2653,18 +2625,18 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39826086" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.9095652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6683938" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6678261" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869565" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6695652" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298791" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298791" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869565" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32852808" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -2678,6 +2650,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="api 19 + last jobs" />
@@ -2690,31 +2663,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbStatus.java</url>
+          <line>77</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_home.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/message_header_items.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="10" lean-forward="false" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_message.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-800">
@@ -2851,16 +2812,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="20" column="44" lean-forward="false" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2931,46 +2882,6 @@
           <folding>
             <element signature="e#1278#1279#0" expanded="false" />
             <element signature="e#1316#1317#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="4" column="65" lean-forward="false" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Status.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#724#725#0" expanded="true" />
-            <element signature="e#756#757#0" expanded="true" />
-            <element signature="e#803#804#0" expanded="true" />
-            <element signature="e#845#846#0" expanded="true" />
-            <element signature="e#873#874#0" expanded="true" />
-            <element signature="e#900#901#0" expanded="true" />
-            <element signature="e#937#938#0" expanded="true" />
-            <element signature="e#969#970#0" expanded="true" />
-            <element signature="e#1004#1005#0" expanded="true" />
-            <element signature="e#1035#1036#0" expanded="true" />
-            <element signature="e#1083#1084#0" expanded="true" />
-            <element signature="e#1123#1124#0" expanded="true" />
-            <element signature="e#1156#1157#0" expanded="true" />
-            <element signature="e#1185#1186#0" expanded="true" />
-            <element signature="e#1229#1230#0" expanded="true" />
-            <element signature="e#1265#1266#0" expanded="true" />
-            <element signature="e#1297#1298#0" expanded="true" />
-            <element signature="e#1325#1326#0" expanded="true" />
-            <element signature="e#1367#1368#0" expanded="true" />
-            <element signature="e#1401#1402#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3089,22 +3000,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbEvents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbComments.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -3118,8 +3013,8 @@
         <state relative-caret-position="280">
           <caret line="95" column="46" lean-forward="false" selection-start-line="95" selection-start-column="46" selection-end-line="95" selection-end-column="46" />
           <folding>
-            <element signature="e#1632#1863#0" expanded="true" />
-            <element signature="e#1862#1863#0" expanded="true" />
+            <element signature="e#1632#1863#0" expanded="false" />
+            <element signature="e#1862#1863#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3128,41 +3023,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-66">
           <caret line="64" column="44" lean-forward="false" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addStatusActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="35" column="44" lean-forward="false" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-237">
-          <caret line="74" column="90" lean-forward="false" selection-start-line="74" selection-start-column="90" selection-end-line="74" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/FeedsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="85" column="36" lean-forward="false" selection-start-line="85" selection-start-column="36" selection-end-line="85" selection-end-column="36" />
-          <folding>
-            <element signature="e#2285#2517#0" expanded="true" />
-            <element signature="e#2516#2517#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Accounts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -3188,26 +3048,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/HomeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-540">
           <caret line="57" column="12" lean-forward="false" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="98" column="26" lean-forward="false" selection-start-line="98" selection-start-column="26" selection-end-line="98" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -3220,11 +3064,128 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbEvents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-657">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/26.1.0/8279b00f5194701ff18363fa2958c5a26670b0ef/support-fragment-26.1.0-sources.jar!/android/support/v4/app/Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="2353" column="0" lean-forward="false" selection-start-line="2353" selection-start-column="0" selection-end-line="2353" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Status.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-263">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/model/Accounts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3">
+          <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1297">
+          <caret line="98" column="26" lean-forward="false" selection-start-line="98" selection-start-column="26" selection-end-line="98" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/helper/DbAccounts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="57" column="38" lean-forward="false" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+        <state relative-caret-position="97">
+          <caret line="44" column="3" lean-forward="false" selection-start-line="44" selection-start-column="3" selection-end-line="44" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="39" column="17" lean-forward="false" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="148" column="9" lean-forward="false" selection-start-line="148" selection-start-column="9" selection-end-line="148" selection-end-column="9" />
+          <folding>
+            <element signature="e#1979#3078#0" expanded="true" />
+            <element signature="e#3077#3078#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="20" column="43" lean-forward="false" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/activity/addStatusActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="65" column="4" lean-forward="false" selection-start-line="65" selection-start-column="4" selection-end-line="70" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/upi/mobprogproject/content/FeedsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="57" column="42" lean-forward="false" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4147#4148#0" expanded="true" />
+            <element signature="e#4176#4177#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

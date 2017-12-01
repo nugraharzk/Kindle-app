@@ -53,7 +53,7 @@ public class DbStatus {
         //parameter, akan mengganti ? pada NAMA=?
         String[] param = {"" + id_status};
 
-        cur = db.query("status", cols, "username=?", param, null, null, null);
+        cur = db.query("status", cols, "id_status=?", param, null, null, null);
 
         if (cur.getCount() > 0) {  //ada data? ambil
             cur.moveToFirst();
