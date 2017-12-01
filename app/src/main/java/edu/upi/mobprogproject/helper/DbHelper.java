@@ -85,7 +85,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     "FOREIGN KEY (id_status) REFERENCES STATUS(id_status))";
     private static final String CREATE_TABEL_EVENT =
             "CREATE TABLE EVENT(id_event INTEGER PRIMARY KEY AUTOINCREMENT, judul TEXT, username TEXT NOT NULL, " +
-                    "waktu TEXT NOT NULL, priority TEXT NOT NULL, deskripsi TEXT NOT NULL, lat TEXT, lng TEXT, konfirmasi INTEGER," +
+                    "waktu TEXT NOT NULL, priority TEXT NOT NULL, deskripsi TEXT NOT NULL, lat TEXT, lng TEXT, konfirmasi INTEGER NOT NULL," +
                     "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
 
     DbHelper(Context context) {

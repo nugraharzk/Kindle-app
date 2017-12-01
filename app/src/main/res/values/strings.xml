@@ -59,6 +59,7 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
 
     <string name="hint_judul">Judul</string>
     <string name="hint_desk">Deskripsi</string>
-    <string name="hint_waktu">Waktu</string>
+    <string name="hint_waktu">HH:MM</string>
+    <string name="hint_date">DD/MM/YYYY</string>
     <string name="hint_urgensi">Urgensi</string>
 </resources>

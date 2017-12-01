@@ -21,10 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
-        android:layout_marginStart="26dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginStart="24dp"
         android:text="@string/month_def"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTgl" />
 
@@ -41,17 +43,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvUrgent" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="1dp"
-        android:text="@string/tempat"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/tvTgl"
-        app:layout_constraintTop_toBottomOf="@+id/tvEvent" />
-
-    <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +51,7 @@
         android:text="@string/waktu"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/tvTgl"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTempat" />
 
     <TextView
         android:id="@+id/textView14"
@@ -78,10 +69,11 @@
         android:id="@+id/tvTempat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="1dp"
         android:text="@string/tempat_def"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/tvTgl"
         app:layout_constraintTop_toBottomOf="@+id/tvEvent" />
 
     <TextView
@@ -93,11 +85,11 @@
         android:text="@string/waktu_def"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTempat" />
 
     <TextView
         android:id="@+id/tvPenyelenggara"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="@string/Penyelenggara_def"

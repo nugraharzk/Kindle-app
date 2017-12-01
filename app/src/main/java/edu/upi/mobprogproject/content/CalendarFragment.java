@@ -3,6 +3,7 @@ package edu.upi.mobprogproject.content;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.addEventActivity;
@@ -30,9 +32,12 @@ import edu.upi.mobprogproject.model.Users;
  */
 public class CalendarFragment extends Fragment {
 
-
+    public static final int ACT2_REQUEST = 100;
     DbEvents dbE;
     DbUsers dbU;
+    RecyclerView recyclerView;
+    AgendaAdapter adapter;
+    static ArrayList<AgendaList> agenda;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -42,21 +47,25 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_calendar, container, false);
+        return inflater.inflate(R.layout.fragment_calendar, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
         dbE = new DbEvents(getActivity());
         dbE.open();
         dbU = new DbUsers(getActivity());
         dbU.open();
 
-        final AgendaAdapter adapter;
-        final ArrayList<AgendaList> agenda = setData(dbE, dbU);
+        agenda = setData(dbE, dbU);
 
         ImageView addAgenda = v.findViewById(R.id.bell_event);
         addAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), addEventActivity.class);
-                startActivity(i);
+                startActivityForResult(i, ACT2_REQUEST);
             }
         });
         /*
@@ -73,10 +82,12 @@ public class CalendarFragment extends Fragment {
         agenda.add(new AgendaList("terdekat", "17", "Jun", "Lomba Koding",
                 "GEEK", "11.00-12.00", "UPI"));
         */
-        RecyclerView recyclerView = v.findViewById(R.id.rcEvent);
+        recyclerView = v.findViewById(R.id.rcEvent);
         adapter = new AgendaAdapter(getActivity(), agenda);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
@@ -84,7 +95,6 @@ public class CalendarFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         // Inflate the layout for this fragment
-        return v;
     }
 
     public ArrayList<AgendaList> setData(DbEvents dbe, DbUsers dbu) {
@@ -98,12 +108,23 @@ public class CalendarFragment extends Fragment {
             one.setNamaAcara(item.getJudul());
             one.setPenyelenggara(user.getNama());
             one.setUrgensi(item.getPriority());
-            String tgl = item.getWaktu();
-            Log.i("dl", "test" + tgl);
-            if (tgl != null) {
-                String[] tgl_pecah = tgl.split(" ");
-                one.setTgl(tgl_pecah[0]);
-                one.setBulan(tgl_pecah[1]);
+            String times = item.getWaktu();
+            Log.i("dl", "test" + times);
+            if (times != null) {
+                //dot need to be escaped
+                String[] times_pecah = times.split("\\.");
+                if (times_pecah.length > 0) {
+                    one.setWaktu(times_pecah[0]);
+                    String tgl = times_pecah[1];
+                    if (tgl != null) {
+                        String[] tgl_pecah = tgl.split("/");
+                        if (tgl_pecah.length > 0) {
+                            one.setTgl(tgl_pecah[0]);
+                            one.setBulan(getDate(tgl_pecah[1]));
+                        }
+                    }
+                }
+                //one.setTgl(tgl_pecah[0]);
             }
             one.setTempat(item.getDeskripsi());
 
@@ -119,5 +140,39 @@ public class CalendarFragment extends Fragment {
         super.onDestroy();
         dbE.close();
         dbU.close();
+    }
+
+    private String getDate(String month) {
+        HashMap<Integer, String> hasMaps = new HashMap<Integer, String>() {{
+            put(1, "Jan");
+            put(2, "Feb");
+            put(3, "Mar");
+            put(4, "Apr");
+            put(5, "Mei");
+            put(6, "Jun");
+            put(7, "Jul");
+            put(8, "Ags");
+            put(9, "Sep");
+            put(10, "Okt");
+            put(11, "Nov");
+            put(12, "Des");
+        }};
+
+        return hasMaps.get(Integer.parseInt(month));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ACT2_REQUEST) {
+            //adapter.notifyDataSetChanged();
+            recyclerView.invalidate();
+            //karena dibalik indexnya
+            recyclerView.getLayoutManager().scrollToPosition(agenda.size() - 1);
+        }
+    }
+
+    public static ArrayList<AgendaList> getAgenda() {
+        return agenda;
     }
 }

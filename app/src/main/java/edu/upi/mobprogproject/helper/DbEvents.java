@@ -38,7 +38,7 @@ public class DbEvents {
         newV.put("username", k.getUsername());
         newV.put("waktu", k.getWaktu());
         newV.put("priority", k.getPriority());
-        newV.put("dekripsi", k.getDeskripsi());
+        newV.put("deskripsi", k.getDeskripsi());
         newV.put("lat", k.getLat());
         newV.put("lng", k.getLng());
         newV.put("konfirmasi", k.getKonfirmasi());
