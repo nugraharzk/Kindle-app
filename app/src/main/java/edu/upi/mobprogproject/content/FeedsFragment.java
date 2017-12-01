@@ -57,6 +57,8 @@ public class FeedsFragment extends Fragment {
         if (requestCode == ACT2_REQUEST) {
             //adapter.notifyDataSetChanged();
             recyclerView.invalidate();
+            //karena dibalik indexnya
+            recyclerView.getLayoutManager().scrollToPosition(status.size() - 1);
         }
     }
 
