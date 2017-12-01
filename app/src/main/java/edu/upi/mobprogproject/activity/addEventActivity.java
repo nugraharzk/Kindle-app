@@ -62,7 +62,7 @@ public class addEventActivity extends AppCompatActivity {
         E.setPriority(urgensi);
 
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
-        E.setNik_owner(sp.getString("nik", ""));
+        E.setUsername(sp.getString("username", ""));
         long a = dbE.insertEvents(E);
         if (a != -1) {
             Toast.makeText(this, "Event Berhasil DItambahkan", Toast.LENGTH_SHORT).show();

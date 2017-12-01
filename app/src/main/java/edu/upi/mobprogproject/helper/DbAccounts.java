@@ -35,7 +35,6 @@ public class DbAccounts {
         newV.put("username", k.getUsername());
         newV.put("email", k.getEmail());
         newV.put("password", k.getPassword());
-        newV.put("nik", k.getNik());
         //newV.put("nama", k.getNama());
 
         return db.insert("account", null, newV);
@@ -46,7 +45,7 @@ public class DbAccounts {
         Accounts K = new Accounts();
 
         //kolom yang diambil
-        String[] cols = new String[]{"username", "password", "nik"};
+        String[] cols = new String[]{"username", "password"};
         //parameter, akan mengganti ? pada NAMA=?
         String[] param = {user, password, user, password};
 
@@ -56,8 +55,6 @@ public class DbAccounts {
             cur.moveToFirst();
             K.setUsername(cur.getString(0));
             K.setPassword(cur.getString(1));
-            K.setNik(cur.getString(2));
-            //K.setNama(cur.getString(3));
         }
         cur.close();
         return K;

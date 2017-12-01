@@ -4,31 +4,33 @@ package edu.upi.mobprogproject.model;
  * Created by amaceh on 14/11/17.
  * A model to Status Table
  * Status
- * id, nik, status, waktu, like
+ * id_status INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, " +
+ "status TEXT, waktu TEXT NOT NULL, like INTEGER NOT NULL," +
+ "FOREIGN KEY (username) REFERENCES ACCOUNT(username)
  **/
 
 public class Status {
-    private int id, like;
-    private String nik, status, waktu;
+    private int id_status, like;
+    private String username, status, waktu;
 
     public Status() {
 
     }
 
-    public Status(int id, int like, String nik, String status, String waktu) {
-        this.id = id;
+    public Status(int id_status, int like, String username, String status, String waktu) {
+        this.id_status = id_status;
         this.like = like;
-        this.nik = nik;
+        this.username = username;
         this.status = status;
         this.waktu = waktu;
     }
 
-    public int getId() {
-        return id;
+    public int getId_status() {
+        return id_status;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_status(int id_status) {
+        this.id_status = id_status;
     }
 
     public int getLike() {
@@ -39,12 +41,12 @@ public class Status {
         this.like = like;
     }
 
-    public String getNik() {
-        return nik;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNik(String nik) {
-        this.nik = nik;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getStatus() {

@@ -17,7 +17,6 @@ import edu.upi.mobprogproject.model.Users;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText editTextNIK;
     private EditText editTextNama;
     private EditText editTextUsername;
     private EditText editTextEmail;
@@ -35,7 +34,6 @@ public class SignupActivity extends AppCompatActivity {
         dbU = new DbUsers(getApplicationContext());
         dbU.open();
         //initializing views
-        editTextNIK = findViewById(R.id.editTextNIK);
         editTextNama = findViewById(R.id.editTextNama);
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -53,7 +51,6 @@ public class SignupActivity extends AppCompatActivity {
         dialog.show();
 
         //getting email and password from edit texts
-        String nik = editTextNIK.getText().toString().trim();
         String nama = editTextNama.getText().toString().trim();
         String username = editTextUsername.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
@@ -80,13 +77,9 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(nik)) {
-            Toast.makeText(this, "Please enter NIK", Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        Accounts u1 = new Accounts(username, email, password, nik);
-        Users u2 = new Users(nik, nama);
+        Accounts u1 = new Accounts(username, email, password);
+        Users u2 = new Users(username, nama);
         //creating a new user
         try {
             long rowInserted = dbA.insertAccounts(u1);

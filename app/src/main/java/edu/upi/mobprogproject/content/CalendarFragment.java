@@ -92,7 +92,7 @@ public class CalendarFragment extends Fragment {
         ArrayList<Events> event = dbe.getAllEvents();
         int i = 0;
         for (Events item : event) {
-            Users user = dbu.getUser(item.getNik_owner());
+            Users user = dbu.getUser(item.getUsername());
             AgendaList one = new AgendaList();
             //judul desk, waktu, urgensi
             one.setNamaAcara(item.getJudul());

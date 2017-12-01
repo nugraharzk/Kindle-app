@@ -84,7 +84,7 @@ public class FeedsFragment extends Fragment {
         ArrayList<Status> status = dbs.getAllStatus();
         int i = 0;
         for (Status item : status) {
-            Users user = dbu.getUser(item.getNik());
+            Users user = dbu.getUser(item.getUsername());
             st.add(new StatusList(user.getNama(), item.getWaktu(), item.getStatus()));
             i += 1;
         }

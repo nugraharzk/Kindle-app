@@ -33,7 +33,7 @@ public class addStatusActivity extends AppCompatActivity {
         Status S = new Status();
         S.setWaktu(Calendar.getInstance().getTime().toString());
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
-        S.setNik(sp.getString("nik", ""));
+        S.setUsername(sp.getString("username", ""));
         S.setLike(0);
         EditText stat = findViewById(R.id.etStatus);
         String status = stat.getText().toString().trim();

@@ -3,39 +3,42 @@ package edu.upi.mobprogproject.model;
 /**
  * Created by amaceh on 14/11/17.
  * User Attribute
- * nik, nama, ttl, alamat, pekerjaan, status, rt, telepon
+ * username TEXT PRIMARY KEY, nama TEXT NOT NULL, ttl TEXT, " +
+ "alamat TEXT, rt TEXT, telepon TEXT, jabatan TEXT,lat TEXT, lng TEXT" +
+ "FOREIGN KEY (username) REFERENCES ACCOUNT(username)
  */
 
 public class Users {
-    int rt;
-    private String nik, nama, ttl, alamat, pekerjaan, status, telepon;
+    private String username, nama, ttl, alamat, rt, telepon, jabatan, lat, lng;
 
     public Users() {
 
     }
 
-    public Users(String nik, String nama) {
-        this.nik = nik;
+    public Users(String username, String nama) {
+
         this.nama = nama;
+        this.username = username;
     }
 
-    public Users(String nik, String nama, String ttl, String alamat, String pekerjaan, String status, int rt, String telepon) {
-        this.nik = nik;
+    public Users(String username, String nama, String ttl, String alamat, String rt, String telepon, String jabatan, String lat, String lng) {
+        this.username = username;
         this.nama = nama;
         this.ttl = ttl;
         this.alamat = alamat;
-        this.pekerjaan = pekerjaan;
-        this.status = status;
         this.rt = rt;
         this.telepon = telepon;
+        this.jabatan = jabatan;
+        this.lat = lat;
+        this.lng = lng;
     }
 
-    public String getNik() {
-        return nik;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNik(String nik) {
-        this.nik = nik;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNama() {
@@ -62,27 +65,11 @@ public class Users {
         this.alamat = alamat;
     }
 
-    public String getPekerjaan() {
-        return pekerjaan;
-    }
-
-    public void setPekerjaan(String pekerjaan) {
-        this.pekerjaan = pekerjaan;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getRt() {
+    public String getRt() {
         return rt;
     }
 
-    public void setRt(int rt) {
+    public void setRt(String rt) {
         this.rt = rt;
     }
 
@@ -92,5 +79,29 @@ public class Users {
 
     public void setTelepon(String telepon) {
         this.telepon = telepon;
+    }
+
+    public String getJabatan() {
+        return jabatan;
+    }
+
+    public void setJabatan(String jabatan) {
+        this.jabatan = jabatan;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 }

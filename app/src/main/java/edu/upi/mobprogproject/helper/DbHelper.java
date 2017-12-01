@@ -6,22 +6,58 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by amaceh on 11/11/17.
- * A class to help connect with sqlite android
- * <p>
- * Account Attribute
- * username, email, password, nik
- * <p>
- * User Attribute
- * nik, nama, ttl, alamat, pekerjaan, status, rt, telepon
- * <p>
- * Status
- * id, nik, status, waktu, like
- * <p>
- * Comment
- * id_comm, id_status, nik, comment
- * <p>
- * Event
- * id, judul, nik_owner, deskripsi, waktu, priority, long, lati, konfirmasi
+ * Mofified 1/12/17
+ TODO : REMOVE THIS TABLE AND LOG IN WITH SERVICE INSTEAD
+ AKUN
+ username PRIMARY NOT NULL
+ email UNIQUE NOT NULL
+ password NOT NULL
+ (implement hashing sha512 atau apapun selain md5,
+ pastikan varchar cukup panjang untuk hasil hashing)
+
+ TODO : SYNC WITH SERVICE
+ USER
+ (ketika akun insert, otomatis user terinsert username saja,
+ yang lainnya biarkan null kecuali jabatan langsung 'warga'<default value>)
+ username PRIMARY NOT NULL
+ FOREIGN KEY username ke tabel akun
+ nama NULL
+ ttl NULL
+ alamat NULL
+ rt NULL
+ telepon NULL
+ jabatan NOT NULL
+ lan NULL
+ lon NULL
+
+ STATUS
+ id_status auto_increment primary
+ username
+ FOREIGN KEY username ke tabel akun
+ status NOT NULL
+ waktu NOT NULL
+ like (default 0)
+
+ KOMENTAR
+ id_komentar autoincrement primary
+ id_status
+ FOREIGN KEY id_status ke tabel status
+ username
+ FOREIGN KEY username ke tabel akun
+ komentar NOT NULL
+
+ AGENDA
+ id_event autoincrement
+ judul NOT NULL
+ username (penyelenggara)
+ FOREIGN KEY username ke tabel akun
+ waktu NOT NULL
+ tanggal NOT NULL
+ priority NOT NULL
+ deskripsi NOT NULL
+ lon NOT NULL
+ lat NOT NULL
+ konfirmasi NOT NULL (default value 0)
  */
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -30,27 +66,27 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "DBKindle.db";
 
-    // TODO table create statement
+    // TODO remove accout table
     private static final String CREATE_TABLE_ACCOUNT =
             "CREATE TABLE ACCOUNT(username TEXT PRIMARY KEY, email TEXT UNIQUE NOT NULL, " +
-                    "password TEXT NOT NULL, nik TEXT UNIQUE NOT NULL)";
+                    "password TEXT NOT NULL)";
     private static final String CREATE_TABLE_USERS =
-            "CREATE TABLE USERS(nik TEXT PRIMARY KEY, nama TEXT NOT NULL, ttl TEXT, " +
-                    "alamat TEXT, pekerjaan TEXT, status TEXT, rt TEXT, telepon TEXT," +
-                    "FOREIGN KEY (nik) REFERENCES ACCOUNT(nik))";
+            "CREATE TABLE USERS(username TEXT PRIMARY KEY, nama TEXT NOT NULL, ttl TEXT, " +
+                    "alamat TEXT, rt TEXT, telepon TEXT, jabatan TEXT,lat TEXT, lng TEXT," +
+                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
     private static final String CREATE_TABLE_STATUS =
-            "CREATE TABLE STATUS(id INTEGER PRIMARY KEY AUTOINCREMENT, nik TEXT NOT NULL, " +
+            "CREATE TABLE STATUS(id_status INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, " +
                     "status TEXT, waktu TEXT NOT NULL, like INTEGER NOT NULL," +
-                    "FOREIGN KEY (nik) REFERENCES ACCOUNT(nik))";
+                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
     private static final String CREATE_TABLE_COMMENT =
-            "CREATE TABLE COMMENT(id_comm INTEGER PRIMARY KEY AUTOINCREMENT, id_status INTEGER NOT NULL, " +
-                    "nik TEXT NOT NULL, comment TEXT," +
-                    "FOREIGN KEY (nik) REFERENCES ACCOUNT(nik)," +
-                    "FOREIGN KEY (id_status) REFERENCES STATUS(id))";
+            "CREATE TABLE COMMENT(id_komentar INTEGER PRIMARY KEY AUTOINCREMENT, id_status INTEGER NOT NULL, " +
+                    "username TEXT NOT NULL, comment TEXT," +
+                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username)," +
+                    "FOREIGN KEY (id_status) REFERENCES STATUS(id_status))";
     private static final String CREATE_TABEL_EVENT =
-            "CREATE TABLE EVENT(id INTEGER PRIMARY KEY AUTOINCREMENT, judul TEXT, nik_owner TEXT NOT NULL, " +
-                    "deskripsi TEXT, waktu TEXT, priority TEXT, long REAL, lati REAL, konfirmasi INTEGER," +
-                    "FOREIGN KEY (nik_owner) REFERENCES ACCOUNT(nik))";
+            "CREATE TABLE EVENT(id_event INTEGER PRIMARY KEY AUTOINCREMENT, judul TEXT, username TEXT NOT NULL, " +
+                    "waktu TEXT NOT NULL, priority TEXT NOT NULL, deskripsi TEXT NOT NULL, lat TEXT, lng TEXT, konfirmasi INTEGER," +
+                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
 
     DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

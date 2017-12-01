@@ -3,36 +3,37 @@ package edu.upi.mobprogproject.model;
 /**
  * Created by amaceh on 14/11/17.
  * Event
- * id, judul, nik_owner, deskripsi, waktu, priority, lon, lati, konfirmasi
+ * CREATE TABLE EVENT(id_event INTEGER PRIMARY KEY AUTOINCREMENT, judul TEXT, username TEXT NOT NULL, " +
+ "waktu TEXT NOT NULL, priority TEXT NOT NULL, deskripsi TEXT NOT NULL, lat TEXT, lng TEXT, konfirmasi INTEGER," +
+ "FOREIGN KEY (username) REFERENCES ACCOUNT(username))
  */
 
 public class Events {
-    private int id, konfirmasi;
-    private String judul, nik_owner, deskripsi, waktu, priority;
-    private long lat, lon;
+    private int id_event, konfirmasi;
+    private String judul, username, waktu, priority, deskripsi, lat, lng;
 
     public Events() {
 
     }
 
-    public Events(int id, int konfirmasi, String judul, String nik_owner, String deskripsi, String waktu, String priority, long lat, long lon) {
-        this.id = id;
+    public Events(int id_event, int konfirmasi, String judul, String username, String waktu, String priority, String deskripsi, String lat, String lng) {
+        this.id_event = id_event;
         this.konfirmasi = konfirmasi;
         this.judul = judul;
-        this.nik_owner = nik_owner;
-        this.deskripsi = deskripsi;
+        this.username = username;
         this.waktu = waktu;
         this.priority = priority;
+        this.deskripsi = deskripsi;
         this.lat = lat;
-        this.lon = lon;
+        this.lng = lng;
     }
 
-    public int getId() {
-        return id;
+    public int getId_event() {
+        return id_event;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_event(int id_event) {
+        this.id_event = id_event;
     }
 
     public int getKonfirmasi() {
@@ -51,20 +52,12 @@ public class Events {
         this.judul = judul;
     }
 
-    public String getNik_owner() {
-        return nik_owner;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNik_owner(String nik_owner) {
-        this.nik_owner = nik_owner;
-    }
-
-    public String getDeskripsi() {
-        return deskripsi;
-    }
-
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getWaktu() {
@@ -83,19 +76,27 @@ public class Events {
         this.priority = priority;
     }
 
-    public long getLat() {
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
+    public String getLat() {
         return lat;
     }
 
-    public void setLat(long lat) {
+    public void setLat(String lat) {
         this.lat = lat;
     }
 
-    public long getLon() {
-        return lon;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLon(long lon) {
-        this.lon = lon;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 }

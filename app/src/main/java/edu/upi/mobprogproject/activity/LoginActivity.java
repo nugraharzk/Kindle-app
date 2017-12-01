@@ -38,8 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
 
         String user = sp.getString("user", "");
+        String email = sp.getString("email", "");
         boolean logged = sp.getBoolean("logged", false);
-        if (!user.equals("") && logged) {
+        if (!user.equals("") && !email.equals("") && logged) {
             finish();
             //opening profile activity
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
@@ -75,14 +76,14 @@ public class LoginActivity extends AppCompatActivity {
         if (u.getUsername() != null) {
             ed = sp.edit();
             ed.putString("user", u.getUsername());
-            ed.putString("nik", u.getNik());
+            ed.putString("email", u.getEmail());
             ed.putBoolean("logged", true);
             ed.apply();
             Toast.makeText(this, "Logged In", Toast.LENGTH_LONG).show();
             finish();
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
         } else {
-            Toast.makeText(this, "Username atau Password salah", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
         }
         dialog.dismiss();
     }

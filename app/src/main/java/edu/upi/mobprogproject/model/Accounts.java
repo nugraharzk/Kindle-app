@@ -4,22 +4,22 @@ package edu.upi.mobprogproject.model;
  * Created by amaceh on 11/11/17.
  * Class to model Account User in Databases
  * Accounts Attribute
- * username, email, password, nik, nama
+ * username TEXT PRIMARY KEY, email TEXT UNIQUE NOT NULL, " +
+ "password TEXT NOT NULL
  */
 
 public class Accounts {
-    private String username, email, password, nik;
+    private String username, email, password;
 
 
     public Accounts() {
 
     }
 
-    public Accounts(String username, String email, String password, String nik) {
+    public Accounts(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.nik = nik;
     }
 
     public String getUsername() {
@@ -44,13 +44,5 @@ public class Accounts {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getNik() {
-        return nik;
-    }
-
-    public void setNik(String nik) {
-        this.nik = nik;
     }
 }
