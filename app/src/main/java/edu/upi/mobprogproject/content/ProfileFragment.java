@@ -13,6 +13,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.EditProfileActivity;
 import edu.upi.mobprogproject.activity.LoginActivity;
@@ -20,6 +25,7 @@ import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
 
 import static android.content.Context.MODE_PRIVATE;
+import static java.util.Calendar.YEAR;
 
 
 /**
@@ -75,9 +81,9 @@ public class ProfileFragment extends Fragment {
         Users user = dbU.getUser(sp.getString("user", ""));
         if (user != null) {
             nama.setText(user.getNama());
-            if (user.getJabatan() != null && user.getTtl() != null
-                    && user.getAlamat() != null && user.getTelepon() != null) {
-                String fill = getString(R.string.name_fill, user.getNama(), yearGenerator(user.getTtl()));
+            if (user.getTtl() != null && user.getAlamat() != null
+                    && user.getTelepon() != null && user.getPekerjaan() != null) {
+                String fill = getString(R.string.name_fill, user.getPekerjaan(), yearGenerator(user.getTtl()));
                 kerja_umur.setText(fill);
                 alamat.setText(user.getAlamat());
                 telepon.setText(user.getTelepon());
@@ -103,7 +109,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(getActivity(), "Profile Berhasil Di Perbaharui", Toast.LENGTH_LONG).show();
+        if (requestCode == ACT2_REQUEST) {
+            Toast.makeText(getActivity(), "Profile Berhasil Di Perbaharui", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "Tedapat Kesalahan", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -113,6 +123,24 @@ public class ProfileFragment extends Fragment {
     }
 
     public String yearGenerator(String ttl) {
-        return "20";
+        if (ttl != null) {
+            String[] getTgl = ttl.split("_");
+            if (getTgl.length > 0) {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Calendar born = Calendar.getInstance();
+                    Calendar curr = Calendar.getInstance();
+
+                    Date date = format.parse(getTgl[1]);
+                    born.setTime(date);
+
+                    int diff = curr.get(YEAR) - born.get(YEAR);
+                    return ("" + diff);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "X";
     }
 }

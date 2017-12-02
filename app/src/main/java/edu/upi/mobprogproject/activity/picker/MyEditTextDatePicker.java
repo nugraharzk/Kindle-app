@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -49,9 +50,15 @@ public class MyEditTextDatePicker implements View.OnClickListener, DatePickerDia
 
     // updates the date in the birth date EditText
     private void updateDisplay() {
-        _editText.setText(new StringBuilder()
-                // Month is 0 based so add 1
-                .append(_day).append("/").append(_month + 1).append("/").append(_birthYear).append(" "));
+//        _editText.setText(new StringBuilder()
+//                // Month is 0 based so add 1
+//                .append(_day).append("/").append(_month + 1).append("/").append(_birthYear).append(" "));
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(_birthYear, _month, _day);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = format.format(calendar.getTime());
+        _editText.setText(strDate);
     }
 
 }

@@ -20,11 +20,21 @@
     <string name="sig_but">Sign up</string>
 
     <string name="hint_login">Username/Email</string>
-    <string name="hint_nik">NIK</string>
     <string name="hint_mail">Email</string>
     <string name="hint_pass">Password</string>
     <string name="hint_name">Nama</string>
     <string name="hint_username">Username</string>
+    <string name="hint_tempatlahir">Tempat Lahir</string>
+    <string name="hint_alamat">Alamat</string>
+    <string name="hint_desa">Desa</string>
+    <string name="hint_kecamatan">Kecamatan</string>
+    <string name="hint_kabupaten">Kabupaten/Kota</string>
+    <string name="hint_pekerjaan">Pekerjaan</string>
+    <string name="hint_phone">Telepon</string>
+    <string name="hint_RT">RT</string>
+    <string name="hint_RW">RW</string>
+
+
     <string name="signmess">Sudah punya akun?</string>
     <string name="link_tosign"> daftar sekarang</string>
     <string name="logmess">Belum punya akun?</string>
@@ -69,4 +79,5 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="sample4">Username : (belum diupdate)</string>
     <string name="name_fill">%1$s | %2$s</string>
     <string name="user_fill">Username : %1$s</string>
+    <string name="edit_akun">Edit Akun</string>
 </resources>

@@ -6,4 +6,136 @@
     android:layout_height="match_parent"
     tools:context="edu.upi.mobprogproject.activity.EditProfileActivity">
 
+    <EditText
+        android:id="@+id/etNamap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hint_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etTempatLahit"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hint_tempatlahir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNamap" />
+
+    <EditText
+        android:id="@+id/etTglLahir"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/hint_date"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/etTempatLahit"
+        app:layout_constraintTop_toBottomOf="@+id/etNamap" />
+
+    <EditText
+        android:id="@+id/etAlamat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/hint_alamat"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTempatLahit" />
+
+    <EditText
+        android:id="@+id/etDesa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hint_desa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etAlamat" />
+
+    <EditText
+        android:id="@+id/etPekerjaan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/hint_pekerjaan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTelepon" />
+
+    <EditText
+        android:id="@+id/etTelepon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/hint_phone"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDesa" />
+
+    <EditText
+        android:id="@+id/etRW"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/hint_RW"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/etRT"
+        app:layout_constraintTop_toBottomOf="@+id/etTglLahir" />
+
+    <EditText
+        android:id="@+id/etRT"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/hint_RT"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/etAlamat"
+        app:layout_constraintTop_toBottomOf="@+id/etTglLahir" />
+
+    <Button
+        android:id="@+id/btEditProfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:onClick="saveProfile"
+        android:text="@string/save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPekerjaan" />
+
+    <Button
+        android:id="@+id/btEditAkun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="199dp"
+        android:text="@string/edit_akun"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btEditProfil"
+        app:layout_constraintTop_toBottomOf="@+id/etRW" />
+
 </android.support.constraint.ConstraintLayout>

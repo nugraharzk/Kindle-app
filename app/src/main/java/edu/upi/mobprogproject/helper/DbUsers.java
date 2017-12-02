@@ -39,10 +39,13 @@ public class DbUsers {
         newV.put("ttl", k.getTtl());
         newV.put("alamat", k.getAlamat());
         newV.put("rt", k.getRt());
+        newV.put("rw", k.getRw());
+        newV.put("desa", k.getDesa());
         newV.put("telepon", k.getTelepon());
         newV.put("jabatan", k.getJabatan());
         newV.put("lat", k.getLat());
         newV.put("lng", k.getLng());
+        newV.put("pekerjaan", k.getPekerjaan());
 
         return db.insert("users", null, newV);
     }
@@ -53,7 +56,7 @@ public class DbUsers {
 
         //kolom yang diambil
         String[] cols = new String[]{"nama", "ttl", "alamat", "rt",
-                "telepon", "jabatan", "lat", "lng"};
+                "rw", "desa", "telepon", "pekerjaan", "jabatan", "lat", "lng"};
         //parameter, akan mengganti ? pada NAMA=?
         String[] param = {username};
 
@@ -66,12 +69,34 @@ public class DbUsers {
             K.setTtl(cur.getString(1));
             K.setAlamat(cur.getString(2));
             K.setRt(cur.getString(3));
-            K.setTelepon(cur.getString(4));
-            K.setJabatan(cur.getString(5));
-            K.setLat(cur.getString(6));
-            K.setLng(cur.getString(7));
+            K.setRw(cur.getString(4));
+            K.setDesa(cur.getString(5));
+            K.setTelepon(cur.getString(6));
+            K.setPekerjaan(cur.getString(7));
+            K.setJabatan(cur.getString(8));
+            K.setLat(cur.getString(9));
+            K.setLng(cur.getString(10));
         }
         cur.close();
         return K;
+    }
+
+    public long updateUsers(String username, Users k) {
+        //parameter, akan mengganti ? pada NAMA=?
+        String[] param = {username};
+
+        ContentValues upV = new ContentValues();
+        upV.put("nama", k.getNama());
+        upV.put("ttl", k.getTtl());
+        upV.put("alamat", k.getAlamat());
+        upV.put("rt", k.getRt());
+        upV.put("rw", k.getRw());
+        upV.put("desa", k.getDesa());
+        upV.put("telepon", k.getTelepon());
+        upV.put("lat", k.getLat());
+        upV.put("lng", k.getLng());
+        upV.put("pekerjaan", k.getPekerjaan());
+
+        return db.update("users", upV, "username=?", param);
     }
 }
