@@ -62,4 +62,11 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="hint_waktu">HH:MM</string>
     <string name="hint_date">DD/MM/YYYY</string>
     <string name="hint_urgensi">Urgensi</string>
+
+    <string name="sample_name">(Sample Name)</string>
+    <string name="sample2">(belum diupdate) | X Thn</string>
+    <string name="sample3">(belum diupdate)</string>
+    <string name="sample4">Username : (belum diupdate)</string>
+    <string name="name_fill">%1$s | %2$s</string>
+    <string name="user_fill">Username : %1$s</string>
 </resources>

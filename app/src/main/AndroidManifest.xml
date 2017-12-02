@@ -50,6 +50,7 @@
         <activity
             android:name=".activity.addStatusActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.EditProfileActivity"></activity>
     </application>
 
 </manifest>
