@@ -11,3 +11,6 @@ the MobProg project
 
 ## bugs
 - app got crash when click update profile
+
+## service-soource
+The service can be found here at Rizky's REPO [Kindle-Service](https://github.com/nugraharzk/Kindle-service).
