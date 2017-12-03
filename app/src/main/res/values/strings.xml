@@ -33,6 +33,12 @@
     <string name="hint_phone">Telepon</string>
     <string name="hint_RT">RT</string>
     <string name="hint_RW">RW</string>
+    <string name="hint_lama">Password Lama</string>
+    <string name="hint_baru">Password Baru</string>
+    <string name="hint_baru2">Ulang Password Baru</string>
+
+
+    <string name="tx_gantipass">Isi kedua form dibawah untuk ganti password, atau kosongkan saja bila tidak ingin mengganti password</string>
 
 
     <string name="signmess">Sudah punya akun?</string>

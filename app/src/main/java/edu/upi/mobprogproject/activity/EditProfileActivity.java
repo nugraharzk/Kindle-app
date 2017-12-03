@@ -16,6 +16,8 @@ import edu.upi.mobprogproject.model.Users;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+    public static final int ACT2_REQUEST = 110;
+
     DbUsers dbU;
     private EditText n, tmL, tL, a, rrt, w, d, t, p;
     SharedPreferences sp;
@@ -54,6 +56,23 @@ public class EditProfileActivity extends AppCompatActivity {
         d.setText(us.getDesa());
         t.setText(us.getTelepon());
         p.setText(us.getPekerjaan());
+    }
+
+    public void editAkun(View v) {
+        Intent ix = new Intent(this, EditAkunActivity.class);
+        startActivityForResult(ix, ACT2_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent i = getIntent();
+        if (requestCode == ACT2_REQUEST && resultCode != 0) {
+            setResult(RESULT_OK, i);
+        } else {
+            Toast.makeText(this, "Akun gagal diperbaharui", Toast.LENGTH_LONG).show();
+        }
+        finish();
     }
 
     public void saveProfile(View v) {

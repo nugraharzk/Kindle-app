@@ -60,4 +60,36 @@ public class DbAccounts {
         cur.close();
         return K;
     }
+
+    public Accounts getAccInfo(String user) {
+        Cursor cur = null;
+        Accounts K = new Accounts();
+
+        //kolom yang diambil
+        String[] cols = new String[]{"username", "email"};
+        //parameter, akan mengganti ? pada NAMA=?
+        String[] param = {user};
+
+        cur = db.query("account", cols, "username=?", param, null, null, null);
+        if (cur.getCount() > 0) {  //ada data? ambil
+            cur.moveToFirst();
+            K.setUsername(cur.getString(0));
+            K.setEmail(cur.getString(1));
+        }
+        cur.close();
+        return K;
+    }
+
+    public long updateAccounts(String username, Accounts a) {
+        //parameter, akan mengganti ? pada NAMA=?
+        String[] param = {username};
+
+        ContentValues upV = new ContentValues();
+        upV.put("email", a.getEmail());
+        if (a.getPassword() != null && !a.getPassword().isEmpty()) {
+            upV.put("password", a.getPassword());
+        }
+
+        return db.update("account", upV, "username=?", param);
+    }
 }

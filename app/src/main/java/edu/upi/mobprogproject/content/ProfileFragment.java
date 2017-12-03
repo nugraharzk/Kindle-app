@@ -124,6 +124,7 @@ public class ProfileFragment extends Fragment {
         if (requestCode == ACT2_REQUEST && resultCode != 0) {
             Toast.makeText(getActivity(), "Profile Berhasil Di Perbaharui", Toast.LENGTH_LONG).show();
         } else {
+            if (resultCode == 0)
             Toast.makeText(getActivity(), "Profile tidak disimpan", Toast.LENGTH_LONG).show();
         }
     }
