@@ -10,7 +10,8 @@ the MobProg project
 * online database using MySQL
 
 ## bugs
+- app got crash for the first time installing when asking location request
 - app got crash when click update profile
 
-## service-soource
+## service-source
 The service can be found here at Rizky's REPO [Kindle-Service](https://github.com/nugraharzk/Kindle-service).
