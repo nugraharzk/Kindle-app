@@ -4,11 +4,10 @@ the MobProg project
 
 ## Changelog
 * updated databases
-* offline feature like adding events, adding status, and profile done
-* user input with some datepicker and timepicker
+* offline feature like adding events, adding status, and profile disabled for a while
+* connect with backend
+* backend at http://mobprog.atwebpages.com/index.php/
+* online database using MySQL
 
 ## bugs
-- not yet implement API
-- not yet create location picker
-- not yet add maps feature
-- app got crash when asking location request
+- app got crash when click update profile
