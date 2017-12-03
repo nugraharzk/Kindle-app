@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.adapter.CustomViewPager;
@@ -23,26 +24,39 @@ import edu.upi.mobprogproject.content.FeedsFragment;
 import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.MessageFragment;
 import edu.upi.mobprogproject.content.ProfileFragment;
+import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
     private Toolbar toolbar;
-    //    ViewPager viewPager;
     CustomViewPager viewPager;
+
+    public String nama, ttl, alamat, telepon;
 
     HomeFragment homeFragment;
     CalendarFragment chatFragment;
     FeedsFragment feedsFragment;
     MessageFragment messageFragment;
     ProfileFragment profileFragment;
+    Bundle bundle;
 
     MenuItem prevMenuItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        bundle = getIntent().getExtras();
+
+        Call<List<Users>> call = apiInterface.getUsersUsername(bundle.getString("username"));
 
         viewPager = findViewById(R.id.viewPager);
         viewPager.setPagingEnabled(false);
@@ -104,21 +118,33 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        setupViewPager(viewPager);
+        call.enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+                List<Users> usersList = response.body();
+//                Log.d("TAG", "onResponse: " + usersList.get(0).getNama());
+                setupViewPager(viewPager, usersList);
+            }
+
+            @Override
+            public void onFailure(Call<List<Users>> call, Throwable t) {
+                Log.d("TAG", "onFailure: ");
+            }
+        });
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager, List<Users> usersList) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager()) {
 //            @Override
 //            public int getItemPosition(Object object) {
 //                return POSITION_NONE;
 //            }
         };
-        homeFragment = new HomeFragment();
+        homeFragment = new HomeFragment(usersList.get(0));
         chatFragment = new CalendarFragment();
         feedsFragment = new FeedsFragment();
         messageFragment = new MessageFragment();
-        profileFragment = new ProfileFragment();
+        profileFragment = new ProfileFragment(usersList.get(0));
 
         adapter.addFragment(homeFragment);
         adapter.addFragment(chatFragment);

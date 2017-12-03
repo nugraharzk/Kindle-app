@@ -49,6 +49,14 @@ import java.util.List;
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.api.mainmap.MainMap;
 import edu.upi.mobprogproject.api.mainmap.MainMap_;
+import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -65,6 +73,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     Location mLastLocation;
     Marker mCurrLocationMarker;
     private double lon, lat;
+    private List<Users> usersList;
+    private Users users;
 
     //    static final LatLng GIK = new LatLng(-6.860426,107.589880);
     private Toolbar toolbar4;
@@ -72,6 +82,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     private GoogleMap map;
     //    private SupportMapFragment map;
     MainMap mainmap = new MainMap();
+
+    public HomeFragment(Users users) {
+        this.users = users;
+    }
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -158,6 +172,30 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
             t.show();
         }
         return rootView;
+    }
+
+    private void addMarkers() {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<List<Users>> call = apiService.getUsersList();
+        call.enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+                usersList = response.body();
+                for (Users results : usersList){
+                    LatLng current = new LatLng(Double.valueOf(results.getLat()), Double.valueOf(results.getLng()));
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(current);
+                    markerOptions.title(results.getNama()).snippet(results.getAlamat());
+                    map.addMarker(markerOptions);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Users>> call, Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
     }
 
     private class AmbilData extends AsyncTask<String, Integer, String> {
@@ -299,9 +337,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         LatLng latLng = new LatLng(lat, lon);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Current Position");
+        markerOptions.title(users.getNama()).snippet(users.getAlamat());
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         mCurrLocationMarker = map.addMarker(markerOptions);
+        addMarkers();
 
         //move map camera
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -315,6 +354,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        this.map = googleMap;
     }
 
     @Override
