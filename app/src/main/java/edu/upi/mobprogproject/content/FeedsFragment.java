@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.activity.addStatusActivity;
+import edu.upi.mobprogproject.activity.AddStatusActivity;
 import edu.upi.mobprogproject.adapter.StatusAdapter;
 import edu.upi.mobprogproject.adapter.data.StatusList;
 import edu.upi.mobprogproject.helper.DbStatus;
@@ -37,6 +37,7 @@ public class FeedsFragment extends Fragment {
     StatusAdapter adapter;
     static ArrayList<StatusList> status;
     Context context;
+    View v;
 
     public static final int ACT2_REQUEST = 99;
 
@@ -48,13 +49,15 @@ public class FeedsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_feeds, container, false);
+        v = inflater.inflate(R.layout.fragment_feeds, container, false);
+        return v;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ACT2_REQUEST) {
+            setRecView();
             //adapter.notifyDataSetChanged();
             recyclerView.invalidate();
             //karena dibalik indexnya
@@ -77,6 +80,10 @@ public class FeedsFragment extends Fragment {
     @Override
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        setRecView();
+    }
+
+    private void setRecView() {
         dbU = new DbUsers(getActivity());
         dbS = new DbStatus(getActivity());
 
@@ -101,7 +108,7 @@ public class FeedsFragment extends Fragment {
         addStat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), addStatusActivity.class);
+                Intent i = new Intent(getActivity(), AddStatusActivity.class);
                 startActivityForResult(i, ACT2_REQUEST);
             }
         });
@@ -116,9 +123,9 @@ public class FeedsFragment extends Fragment {
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    public static ArrayList<StatusList> getStatus() {
-        return status;
-    }
+    //public static ArrayList<StatusList> getStatus() {
+    //  return status;
+    //}
 
     @Override
     public void onDestroy() {

@@ -45,12 +45,13 @@
             android:name=".activity.SignupActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.addEventActivity"
+            android:name=".activity.AddEventActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.addStatusActivity"
+            android:name=".activity.AddStatusActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.EditProfileActivity"></activity>
+        <activity android:name=".activity.EditProfileActivity" />
+        <activity android:name=".activity.EditAkunActivity"></activity>
     </application>
 
 </manifest>

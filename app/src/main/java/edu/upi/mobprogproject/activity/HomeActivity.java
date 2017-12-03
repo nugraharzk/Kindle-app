@@ -1,5 +1,6 @@
 package edu.upi.mobprogproject.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -78,7 +79,6 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -95,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d("page", "onPageSelected: " + position);
                 bottomNavigationView.getMenu().getItem(position).setChecked(true);
                 prevMenuItem = bottomNavigationView.getMenu().getItem(position);
-
+                viewPager.getAdapter().notifyDataSetChanged();
             }
 
             @Override
@@ -108,7 +108,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager()) {
+//            @Override
+//            public int getItemPosition(Object object) {
+//                return POSITION_NONE;
+//            }
+        };
         homeFragment = new HomeFragment();
         chatFragment = new CalendarFragment();
         feedsFragment = new FeedsFragment();
@@ -124,6 +129,8 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+
+    @SuppressLint("RestrictedApi")
     private void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
         try {

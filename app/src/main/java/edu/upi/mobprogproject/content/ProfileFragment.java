@@ -38,6 +38,7 @@ public class ProfileFragment extends Fragment {
     public static final int ACT2_REQUEST = 101;
 
     DbUsers dbU;
+    View v;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -46,7 +47,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         Button BtLogout = v.findViewById(R.id.btLogout);
         BtLogout.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +70,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        setProfile();
+    }
+
+    private void setProfile() {
+
         TextView nama, kerja_umur, alamat, telepon, username;
         nama = v.findViewById(R.id.tvNama);
         kerja_umur = v.findViewById(R.id.tvKerUmur);
@@ -92,6 +98,12 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setProfile();
+    }
+
     public void logout(View v) {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         ed = sp.edit();
@@ -109,10 +121,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ACT2_REQUEST) {
+        if (requestCode == ACT2_REQUEST && resultCode != 0) {
             Toast.makeText(getActivity(), "Profile Berhasil Di Perbaharui", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getActivity(), "Tedapat Kesalahan", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Profile tidak disimpan", Toast.LENGTH_LONG).show();
         }
     }
 

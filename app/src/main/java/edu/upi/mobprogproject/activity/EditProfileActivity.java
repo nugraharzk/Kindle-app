@@ -7,34 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.activity.picker.MyEditTextDatePicker;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
 
 public class EditProfileActivity extends AppCompatActivity {
 
     DbUsers dbU;
+    private EditText n, tmL, tL, a, rrt, w, d, t, p;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
-        dbU = new DbUsers(this);
-        dbU.open();
-        new MyEditTextDatePicker(this, R.id.etTglLahir);
-        Button save = findViewById(R.id.btEditProp);
-    }
-
-    public void saveProfile(View v) {
-        EditText n, tmL, tL, a, rrt, w, d, t, p;
-        String nama, tempatL, tanggalL, alamat,
-                rt, rw, desa, telepon, pekerjaan;
         n = findViewById(R.id.etNamap);
         tmL = findViewById(R.id.etTempatLahit);
         tL = findViewById(R.id.etTglLahir);
@@ -44,6 +33,33 @@ public class EditProfileActivity extends AppCompatActivity {
         d = findViewById(R.id.etDesa);
         t = findViewById(R.id.etTelepon);
         p = findViewById(R.id.etPekerjaan);
+        sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
+
+        dbU = new DbUsers(this);
+        dbU.open();
+        Users us = dbU.getUser(sp.getString("user", ""));
+        n.setText(us.getNama());
+        //tmL.setText();
+        String ttl = us.getTtl();
+        if (ttl != null) {
+            String[] ttl_split = ttl.split("_");
+            if (ttl_split.length > 0) {
+                tmL.setText(ttl_split[0]);
+                tL.setText(ttl_split[1]);
+            }
+        }
+        a.setText(us.getAlamat());
+        rrt.setText(us.getRt());
+        w.setText(us.getRw());
+        d.setText(us.getDesa());
+        t.setText(us.getTelepon());
+        p.setText(us.getPekerjaan());
+    }
+
+    public void saveProfile(View v) {
+        String nama, tempatL, tanggalL, alamat,
+                rt, rw, desa, telepon, pekerjaan;
+
 
         nama = n.getText().toString().trim();
         tempatL = tmL.getText().toString().trim();
@@ -102,15 +118,14 @@ public class EditProfileActivity extends AppCompatActivity {
         u.setTelepon(telepon);
         u.setPekerjaan(pekerjaan);
 
-        SharedPreferences sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
+        Intent i = getIntent();
         try {
             dbU.updateUsers(sp.getString("user", ""), u);
-            Intent i = getIntent();
             setResult(RESULT_OK, i);
         } catch (Exception e) {
+            setResult(RESULT_CANCELED, i);
             Log.d("update err", e.toString());
         }
-
         finish();
     }
 
@@ -118,5 +133,13 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         dbU.close();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = getIntent();
+        setResult(RESULT_CANCELED, i);
+        finish();
     }
 }

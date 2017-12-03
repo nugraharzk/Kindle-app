@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.activity.addEventActivity;
+import edu.upi.mobprogproject.activity.AddEventActivity;
 import edu.upi.mobprogproject.adapter.AgendaAdapter;
 import edu.upi.mobprogproject.adapter.data.AgendaList;
 import edu.upi.mobprogproject.helper.DbEvents;
@@ -38,7 +38,7 @@ public class CalendarFragment extends Fragment {
     RecyclerView recyclerView;
     AgendaAdapter adapter;
     static ArrayList<AgendaList> agenda;
-
+    private View v;
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -47,12 +47,18 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        v = inflater.inflate(R.layout.fragment_calendar, container, false);
+        return v;
     }
 
     @Override
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        setRecView();
+        // Inflate the layout for this fragment
+    }
+
+    private void setRecView() {
         dbE = new DbEvents(getActivity());
         dbE.open();
         dbU = new DbUsers(getActivity());
@@ -64,7 +70,7 @@ public class CalendarFragment extends Fragment {
         addAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), addEventActivity.class);
+                Intent i = new Intent(getActivity(), AddEventActivity.class);
                 startActivityForResult(i, ACT2_REQUEST);
             }
         });
@@ -94,7 +100,6 @@ public class CalendarFragment extends Fragment {
                 layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        // Inflate the layout for this fragment
     }
 
     public ArrayList<AgendaList> setData(DbEvents dbe, DbUsers dbu) {
@@ -165,6 +170,7 @@ public class CalendarFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ACT2_REQUEST) {
+            setRecView();
             //adapter.notifyDataSetChanged();
             recyclerView.invalidate();
             //karena dibalik indexnya
@@ -172,7 +178,7 @@ public class CalendarFragment extends Fragment {
         }
     }
 
-    public static ArrayList<AgendaList> getAgenda() {
-        return agenda;
-    }
+    //public static ArrayList<AgendaList> getAgenda() {
+    //    return agenda;
+    //}
 }
