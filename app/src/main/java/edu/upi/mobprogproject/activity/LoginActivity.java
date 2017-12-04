@@ -46,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
+
         /*dbU = new DbAccounts(getApplicationContext());
         dbU.open();
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);

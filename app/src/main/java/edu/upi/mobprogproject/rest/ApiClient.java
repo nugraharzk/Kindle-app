@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://mobprog.atwebpages.com/index.php/";
+    public static final String BASE_URL = "http://mobprog.atwebpages.com/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(){

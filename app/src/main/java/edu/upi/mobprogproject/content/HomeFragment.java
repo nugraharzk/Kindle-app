@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -47,8 +46,6 @@ import java.net.URL;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.api.mainmap.MainMap;
-import edu.upi.mobprogproject.api.mainmap.MainMap_;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.rest.ApiClient;
 import edu.upi.mobprogproject.rest.ApiInterface;
@@ -81,7 +78,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     MapView mapView;
     private GoogleMap map;
     //    private SupportMapFragment map;
-    MainMap mainmap = new MainMap();
 
     public HomeFragment(Users users) {
         this.users = users;
@@ -215,8 +211,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 conn.connect();
 
                 try {
-                    ObjectMapper mapper = new ObjectMapper();
-                    mainmap = mapper.readValue(conn.getInputStream(), MainMap.class);
+                    //ObjectMapper mapper = new ObjectMapper();
+                    //mainmap = mapper.readValue(conn.getInputStream(), MainMap.class);
                 } catch (Exception e) {
                     Log.i("yw", e.toString());
                     result = "fail";
@@ -243,13 +239,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         protected void onPostExecute(String result) {
             //tvHasil.setText(result);
 
-            List<MainMap_> data = mainmap.getMainMap();
-            if (data != null) {
-                for (MainMap_ x : data) {
-                    LatLng alert = new LatLng(Double.parseDouble(x.getLat()), Double.parseDouble(x.getLon()));
-                    map.addMarker(new MarkerOptions().position(alert).title(x.getNama()));
-                }
-            }
+//            List<MainMap_> data = mainmap.getMainMap();
+//            if (data != null) {
+//                for (MainMap_ x : data) {
+//                    LatLng alert = new LatLng(Double.parseDouble(x.getLat()), Double.parseDouble(x.getLon()));
+//                    map.addMarker(new MarkerOptions().position(alert).title(x.getNama()));
+//                }
+//            }
         }
     }
 

@@ -78,8 +78,7 @@ public class ProfileFragment extends Fragment {
         tvTtl.setText(users.getTtl());
         tvAlamat.setText(users.getAlamat());
         tvTelepon.setText(users.getTelepon());
-        tvUser.setText("Username : " + users.getUsername());
-
+        tvUser.setText(getString(R.string.user_fill, users.getUsername()));
         return v;
     }
 
