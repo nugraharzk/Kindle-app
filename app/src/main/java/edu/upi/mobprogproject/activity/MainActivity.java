@@ -10,7 +10,7 @@ import edu.upi.mobprogproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIMEOUT = 5000;
+    private static int SPLASH_TIMEOUT = 1000;
     private ProgressBar progressBar;
 
     @Override

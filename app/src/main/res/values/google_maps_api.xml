@@ -20,7 +20,8 @@
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCmqNUKLRihwbpVwtuuphyg7D5YllV6KSw</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAlraf_fV-8KS2sG2VzYw-0mnL2D9-e2dc</string>
     <!--The Key mgiht be different, Achmad Key-->
     <!--AIzaSyCmqNUKLRihwbpVwtuuphyg7D5YllV6KSw-->
+    <!--nopal AIzaSyAlraf_fV-8KS2sG2VzYw-0mnL2D9-e2dc-->
 </resources>
