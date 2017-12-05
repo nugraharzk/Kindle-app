@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
@@ -22,10 +23,23 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText n, tmL, tL, a, rrt, w, d, t, p;
     SharedPreferences sp;
 
+    ImageView backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        backBtn = (ImageView)findViewById(R.id.back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = getIntent();
+                setResult(RESULT_CANCELED, i);
+                finish();
+            }
+        });
+
         n = findViewById(R.id.etNamap);
         tmL = findViewById(R.id.etTempatLahit);
         tL = findViewById(R.id.etTglLahir);
@@ -56,12 +70,16 @@ public class EditProfileActivity extends AppCompatActivity {
         d.setText(us.getDesa());
         t.setText(us.getTelepon());
         p.setText(us.getPekerjaan());
+
+
     }
 
     public void editAkun(View v) {
         Intent ix = new Intent(this, EditAkunActivity.class);
         startActivityForResult(ix, ACT2_REQUEST);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

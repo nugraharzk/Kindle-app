@@ -13,13 +13,15 @@ import retrofit2.http.Query;
  */
 
 public interface ApiInterface {
-
-    @GET("users")
-    Call<List<Users>> getUsersList();
-
     @GET("users/{username}")
     Call<List<Users>> getUsersUsername(@Query("username") String username);
 
     @GET("accounts")
-    Call<List<Accounts>> getAccountsList();
+    Call<List<Accounts>> getUserLogin(@Query("username") String username, @Query("password") String password);
+//    @GET("accounts")
+//    Call<List<Accounts>> getAccountsList();
+
+    @GET("users")
+    Call<List<Users>> getUsersList();
+
 }

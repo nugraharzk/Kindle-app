@@ -1,6 +1,5 @@
 package edu.upi.mobprogproject.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.helper.DbAccounts;
-import edu.upi.mobprogproject.model.Accounts;
 
 public class EditAkunActivity extends AppCompatActivity {
 
-    DbAccounts dbA;
     EditText etmail, etolpass, etnewpass, etnewpass2;
     SharedPreferences sp;
     SharedPreferences.Editor ed;
@@ -27,17 +23,15 @@ public class EditAkunActivity extends AppCompatActivity {
         EditText etuser = findViewById(R.id.etUsername);
         etuser.setEnabled(false);
 
-        dbA = new DbAccounts(this);
-        dbA.open();
         etmail = findViewById(R.id.etEmail);
         etolpass = findViewById(R.id.etOldPass);
         etnewpass = findViewById(R.id.etNewPass1);
         etnewpass2 = findViewById(R.id.etNewPass2);
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
 
-        Accounts ac = dbA.getAccInfo(sp.getString("user", ""));
+        //Accounts ac = dbA.getAccInfo(sp.getString("user", ""));
         etuser.setText(sp.getString("user", ""));
-        etmail.setText(ac.getEmail());
+        //etmail.setText(ac.getEmail());
     }
 
     public void saveAkun(View v) {
@@ -66,27 +60,27 @@ public class EditAkunActivity extends AppCompatActivity {
             new_pass = passnew1;
         }
 
-        Accounts u = dbA.getAccount(sp.getString("user", ""), passold);
-        if (u.getUsername() != null) {
-            Accounts x = new Accounts();
-            x.setEmail(email);
-            if (!new_pass.isEmpty()) {
-                x.setPassword(new_pass);
-            }
-            if (u.getPassword().equals(passold)) {
-                dbA.updateAccounts(sp.getString("user", ""), x);
-                ed = sp.edit();
-                ed.putString("email", x.getEmail());
-                ed.putBoolean("logged", true);
-                ed.apply();
-            }
-            Toast.makeText(this, "Tersimpan", Toast.LENGTH_LONG).show();
-            Intent i = getIntent();
-            setResult(RESULT_OK, i);
-            finish();
-        } else {
-            Toast.makeText(this, "Password Lama salah", Toast.LENGTH_LONG).show();
-        }
+        //Accounts u = dbA.getAccount(sp.getString("user", ""), passold);
+        // if (u.getUsername() != null) {
+//            Accounts x = new Accounts();
+//            x.setEmail(email);
+//            if (!new_pass.isEmpty()) {
+//                x.setPassword(new_pass);
+//            }
+//            if (u.getPassword().equals(passold)) {
+//                dbA.updateAccounts(sp.getString("user", ""), x);
+//                ed = sp.edit();
+//                ed.putString("email", x.getEmail());
+//                ed.putBoolean("logged", true);
+//                ed.apply();
+//            }
+//            Toast.makeText(this, "Tersimpan", Toast.LENGTH_LONG).show();
+//            Intent i = getIntent();
+//            setResult(RESULT_OK, i);
+//            finish();
+//        } else {
+//            Toast.makeText(this, "Password Lama salah", Toast.LENGTH_LONG).show();
+//        }
 
 
     }
@@ -94,6 +88,6 @@ public class EditAkunActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dbA.close();
+        //dbA.close();
     }
 }

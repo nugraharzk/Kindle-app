@@ -66,27 +66,22 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "DBKindle.db";
 
-    // TODO remove accout table
-    private static final String CREATE_TABLE_ACCOUNT =
-            "CREATE TABLE ACCOUNT(username TEXT PRIMARY KEY, email TEXT UNIQUE NOT NULL, " +
-                    "password TEXT NOT NULL)";
     private static final String CREATE_TABLE_USERS =
             "CREATE TABLE USERS(username TEXT PRIMARY KEY, nama TEXT NOT NULL, ttl TEXT, " +
-                    "alamat TEXT, rt TEXT, rw TEXT, desa TEXT,telepon TEXT, pekerjaan TEXT, jabatan TEXT,lat TEXT, lng TEXT," +
-                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
+                    "alamat TEXT, rt TEXT, rw TEXT, desa TEXT,telepon TEXT, pekerjaan TEXT, jabatan TEXT,lat TEXT, lng TEXT)";
     private static final String CREATE_TABLE_STATUS =
             "CREATE TABLE STATUS(id_status INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, " +
                     "status TEXT NOT NULL, waktu TEXT NOT NULL, like INTEGER NOT NULL," +
-                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
+                    "FOREIGN KEY (username) REFERENCES USERS(username))";
     private static final String CREATE_TABLE_COMMENT =
             "CREATE TABLE COMMENT(id_komentar INTEGER PRIMARY KEY AUTOINCREMENT, id_status INTEGER NOT NULL, " +
                     "username TEXT NOT NULL, comment TEXT," +
                     "FOREIGN KEY (username) REFERENCES ACCOUNT(username)," +
-                    "FOREIGN KEY (id_status) REFERENCES STATUS(id_status))";
+                    "FOREIGN KEY (id_status) REFERENCES USERS(id_status))";
     private static final String CREATE_TABEL_EVENT =
             "CREATE TABLE EVENT(id_event INTEGER PRIMARY KEY AUTOINCREMENT, judul TEXT, username TEXT NOT NULL, " +
                     "waktu TEXT NOT NULL, priority TEXT NOT NULL, deskripsi TEXT NOT NULL, lat TEXT, lng TEXT, konfirmasi INTEGER NOT NULL," +
-                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
+                    "FOREIGN KEY (username) REFERENCES USERS(username))";
 
     DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -95,7 +90,6 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //create database
-        db.execSQL(CREATE_TABLE_ACCOUNT);
         db.execSQL(CREATE_TABLE_USERS);
         db.execSQL(CREATE_TABLE_STATUS);
         db.execSQL(CREATE_TABLE_COMMENT);

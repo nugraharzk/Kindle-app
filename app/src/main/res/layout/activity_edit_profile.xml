@@ -40,6 +40,7 @@
                 android:maxHeight="30dip"
                 android:minHeight="30dip"
                 android:src="@drawable/back"
+                android:clickable="true"
                 tools:ignore="RtlSymmetry" />
 
     </android.support.v7.widget.Toolbar>
@@ -66,20 +67,45 @@
                 <!--android:textColor="@color/colorAccent"-->
                 <!--android:textSize="18sp" />-->
 
+            <TextView
+                android:id="@+id/name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="NAMA"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                />
+
             <EditText
                 android:id="@+id/etNamap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="5dp"
                 android:ems="10"
                 android:hint="@string/hint_name"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:inputType="textPersonName"
                 android:background="@drawable/capsule_edittext"
-                android:layout_below="@id/textView"
+                android:layout_below="@+id/name_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ttl_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="Tempat Tanngal Lahir"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/etNamap"
+                />
 
             <LinearLayout
                 android:id="@+id/linLayout1"
@@ -88,8 +114,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/etNamap">
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/ttl_title">
 
                 <EditText
                     android:id="@+id/etTempatLahit"
@@ -129,20 +155,46 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/alamat_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="Alamat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/linLayout1"
+                />
+
             <EditText
                 android:id="@+id/etAlamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:ems="10"
                 android:hint="@string/hint_alamat"
                 android:inputType="textPersonName"
-                android:layout_below="@+id/linLayout1"
+                android:layout_below="@+id/alamat_title"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:background="@drawable/capsule_edittext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etTempatLahit" />
+
+            <TextView
+                android:id="@+id/desa_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="Desa"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/etAlamat"
+                />
 
             <EditText
                 android:id="@+id/etDesa"
@@ -152,12 +204,25 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="@string/hint_desa"
-                android:layout_below="@id/etAlamat"
+                android:layout_below="@+id/desa_title"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:background="@drawable/capsule_edittext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etAlamat" />
+
+            <TextView
+                android:id="@+id/pekerjaan_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="Pekerjaan"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/etDesa"
+                />
 
             <EditText
                 android:id="@+id/etPekerjaan"
@@ -167,12 +232,25 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="@string/hint_pekerjaan"
-                android:layout_below="@id/etDesa"
+                android:layout_below="@+id/pekerjaan_title"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:background="@drawable/capsule_edittext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etTelepon" />
+
+            <TextView
+                android:id="@+id/telepon_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="Telepon"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/etPekerjaan"
+                />
 
             <EditText
                 android:id="@+id/etTelepon"
@@ -182,12 +260,25 @@
                 android:ems="10"
                 android:hint="@string/hint_phone"
                 android:inputType="phone"
-                android:layout_below="@+id/etPekerjaan"
+                android:layout_below="@+id/telepon_title"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:background="@drawable/capsule_edittext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etDesa" />
+
+            <TextView
+                android:id="@+id/rtrw_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="RW / RT"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/etTelepon"
+                />
 
             <LinearLayout
                 android:id="@+id/linLayout2"
@@ -197,7 +288,7 @@
                 android:orientation="horizontal"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="15dp"
-                android:layout_below="@+id/etTelepon">
+                android:layout_below="@+id/rtrw_title">
 
                 <EditText
                     android:id="@+id/etRW"

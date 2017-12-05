@@ -1,13 +1,17 @@
 package edu.upi.mobprogproject.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+import java.util.List;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.content.CalendarFragment;
@@ -15,10 +19,18 @@ import edu.upi.mobprogproject.content.FeedsFragment;
 import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.MessageFragment;
 import edu.upi.mobprogproject.content.ProfileFragment;
-
+import edu.upi.mobprogproject.helper.DbUsers;
+import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeActivity extends AppCompatActivity {
+    List<Users> userlist;
+    DbUsers dbU;
 
     Button donate_button;
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -80,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Bundle extras = getIntent().getExtras();
-        int position=1;
+        int position=0;
         if(extras != null) {
             position = extras.getInt("viewpager_position");
         }
@@ -120,6 +132,57 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         this.finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void getData() {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<Users>> call = apiService.getUsersList();
+        call.enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
+                userlist = response.body();
+                if (userlist != null) {
+                    dbU.update(userlist);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    private void setData() {
+//        for (Users acc : accountsList) {
+//            if (Objects.equals(username, acc.getUsername()) && acc.getPassword().equals(password)) {
+//                i = 1;
+//            }
+//        }
+        // dbU.update(userlist);
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dbU = new DbUsers(this);
+        dbU.open();
+        getData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbU.close();
     }
 
     /* KODINGAN IKI HEEERRREE */
