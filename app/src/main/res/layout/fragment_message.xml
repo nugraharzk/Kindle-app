@@ -13,62 +13,52 @@
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/white"
+        android:background="@color/blue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         tools:ignore="RtlHardcoded">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/searchView"
-            android:layout_centerHorizontal="true">
+            android:layout_alignTop="@+id/menu"
+            android:layout_gravity="center"
+            android:fontFamily="roboto"
+            android:text="@string/messagescaps"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/bell"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/textView15"
-                android:contentDescription="@string/app_name"
-                android:maxHeight="30dip"
-                android:minHeight="30dip"
-                android:paddingRight="10dp"
-                android:src="@drawable/add"
-                tools:ignore="RtlSymmetry" />
+        <ImageView
+            android:id="@+id/bell"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/textView14"
+            android:contentDescription="@string/app_name"
+            android:maxHeight="30dip"
+            android:minHeight="30dip"
+            android:src="@drawable/add"
+            tools:ignore="RtlSymmetry" />
 
-            <ImageView
-                android:id="@+id/menu"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="11dp"
-                android:contentDescription="@string/app_name"
-                android:maxHeight="30dip"
-                android:minHeight="30dip"
-                android:paddingRight="10dp"
-                android:src="@drawable/menu"
-                tools:ignore="RtlSymmetry" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/bell"
-                android:fontFamily="roboto"
-                android:paddingLeft="100dp"
-                android:text="@string/messagescaps"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                tools:ignore="RtlSymmetry" />
-
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/toolbar5"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="11dp"
+            android:layout_marginEnd="11dp"
+            android:contentDescription="@string/app_name"
+            android:maxHeight="30dip"
+            android:minHeight="30dip"
+            android:src="@drawable/menu"
+            android:foregroundGravity="right"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"/>
 
     </android.support.v7.widget.Toolbar>
 

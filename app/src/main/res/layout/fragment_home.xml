@@ -17,59 +17,52 @@
         android:id="@+id/toolbar4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/white"
+        android:background="@color/blue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         tools:ignore="RtlHardcoded">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/searchView"
-            android:layout_centerHorizontal="true">
+            android:layout_alignTop="@+id/notif"
+            android:layout_gravity="center"
+            android:fontFamily="roboto"
+            android:text="@string/homecaps"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/rt"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/textView15"
-                android:contentDescription="@string/app_name"
-                android:maxHeight="30dip"
-                android:minHeight="30dip"
-                android:paddingRight="10dp"
-                android:src="@drawable/two"
-                tools:ignore="RtlSymmetry" />
+        <ImageView
+            android:id="@+id/rt"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/textView15"
+            android:contentDescription="@string/app_name"
+            android:maxHeight="30dip"
+            android:minHeight="30dip"
+            android:src="@drawable/list"
+            tools:ignore="RtlSymmetry" />
 
-            <ImageView
-                android:id="@+id/notif"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="11dp"
-                android:contentDescription="@string/app_name"
-                android:maxHeight="30dip"
-                android:minHeight="30dip"
-                android:paddingRight="10dp"
-                android:src="@drawable/bell"
-                tools:ignore="RtlSymmetry" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="118dp"
-                android:layout_toEndOf="@+id/rt"
-                android:maxHeight="40dip"
-                android:minHeight="40dip"
-                android:src="@drawable/logo" />
-
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/notif"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/toolbar4"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="11dp"
+            android:layout_marginEnd="11dp"
+            android:contentDescription="@string/app_name"
+            android:maxHeight="30dip"
+            android:minHeight="30dip"
+            android:src="@drawable/bell"
+            android:foregroundGravity="right"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -80,11 +73,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:text="TOMBOL URGEN"
+        android:textStyle="bold"
         android:background="@drawable/urgen_btn"
         android:textAlignment="center"
         android:padding="10dp"
         android:fontFamily="@font/roboto"
         android:textColor="#FFF" />
-
 
 </RelativeLayout>

@@ -13,12 +13,13 @@
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/blue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingRight="10dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -26,13 +27,12 @@
 
             <ImageView
                 android:id="@+id/gear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:maxHeight="30dip"
                 android:minHeight="30dip"
-                android:paddingRight="10dp"
                 android:src="@drawable/settings" />
 
             <TextView
@@ -44,8 +44,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="roboto"
                 android:text="@string/profilecaps"
-                android:textColor="#000000"
-                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -331,12 +331,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
         //Place current location marker
         LatLng latLng = new LatLng(lat, lon);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title(users.getNama()).snippet(users.getAlamat());
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-        mCurrLocationMarker = map.addMarker(markerOptions);
-        addMarkers();
+//        MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.position(latLng);
+//        markerOptions.title(users.getNama()).snippet(users.getAlamat());
+//        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+//        mCurrLocationMarker = map.addMarker(markerOptions);
+//        addMarkers();
 
         //move map camera
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
