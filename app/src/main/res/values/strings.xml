@@ -11,6 +11,7 @@
     <string name="messagescaps">PESAN</string>
     <string name="profile">Profil</string>
     <string name="profilecaps">PROFIL</string>
+    <string name="editprofil">EDIT PROFIL</string>
 
 
     <string name="log_but">Log in</string>
