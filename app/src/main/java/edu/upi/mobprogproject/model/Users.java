@@ -1,32 +1,74 @@
+
 package edu.upi.mobprogproject.model;
 
-/**
- * Created by amaceh on 14/11/17.
- * User Attribute
- * username TEXT PRIMARY KEY, nama TEXT NOT NULL, ttl TEXT, " +
- "alamat TEXT, rt TEXT, telepon TEXT, pekerjaan TEXT,jabatan TEXT,lat TEXT, lng TEXT" +
- "FOREIGN KEY (username) REFERENCES ACCOUNT(username)
- */
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class Users {
-    private String username, nama, ttl, alamat, rt, rw, desa,
-            telepon, pekerjaan, jabatan, lat, lng;
+import java.io.Serializable;
 
+public class Users implements Serializable {
+
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("nama")
+    @Expose
+    private String nama;
+    @SerializedName("ttl")
+    @Expose
+    private String ttl;
+    @SerializedName("alamat")
+    @Expose
+    private String alamat;
+    @SerializedName("rt")
+    @Expose
+    private String rt;
+    @SerializedName("rw")
+    @Expose
+    private String rw;
+    @SerializedName("desa")
+    @Expose
+    private String desa;
+    @SerializedName("telepon")
+    @Expose
+    private String telepon;
+    @SerializedName("pekerjaan")
+    @Expose
+    private String pekerjaan;
+    @SerializedName("lat")
+    @Expose
+    private String lat;
+    @SerializedName("lng")
+    @Expose
+    private String lng;
+    @SerializedName("jabatan")
+    @Expose
+    private String jabatan;
+    private final static long serialVersionUID = -3945537379071229002L;
+
+    /**
+     * No args constructor for use in serialization
+     */
     public Users() {
-
     }
 
-    public Users(String username, String nama) {
-
-        this.nama = nama;
-        this.username = username;
-        this.jabatan = "warga";
-    }
-
-
-    public Users(String username, String nama, String ttl, String alamat,
-                 String rt, String rw, String desa, String telepon,
-                 String pekerjaan, String jabatan, String lat, String lng) {
+    /**
+     *
+     * @param jabatan
+     * @param username
+     * @param telepon
+     * @param lng
+     * @param rt
+     * @param nama
+     * @param desa
+     * @param alamat
+     * @param ttl
+     * @param pekerjaan
+     * @param rw
+     * @param lat
+     */
+    public Users(String username, String nama, String ttl, String alamat, String rt, String rw, String desa, String telepon, String pekerjaan, String lat, String lng, String jabatan) {
+        super();
         this.username = username;
         this.nama = nama;
         this.ttl = ttl;
@@ -36,9 +78,16 @@ public class Users {
         this.desa = desa;
         this.telepon = telepon;
         this.pekerjaan = pekerjaan;
-        this.jabatan = jabatan;
         this.lat = lat;
         this.lng = lng;
+        this.jabatan = jabatan;
+    }
+
+    public Users(String username, String nama) {
+        super();
+        this.nama = nama;
+        this.username = username;
+        this.jabatan = "warga";
     }
 
     public String getUsername() {
@@ -113,14 +162,6 @@ public class Users {
         this.pekerjaan = pekerjaan;
     }
 
-    public String getJabatan() {
-        return jabatan;
-    }
-
-    public void setJabatan(String jabatan) {
-        this.jabatan = jabatan;
-    }
-
     public String getLat() {
         return lat;
     }
@@ -136,4 +177,13 @@ public class Users {
     public void setLng(String lng) {
         this.lng = lng;
     }
+
+    public String getJabatan() {
+        return jabatan;
+    }
+
+    public void setJabatan(String jabatan) {
+        this.jabatan = jabatan;
+    }
+
 }

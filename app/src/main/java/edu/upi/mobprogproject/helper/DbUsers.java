@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.List;
+
 import edu.upi.mobprogproject.model.Users;
 
 /**
@@ -98,5 +100,12 @@ public class DbUsers {
         upV.put("pekerjaan", k.getPekerjaan());
 
         return db.update("users", upV, "username=?", param);
+    }
+
+    public void update(List<Users> user) {
+        db.delete("users", null, null);
+        for (Users us : user) {
+            insertUsers(us);
+        }
     }
 }

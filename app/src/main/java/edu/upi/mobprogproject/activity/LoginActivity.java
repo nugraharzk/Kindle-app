@@ -4,6 +4,7 @@ package edu.upi.mobprogproject.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,10 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.Objects;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.helper.DbAccounts;
 import edu.upi.mobprogproject.model.Accounts;
 import edu.upi.mobprogproject.rest.ApiClient;
 import edu.upi.mobprogproject.rest.ApiInterface;
@@ -33,10 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     private List<Accounts> accountsList;
+    private String username, password;
 
-    int i = 0;
-
-    DbAccounts dbU;
     SharedPreferences sp;
     SharedPreferences.Editor ed;
     //progress dialog
@@ -46,10 +43,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
 
-        /*dbU = new DbAccounts(getApplicationContext());
+        /*
+        dbU = new DbAccounts(getApplicationContext());
         dbU.open();
+        */
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
 
         String user = sp.getString("user", "");
@@ -59,21 +57,21 @@ public class LoginActivity extends AppCompatActivity {
             finish();
             //opening profile activity
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-        }*/
+        }
         //initializing views
         editTextUsername = findViewById(R.id.editTextLogin);
         editTextPassword = findViewById(R.id.editTextPassword);
     }
 
     public void userLogin(View v) {
-        String username = editTextUsername.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        username = editTextUsername.getText().toString().trim();
+        password = editTextPassword.getText().toString().trim();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.progressbar, null);
         builder.setView(view);
         builder.setCancelable(true);
-        Dialog dialog = builder.create();
+        final Dialog dialog = builder.create();
 
         //checking if email and passwords are empty
         if (TextUtils.isEmpty(username)) {
@@ -101,25 +99,40 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
         }*/
 
-        if (accountsList != null) {
-            setData(username,password);
-        }else {
-            getData();
-            setData(username,password);
-        }
+        final Context c = this;
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<Accounts>> call = apiService.getUserLogin(username, password);
+        call.enqueue(new Callback<List<Accounts>>() {
+            @Override
+            public void onResponse(Call<List<Accounts>> call, Response<List<Accounts>> response) {
+                accountsList = response.body();
+                dialog.dismiss();
+                if (accountsList != null) {
+                    ed = sp.edit();
+                    ed.putString("user", accountsList.get(0).getUsername());
+                    ed.putString("email", accountsList.get(0).getEmail());
+                    ed.putBoolean("logged", true);
+                    ed.apply();
+                    Toast.makeText(c, "Logged In", Toast.LENGTH_LONG).show();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
 
-        if (i == 1){
-            Toast.makeText(this, "Logged In", Toast.LENGTH_LONG).show();
-            finish();
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-            intent.putExtra("username", username);
-            startActivity(intent);
-        }
-        else {
-            Toast.makeText(this, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
-        }
+                } else {
+                    Toast.makeText(c, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
+                    //dialog.dismiss();
+                    return;
+                }
+            }
 
-        dialog.dismiss();
+            @Override
+            public void onFailure(Call<List<Accounts>> call, Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
+
+
+        //dialog.dismiss();
+
     }
 
     public void daftar(View v) {
@@ -137,13 +150,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getData();
     }
 
     private void getData(){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<List<Accounts>> call = apiService.getAccountsList();
+        Call<List<Accounts>> call = apiService.getUserLogin(username, password);
         call.enqueue(new Callback<List<Accounts>>() {
             @Override
             public void onResponse(Call<List<Accounts>> call, Response<List<Accounts>> response) {
@@ -155,13 +166,5 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure: ", t);
             }
         });
-    }
-
-    private void setData(String username, String password){
-        for (Accounts acc : accountsList) {
-            if (Objects.equals(username, acc.getUsername()) && acc.getPassword().equals(password)) {
-                i = 1;
-            }
-        }
     }
 }

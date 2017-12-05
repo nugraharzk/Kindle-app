@@ -24,6 +24,7 @@ import edu.upi.mobprogproject.content.FeedsFragment;
 import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.MessageFragment;
 import edu.upi.mobprogproject.content.ProfileFragment;
+import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.rest.ApiClient;
 import edu.upi.mobprogproject.rest.ApiInterface;
@@ -33,30 +34,29 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     BottomNavigationView bottomNavigationView;
 
     private Toolbar toolbar;
+    //    ViewPager viewPager;
     CustomViewPager viewPager;
 
-    public String nama, ttl, alamat, telepon;
 
     HomeFragment homeFragment;
     CalendarFragment chatFragment;
     FeedsFragment feedsFragment;
     MessageFragment messageFragment;
     ProfileFragment profileFragment;
-    Bundle bundle;
 
     MenuItem prevMenuItem;
+
+    List<Users> userlist;
+    DbUsers dbU;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        bundle = getIntent().getExtras();
-
-        Call<List<Users>> call = apiInterface.getUsersUsername(bundle.getString("username"));
 
         viewPager = findViewById(R.id.viewPager);
         viewPager.setPagingEnabled(false);
@@ -118,33 +118,21 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        call.enqueue(new Callback<List<Users>>() {
-            @Override
-            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
-                List<Users> usersList = response.body();
-//                Log.d("TAG", "onResponse: " + usersList.get(0).getNama());
-                setupViewPager(viewPager, usersList);
-            }
-
-            @Override
-            public void onFailure(Call<List<Users>> call, Throwable t) {
-                Log.d("TAG", "onFailure: ");
-            }
-        });
+        setupViewPager(viewPager);
     }
 
-    private void setupViewPager(ViewPager viewPager, List<Users> usersList) {
+    private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager()) {
 //            @Override
 //            public int getItemPosition(Object object) {
 //                return POSITION_NONE;
 //            }
         };
-        homeFragment = new HomeFragment(usersList.get(0));
+        homeFragment = new HomeFragment();
         chatFragment = new CalendarFragment();
         feedsFragment = new FeedsFragment();
         messageFragment = new MessageFragment();
-        profileFragment = new ProfileFragment(usersList.get(0));
+        profileFragment = new ProfileFragment();
 
         adapter.addFragment(homeFragment);
         adapter.addFragment(chatFragment);
@@ -181,4 +169,52 @@ public class HomeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void getData() {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<Users>> call = apiService.getUsersList();
+        call.enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
+                userlist = response.body();
+                if (userlist != null) {
+                    dbU.update(userlist);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+    private void setData() {
+//        for (Users acc : accountsList) {
+//            if (Objects.equals(username, acc.getUsername()) && acc.getPassword().equals(password)) {
+//                i = 1;
+//            }
+//        }
+        // dbU.update(userlist);
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dbU = new DbUsers(this);
+        dbU.open();
+        getData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbU.close();
+    }
 }
+
+

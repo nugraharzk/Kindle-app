@@ -36,14 +36,10 @@ public class ProfileFragment extends Fragment {
     public SharedPreferences sp;
     public SharedPreferences.Editor ed;
     public static final int ACT2_REQUEST = 101;
-    private Users users;
+//    private Users users;
 
     DbUsers dbU;
     View v;
-
-    public ProfileFragment(Users users) {
-        this.users = users;
-    }
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -74,15 +70,15 @@ public class ProfileFragment extends Fragment {
         TextView tvAlamat = v.findViewById(R.id.tvAlamat);
         TextView tvTelepon = v.findViewById(R.id.tvPhone);
         TextView tvUser = v.findViewById(R.id.tvUsername);
-        tvNama.setText(users.getNama());
-        tvTtl.setText(users.getTtl());
-        tvAlamat.setText(users.getAlamat());
-        tvTelepon.setText(users.getTelepon());
-        tvUser.setText(getString(R.string.user_fill, users.getUsername()));
+//        tvNama.setText(users.getNama());
+//        tvTtl.setText(users.getTtl());
+//        tvAlamat.setText(users.getAlamat());
+//        tvTelepon.setText(users.getTelepon());
+//        tvUser.setText(getString(R.string.user_fill, users.getUsername()));
         return v;
     }
 
-    /*@Override
+    @Override
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         setProfile();
@@ -117,13 +113,13 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setProfile();
-    }*/
+    }
 
     public void logout(View v) {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
-        /*ed = sp.edit();
+        ed = sp.edit();
         ed.clear();
-        ed.apply();*/
+        ed.apply();
         getActivity().finish();
         startActivity(intent);
     }
@@ -150,7 +146,7 @@ public class ProfileFragment extends Fragment {
 //        dbU.close();
     }
 
-    /*public String yearGenerator(String ttl) {
+    public String yearGenerator(String ttl) {
         if (ttl != null) {
             String[] getTgl = ttl.split("_");
             if (getTgl.length > 0) {
@@ -170,5 +166,5 @@ public class ProfileFragment extends Fragment {
             }
         }
         return "X";
-    }*/
+    }
 }

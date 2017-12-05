@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,22 +36,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
-import edu.upi.mobprogproject.rest.ApiClient;
-import edu.upi.mobprogproject.rest.ApiInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static android.content.ContentValues.TAG;
 
 
 /**
@@ -63,6 +50,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
+    private static final String TAG = HomeFragment.class.getSimpleName();
 
     private static final int MY_PERMISSIONS_REQUEST = 99;
     GoogleApiClient mGoogleApiClient;
@@ -71,17 +59,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     Marker mCurrLocationMarker;
     private double lon, lat;
     private List<Users> usersList;
-    private Users users;
+//    private Users users;
 
     //    static final LatLng GIK = new LatLng(-6.860426,107.589880);
     private Toolbar toolbar4;
     MapView mapView;
     private GoogleMap map;
+
+    private List<Users> userlist;
+
+
+    private DbUsers dbU;
+
     //    private SupportMapFragment map;
 
-    public HomeFragment(Users users) {
-        this.users = users;
-    }
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -110,7 +101,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
+//        getData();
+//        if (userlist!=null){
+//            setData();
+//        }
 //        map = ((SupportMapFragment)getFragmentManager().findFragmentById(R.id.mapView)).getMap();
 
         toolbar4 = rootView.findViewById(R.id.toolbar3);
@@ -161,92 +155,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            new AmbilData().execute("192.168.43.1/kindle/mapdata \n"); //url jadi parameter
+
         } else {
             // tampilkan error
             Toast t = Toast.makeText(getActivity(), "Tidak ada koneksi!", Toast.LENGTH_LONG);
             t.show();
         }
         return rootView;
-    }
-
-    private void addMarkers() {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<List<Users>> call = apiService.getUsersList();
-        call.enqueue(new Callback<List<Users>>() {
-            @Override
-            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
-                usersList = response.body();
-                for (Users results : usersList){
-                    LatLng current = new LatLng(Double.valueOf(results.getLat()), Double.valueOf(results.getLng()));
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(current);
-                    markerOptions.title(results.getNama()).snippet(results.getAlamat());
-                    map.addMarker(markerOptions);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Users>> call, Throwable t) {
-                Log.e(TAG, "onFailure: ", t);
-            }
-        });
-    }
-
-    private class AmbilData extends AsyncTask<String, Integer, String> {
-
-        protected String doInBackground(String... strUrl) {
-            Log.v("kdl", "mulai ambil data");
-            String result = "done";
-            InputStream is = null;
-            try {
-                URL url = new URL(strUrl[0]);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                //timeout
-                conn.setReadTimeout(10000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
-
-                conn.setRequestMethod("GET");
-                conn.connect();
-
-                try {
-                    //ObjectMapper mapper = new ObjectMapper();
-                    //mainmap = mapper.readValue(conn.getInputStream(), MainMap.class);
-                } catch (Exception e) {
-                    Log.i("yw", e.toString());
-                    result = "fail";
-                } finally {
-                    result = "fail";
-                    if (is != null) {
-                        try {
-                            is.close();
-                        } catch (IOException e) {
-                            Log.i("yw", "Error closing InputStream");
-                        }
-                    }
-                }
-            } catch (MalformedURLException e) {
-                result = "conn";
-                e.printStackTrace();
-            } catch (IOException e) {
-                result = "conn";
-                e.printStackTrace();
-            }
-            return result;
-        }
-
-        protected void onPostExecute(String result) {
-            //tvHasil.setText(result);
-
-//            List<MainMap_> data = mainmap.getMainMap();
-//            if (data != null) {
-//                for (MainMap_ x : data) {
-//                    LatLng alert = new LatLng(Double.parseDouble(x.getLat()), Double.parseDouble(x.getLon()));
-//                    map.addMarker(new MarkerOptions().position(alert).title(x.getNama()));
-//                }
-//            }
-        }
     }
 
     @Override
@@ -333,10 +248,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         LatLng latLng = new LatLng(lat, lon);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title(users.getNama()).snippet(users.getAlamat());
+        // markerOptions.title(users.getNama()).snippet(users.getAlamat());
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         mCurrLocationMarker = map.addMarker(markerOptions);
-        addMarkers();
 
         //move map camera
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -369,5 +283,33 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
             ad.show();
         }
     }
+
+//        private void getData(){
+//        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+//        Call<List<Users>> call = apiService.getUsersList();
+//        call.enqueue(new Callback<List<Users>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
+//                userlist = response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
+//                Log.e(TAG, "onFailure: ", t);
+//                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
+//    }
+//
+//    private void setData(){
+////        for (Users acc : accountsList) {
+////            if (Objects.equals(username, acc.getUsername()) && acc.getPassword().equals(password)) {
+////                i = 1;
+////            }
+////        }
+//        dbU.update(userlist);
+//
+//    }
 
 }

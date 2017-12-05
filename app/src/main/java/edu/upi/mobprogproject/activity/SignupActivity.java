@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.helper.DbAccounts;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Accounts;
 import edu.upi.mobprogproject.model.Users;
@@ -21,15 +20,12 @@ public class SignupActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    DbAccounts dbA;
     DbUsers dbU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        dbA = new DbAccounts(getApplicationContext());
-        dbA.open();
 
         dbU = new DbUsers(getApplicationContext());
         dbU.open();
@@ -82,9 +78,8 @@ public class SignupActivity extends AppCompatActivity {
         Users u2 = new Users(username, nama);
         //creating a new user
         try {
-            long rowInserted = dbA.insertAccounts(u1);
             long rowInserted2 = dbU.insertUsers(u2);
-            if (rowInserted != -1 && rowInserted2 != -1) {
+            if (rowInserted2 != -1) {
                 Toast.makeText(this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Username atau Password sudah ada", Toast.LENGTH_SHORT).show();
@@ -110,7 +105,6 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dbA.close();
         dbU.close();
     }
 }
