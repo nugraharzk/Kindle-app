@@ -12,7 +12,6 @@ import android.widget.Toast;
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Accounts;
-import edu.upi.mobprogproject.model.Users;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -75,15 +74,15 @@ public class SignupActivity extends AppCompatActivity {
 
 
         Accounts u1 = new Accounts(username, email, password);
-        Users u2 = new Users(username, nama);
+        //Users u2 = new Users(username, nama);
         //creating a new user
         try {
-            long rowInserted2 = dbU.insertUsers(u2);
-            if (rowInserted2 != -1) {
-                Toast.makeText(this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Username atau Password sudah ada", Toast.LENGTH_SHORT).show();
-            }
+            //long rowInserted2 = dbU.insertUsers(u2);
+            //if (rowInserted2 != -1) {
+            //  Toast.makeText(this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
+            //} else {
+            //  Toast.makeText(this, "Username atau Password sudah ada", Toast.LENGTH_SHORT).show();
+            //}
             dialog.dismiss();
         } catch (android.database.SQLException e) {
             dialog.dismiss();

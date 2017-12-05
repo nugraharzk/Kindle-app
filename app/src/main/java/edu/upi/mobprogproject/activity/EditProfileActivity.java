@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.picker.MyEditTextDatePicker;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
 
@@ -37,6 +38,7 @@ public class EditProfileActivity extends AppCompatActivity {
         p = findViewById(R.id.etPekerjaan);
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
 
+        new MyEditTextDatePicker(this, R.id.etTglLahir);
         dbU = new DbUsers(this);
         dbU.open();
         Users us = dbU.getUser(sp.getString("user", ""));

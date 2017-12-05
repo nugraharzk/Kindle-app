@@ -83,12 +83,12 @@ public class Users implements Serializable {
         this.jabatan = jabatan;
     }
 
-    public Users(String username, String nama) {
-        super();
-        this.nama = nama;
-        this.username = username;
-        this.jabatan = "warga";
-    }
+//    public Users(String username, String nama) {
+//        super();
+//        this.nama = nama;
+//        this.username = username;
+//        this.jabatan = "warga";
+//    }
 
     public String getUsername() {
         return username;

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upi.mobprogproject.model.Status;
 
@@ -84,5 +85,12 @@ public class DbStatus {
         }
         cur.close();
         return out;
+    }
+
+    public void update(List<Status> stat) {
+        db.delete("status", null, null);
+        for (Status st : stat) {
+            insertStatus(st);
+        }
     }
 }

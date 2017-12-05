@@ -24,7 +24,11 @@ import edu.upi.mobprogproject.content.FeedsFragment;
 import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.MessageFragment;
 import edu.upi.mobprogproject.content.ProfileFragment;
+import edu.upi.mobprogproject.helper.DbEvents;
+import edu.upi.mobprogproject.helper.DbStatus;
 import edu.upi.mobprogproject.helper.DbUsers;
+import edu.upi.mobprogproject.model.Events;
+import edu.upi.mobprogproject.model.Status;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.rest.ApiClient;
 import edu.upi.mobprogproject.rest.ApiInterface;
@@ -38,7 +42,6 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     private Toolbar toolbar;
-    //    ViewPager viewPager;
     CustomViewPager viewPager;
 
 
@@ -52,6 +55,12 @@ public class HomeActivity extends AppCompatActivity {
 
     List<Users> userlist;
     DbUsers dbU;
+
+    List<Status> statuslist;
+    DbStatus dbS;
+
+    List<Events> eventlist;
+    DbEvents dbE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +198,44 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        Call<List<Status>> call2 = apiService.getStatusList();
+        call2.enqueue(new Callback<List<Status>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Status>> call, @NonNull Response<List<Status>> response) {
+                statuslist = response.body();
+                if (statuslist != null) {
+                    //dbU.update(userlist);
+                    dbS.update(statuslist);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Status>> call, @NonNull Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        Call<List<Events>> call3 = apiService.getEventList();
+        call3.enqueue(new Callback<List<Events>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Events>> call, @NonNull Response<List<Events>> response) {
+                eventlist = response.body();
+                if (eventlist != null) {
+                    //dbU.update(userlist);
+                    dbE.update(eventlist);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Events>> call, @NonNull Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     private void setData() {
@@ -206,7 +253,11 @@ public class HomeActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         dbU = new DbUsers(this);
+        dbE = new DbEvents(this);
+        dbS = new DbStatus(this);
         dbU.open();
+        dbE.open();
+        dbS.open();
         getData();
     }
 
@@ -214,6 +265,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         dbU.close();
+        dbE.close();
+        dbS.close();
     }
 }
 

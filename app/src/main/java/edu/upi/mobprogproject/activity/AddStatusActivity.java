@@ -35,6 +35,7 @@ public class AddStatusActivity extends AppCompatActivity {
     }
 
     public void saveStatus(View v) {
+
         Status S = new Status();
         S.setWaktu(Calendar.getInstance().getTime().toString());
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);

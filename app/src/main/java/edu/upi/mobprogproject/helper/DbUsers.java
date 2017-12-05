@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.upi.mobprogproject.model.Users;
@@ -107,5 +108,31 @@ public class DbUsers {
         for (Users us : user) {
             insertUsers(us);
         }
+    }
+
+    public ArrayList<Users> getAllUsers() {
+        Cursor cur = null;
+        ArrayList<Users> out = new ArrayList<>();
+        cur = db.rawQuery("SELECT * FROM USERS", null);
+        if (cur.moveToFirst()) {
+            do {
+                Users K = new Users();
+                K.setUsername(cur.getString(0));
+                K.setNama(cur.getString(1));
+                K.setTtl(cur.getString(2));
+                K.setAlamat(cur.getString(3));
+                K.setRt(cur.getString(4));
+                K.setRw(cur.getString(5));
+                K.setDesa(cur.getString(6));
+                K.setTelepon(cur.getString(7));
+                K.setPekerjaan(cur.getString(8));
+                K.setJabatan(cur.getString(9));
+                K.setLat(cur.getString(10));
+                K.setLng(cur.getString(11));
+                out.add(K);
+            } while (cur.moveToNext());
+        }
+        cur.close();
+        return out;
     }
 }

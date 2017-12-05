@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<List<Accounts>> call, Response<List<Accounts>> response) {
                 accountsList = response.body();
                 dialog.dismiss();
-                if (accountsList != null) {
+                if (accountsList != null && accountsList.size() > 0) {
                     ed = sp.edit();
                     ed.putString("user", accountsList.get(0).getUsername());
                     ed.putString("email", accountsList.get(0).getEmail());
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(c, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
-                    //dialog.dismiss();
+                    dialog.dismiss();
                     return;
                 }
             }

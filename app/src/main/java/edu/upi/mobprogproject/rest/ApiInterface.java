@@ -3,6 +3,8 @@ package edu.upi.mobprogproject.rest;
 import java.util.List;
 
 import edu.upi.mobprogproject.model.Accounts;
+import edu.upi.mobprogproject.model.Events;
+import edu.upi.mobprogproject.model.Status;
 import edu.upi.mobprogproject.model.Users;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,6 +15,9 @@ import retrofit2.http.Query;
  */
 
 public interface ApiInterface {
+
+    @GET("users")
+    Call<List<Users>> getUsersList();
     @GET("users/{username}")
     Call<List<Users>> getUsersUsername(@Query("username") String username);
 
@@ -21,7 +26,11 @@ public interface ApiInterface {
 //    @GET("accounts")
 //    Call<List<Accounts>> getAccountsList();
 
-    @GET("users")
-    Call<List<Users>> getUsersList();
 
+    @GET("status")
+    Call<List<Status>> getStatusList();
+
+
+    @GET("event")
+    Call<List<Events>> getEventList();
 }

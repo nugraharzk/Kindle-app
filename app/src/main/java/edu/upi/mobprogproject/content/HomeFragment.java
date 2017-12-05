@@ -2,11 +2,8 @@ package edu.upi.mobprogproject.content;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -101,11 +97,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-//        getData();
-//        if (userlist!=null){
-//            setData();
-//        }
-//        map = ((SupportMapFragment)getFragmentManager().findFragmentById(R.id.mapView)).getMap();
+        dbU = new DbUsers(getActivity());
+        dbU.open();
 
         toolbar4 = rootView.findViewById(R.id.toolbar3);
         if (toolbar4 != null) {
@@ -131,7 +124,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 LatLng bandung = new LatLng(-6.90389, 107.61861);
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(bandung).zoom(12).build();
                 map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+                showTetangga(map);
                 // For showing a move to my location button
                 //map.setMyLocationEnabled(true);
                 /*
@@ -150,17 +143,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 //        map.getMapAsync(this);
         createLocationRequest();
         buildGoogleApiClient();
-
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-
-        } else {
-            // tampilkan error
-            Toast t = Toast.makeText(getActivity(), "Tidak ada koneksi!", Toast.LENGTH_LONG);
-            t.show();
-        }
         return rootView;
     }
 
@@ -196,6 +178,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        dbU.close();
     }
 
     @Override
@@ -248,7 +231,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         LatLng latLng = new LatLng(lat, lon);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        // markerOptions.title(users.getNama()).snippet(users.getAlamat());
+        //markerOptions.title(users.getNama()).snippet(users.getAlamat());
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         mCurrLocationMarker = map.addMarker(markerOptions);
 
@@ -284,32 +267,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-//        private void getData(){
-//        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-//        Call<List<Users>> call = apiService.getUsersList();
-//        call.enqueue(new Callback<List<Users>>() {
-//            @Override
-//            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
-//                userlist = response.body();
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
-//                Log.e(TAG, "onFailure: ", t);
-//                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
-//    }
-//
-//    private void setData(){
-////        for (Users acc : accountsList) {
-////            if (Objects.equals(username, acc.getUsername()) && acc.getPassword().equals(password)) {
-////                i = 1;
-////            }
-////        }
-//        dbU.update(userlist);
-//
-//    }
+    private void showTetangga(GoogleMap map) {
+        userlist = dbU.getAllUsers();
+        for (Users us : userlist) {
+            LatLng latLng = new LatLng(Double.parseDouble(us.getLat()), Double.parseDouble(us.getLng()));
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title(us.getNama()).snippet(us.getAlamat());
+            //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            mCurrLocationMarker = map.addMarker(markerOptions);
+        }
 
+    }
 }
