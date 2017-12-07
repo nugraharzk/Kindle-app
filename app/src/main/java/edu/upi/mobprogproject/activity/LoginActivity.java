@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private EditText editTextUsername;
     private EditText editTextPassword;
     private List<Accounts> accountsList;
@@ -150,21 +150,5 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-    private void getData(){
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<Accounts>> call = apiService.getUserLogin(username, password);
-        call.enqueue(new Callback<List<Accounts>>() {
-            @Override
-            public void onResponse(Call<List<Accounts>> call, Response<List<Accounts>> response) {
-                accountsList = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<Accounts>> call, Throwable t) {
-                Log.e(TAG, "onFailure: ", t);
-            }
-        });
     }
 }

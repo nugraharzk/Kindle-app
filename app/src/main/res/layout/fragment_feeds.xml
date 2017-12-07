@@ -19,47 +19,17 @@
         tools:ignore="RtlHardcoded">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/searchView"
-            android:layout_centerHorizontal="true">
-
-            <ImageView
-                android:id="@+id/bell_status"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/textView15"
-                android:contentDescription="@string/app_name"
-                android:maxHeight="30dip"
-                android:minHeight="30dip"
-                android:paddingRight="10dp"
-                android:src="@drawable/add"
-                tools:ignore="RtlSymmetry" />
-
-            <ImageView
-                android:id="@+id/menu"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="11dp"
-                android:contentDescription="@string/app_name"
-                android:maxHeight="30dip"
-                android:minHeight="30dip"
-                android:paddingRight="10dp"
-                android:src="@drawable/menu"
-                tools:ignore="RtlSymmetry" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/searchView">
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="13dp"
-                android:layout_toEndOf="@+id/bell_status"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="roboto"
-                android:paddingLeft="100dp"
                 android:text="@string/feedscaps"
                 android:textAlignment="center"
                 android:textColor="#000000"
@@ -76,5 +46,14 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbar4" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnAddFeeds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/plus" />
 
 </RelativeLayout>

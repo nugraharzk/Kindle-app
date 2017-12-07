@@ -103,7 +103,7 @@ public class FeedsFragment extends Fragment {
         */
         adapter = new StatusAdapter(getActivity(), status);
 
-        ImageView addStat = v.findViewById(R.id.bell_status);
+        ImageView addStat = v.findViewById(R.id.btnAddFeeds);
 
         addStat.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = SignupActivity.class.getSimpleName();
 
     private EditText editTextNama;
     private EditText editTextUsername;

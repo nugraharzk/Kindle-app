@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -19,8 +20,15 @@ import edu.upi.mobprogproject.activity.picker.MyEditTextTimePicker;
 import edu.upi.mobprogproject.helper.DbEvents;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Events;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddEventActivity extends AppCompatActivity {
+
+    private static final String TAG = AddEventActivity.class.getSimpleName();
 
     SharedPreferences sp;
     DbEvents dbE;
@@ -90,9 +98,24 @@ public class AddEventActivity extends AppCompatActivity {
         E.setKonfirmasi(0);
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
         E.setUsername(sp.getString("user", ""));
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Events> call = apiInterface.postEvent(E.getJudul(), sp.getString("user", ""), E.getWaktu(), E.getPriority(), E.getDeskripsi(), E.getLat(), E.getLng(), String.valueOf(E.getKonfirmasi()));
+
         long a = dbE.insertEvents(E);
         if (a != -1) {
-            Toast.makeText(this, "Event Berhasil DItambahkan", Toast.LENGTH_SHORT).show();
+            call.enqueue(new Callback<Events>() {
+                @Override
+                public void onResponse(Call<Events> call, Response<Events> response) {
+                    Log.d(TAG, "onResponse: " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Events> call, Throwable t) {
+                    Log.d(TAG, "onFailure: " + t);
+                }
+            });
+            Toast.makeText(this, "Event Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Mohon maaf terjadi kesalahan", Toast.LENGTH_SHORT).show();
         }

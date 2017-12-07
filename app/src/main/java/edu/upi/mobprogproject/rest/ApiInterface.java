@@ -20,19 +20,24 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-    @GET("users")
-    Call<List<Users>> getUsersList();
-    @GET("users/{username}")
-    Call<List<Users>> getUsersUsername(@Query("username") String username);
 
     @GET("accounts")
     Call<List<Accounts>> getUserLogin(@Query("username") String username, @Query("password") String password);
-//    @GET("accounts")
-//    Call<List<Accounts>> getAccountsList();
 
     @FormUrlEncoded
     @POST("accounts")
     Call<Accounts> postAccount(@Field("username") String username, @Field("password") String password, @Field("email") String email);
+
+    @FormUrlEncoded
+    @PUT("accounts")
+    Call<Accounts> putAccount(@Field("username") String username,
+                              @Field("password") String password,
+                              @Field("email") String email);
+
+    /************************************************************************************************************/
+
+    @GET("users")
+    Call<List<Users>> getUsersList();
 
     @FormUrlEncoded
     @POST("users")
@@ -48,19 +53,36 @@ public interface ApiInterface {
                         @Field("rw") String rw,
                         @Field("desa") String desa,
                         @Field("telepon") String telepon,
-                        @Field("pekerjaan") String pekerjaan);
+                        @Field("pekerjaan") String pekerjaan,
+                        @Field("lat") String lat,
+                        @Field("lng") String lng,
+                        @Field("jabatan") String jabatan);
 
-    @FormUrlEncoded
-    @PUT("accounts")
-    Call<Accounts> putAccount(@Field("username") String username,
-                              @Field("password") String password,
-                              @Field("email") String email);
-
+    /************************************************************************************************************/
 
     @GET("status")
     Call<List<Status>> getStatusList();
 
+    @FormUrlEncoded
+    @POST("status")
+    Call<Status> postStatus(@Field("username") String username,
+                            @Field("status") String status,
+                            @Field("waktu") String waktu,
+                            @Field("liked") String liked);
+
+    /************************************************************************************************************/
 
     @GET("event")
     Call<List<Events>> getEventList();
+
+    @FormUrlEncoded
+    @POST("event")
+    Call<Events> postEvent(@Field("judul") String judul,
+                           @Field("username") String username,
+                           @Field("waktu") String waktu,
+                           @Field("priority") String priority,
+                           @Field("deskripsi") String deskripsi,
+                           @Field("lat") String lat,
+                           @Field("lng") String lng,
+                           @Field("konfirmasi") String konfirmasi);
 }

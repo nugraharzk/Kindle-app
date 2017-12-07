@@ -149,7 +149,7 @@ public class EditProfileActivity extends AppCompatActivity {
         u.setPekerjaan(pekerjaan);
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Users> call = apiInterface.putUser(sp.getString("user",""),nama,tempatL+"_"+tanggalL, alamat, rt, rw, desa, telepon, pekerjaan);
+        Call<Users> call = apiInterface.putUser(sp.getString("user",""),nama,tempatL+"_"+tanggalL, alamat, rt, rw, desa, telepon, pekerjaan, null, null, "warga");
 
         Intent i = getIntent();
         try {

@@ -66,7 +66,7 @@ public class CalendarFragment extends Fragment {
 
         agenda = setData(dbE, dbU);
 
-        ImageView addAgenda = v.findViewById(R.id.bell_event);
+        ImageView addAgenda = v.findViewById(R.id.btnAddEvent);
         addAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

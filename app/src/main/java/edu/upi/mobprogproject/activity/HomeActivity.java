@@ -38,7 +38,7 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = HomeActivity.class.getSimpleName();
     BottomNavigationView bottomNavigationView;
 
     private Toolbar toolbar;
