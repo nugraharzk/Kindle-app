@@ -14,10 +14,17 @@ import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.picker.MyEditTextDatePicker;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+    private static final String TAG = EditProfileActivity.class.getSimpleName();
     public static final int ACT2_REQUEST = 110;
+    private Bundle bundle;
 
     DbUsers dbU;
     private EditText n, tmL, tL, a, rrt, w, d, t, p;
@@ -27,6 +34,8 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        bundle = getIntent().getExtras();
         n = findViewById(R.id.etNamap);
         tmL = findViewById(R.id.etTempatLahit);
         tL = findViewById(R.id.etTglLahir);
@@ -72,7 +81,7 @@ public class EditProfileActivity extends AppCompatActivity {
         if (requestCode == ACT2_REQUEST && resultCode != 0) {
             setResult(RESULT_OK, i);
         } else {
-            Toast.makeText(this, "Akun gagal diperbaharui", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Profil gagal diperbaharui", Toast.LENGTH_LONG).show();
         }
         finish();
     }
@@ -139,9 +148,23 @@ public class EditProfileActivity extends AppCompatActivity {
         u.setTelepon(telepon);
         u.setPekerjaan(pekerjaan);
 
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Users> call = apiInterface.putUser(sp.getString("user",""),nama,tempatL+"_"+tanggalL, alamat, rt, rw, desa, telepon, pekerjaan);
+
         Intent i = getIntent();
         try {
             dbU.updateUsers(sp.getString("user", ""), u);
+            call.enqueue(new Callback<Users>() {
+                @Override
+                public void onResponse(Call<Users> call, Response<Users> response) {
+                    Log.d(TAG, "onResponse: " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Users> call, Throwable t) {
+                    Log.d(TAG, "onFailure: " + t);
+                }
+            });
             setResult(RESULT_OK, i);
         } catch (Exception e) {
             setResult(RESULT_CANCELED, i);

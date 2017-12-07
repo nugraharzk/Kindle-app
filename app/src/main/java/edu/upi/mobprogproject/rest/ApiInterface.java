@@ -7,7 +7,11 @@ import edu.upi.mobprogproject.model.Events;
 import edu.upi.mobprogproject.model.Status;
 import edu.upi.mobprogproject.model.Users;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 /**
@@ -25,6 +29,32 @@ public interface ApiInterface {
     Call<List<Accounts>> getUserLogin(@Query("username") String username, @Query("password") String password);
 //    @GET("accounts")
 //    Call<List<Accounts>> getAccountsList();
+
+    @FormUrlEncoded
+    @POST("accounts")
+    Call<Accounts> postAccount(@Field("username") String username, @Field("password") String password, @Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("users")
+    Call<Users> postUser(@Field("username") String username, @Field("nama") String nama);
+
+    @FormUrlEncoded
+    @PUT("users")
+    Call<Users> putUser(@Field("username") String username,
+                        @Field("nama") String nama,
+                        @Field("ttl") String ttl,
+                        @Field("alamat") String alamat,
+                        @Field("rt") String rt,
+                        @Field("rw") String rw,
+                        @Field("desa") String desa,
+                        @Field("telepon") String telepon,
+                        @Field("pekerjaan") String pekerjaan);
+
+    @FormUrlEncoded
+    @PUT("accounts")
+    Call<Accounts> putAccount(@Field("username") String username,
+                              @Field("password") String password,
+                              @Field("email") String email);
 
 
     @GET("status")

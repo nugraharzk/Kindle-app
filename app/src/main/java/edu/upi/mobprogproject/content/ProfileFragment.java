@@ -36,6 +36,7 @@ public class ProfileFragment extends Fragment {
     public SharedPreferences sp;
     public SharedPreferences.Editor ed;
     public static final int ACT2_REQUEST = 101;
+    private TextView tvUser;
 //    private Users users;
 
     DbUsers dbU;
@@ -69,7 +70,7 @@ public class ProfileFragment extends Fragment {
         TextView tvTtl = v.findViewById(R.id.tvKerUmur);
         TextView tvAlamat = v.findViewById(R.id.tvAlamat);
         TextView tvTelepon = v.findViewById(R.id.tvPhone);
-        TextView tvUser = v.findViewById(R.id.tvUsername);
+        tvUser = v.findViewById(R.id.tvUsername);
 //        tvNama.setText(users.getNama());
 //        tvTtl.setText(users.getTtl());
 //        tvAlamat.setText(users.getAlamat());
@@ -126,6 +127,7 @@ public class ProfileFragment extends Fragment {
 
     public void editProfile(View v) {
         Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        intent.putExtra("username", tvUser.getText().toString());
         startActivityForResult(intent, ACT2_REQUEST);
     }
 

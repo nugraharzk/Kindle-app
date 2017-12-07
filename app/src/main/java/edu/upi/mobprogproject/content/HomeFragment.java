@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,11 @@ import java.util.List;
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -99,6 +105,21 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         dbU = new DbUsers(getActivity());
         dbU.open();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<Users>> call = apiInterface.getUsersList();
+        call.enqueue(new Callback<List<Users>>() {
+            @Override
+            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+                Log.d(TAG, "onResponse: " + response.body());
+                usersList = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<Users>> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t);
+            }
+        });
 
         toolbar4 = rootView.findViewById(R.id.toolbar3);
         if (toolbar4 != null) {
@@ -231,7 +252,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         LatLng latLng = new LatLng(lat, lon);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        //markerOptions.title(users.getNama()).snippet(users.getAlamat());
+        markerOptions.title("Im Here");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         mCurrLocationMarker = map.addMarker(markerOptions);
 
@@ -269,14 +290,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
     private void showTetangga(GoogleMap map) {
         userlist = dbU.getAllUsers();
-        for (Users us : userlist) {
-            LatLng latLng = new LatLng(Double.parseDouble(us.getLat()), Double.parseDouble(us.getLng()));
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title(us.getNama()).snippet(us.getAlamat());
-            //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-            mCurrLocationMarker = map.addMarker(markerOptions);
-        }
+        /*for (Users us : usersList) {
+            if (Double.valueOf(us.getLat()) != null && Double.valueOf(us.getLng()) != null) {
+                LatLng latLng = new LatLng(Double.valueOf(us.getLat()), Double.valueOf(us.getLng()));
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title(us.getNama()).snippet(us.getAlamat());
+                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                mCurrLocationMarker = map.addMarker(markerOptions);
+            }
+        }*/
 
     }
 }
