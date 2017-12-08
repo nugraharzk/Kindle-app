@@ -1,6 +1,6 @@
 # KINDLE
 the MobProg project
-> please drop/uninstall old App since there was lot of updates
+> please drop/uninstall old App since there was lot of updates <br>
 > please install SDK ver 27
 
 ## Changelog
