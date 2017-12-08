@@ -7,7 +7,7 @@ the MobProg project
 * updated databases
 * offline feature like adding events, adding status, and profile disabled for a while
 * connect with api
-* backend at http://mobprog.atwebpages.com/index.php/
+* backend at http://mobprog.atwebpages.com/
 * online database using MySQL
 
 #### 8-des-17
