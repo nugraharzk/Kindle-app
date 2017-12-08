@@ -10,7 +10,7 @@ the MobProg project
 * backend at http://mobprog.atwebpages.com/index.php/
 * online database using MySQL
 
-8-des-17
+#### 8-des-17
 * layout changes merged with naufal brach
 * add data (event, status, register) now added to the api
 * gradle depedencies misc
