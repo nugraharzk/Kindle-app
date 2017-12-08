@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upi.mobprogproject.model.Events;
 
@@ -95,5 +96,12 @@ public class DbEvents {
         }
         cur.close();
         return out;
+    }
+
+    public void update(List<Events> even) {
+        db.delete("event", null, null);
+        for (Events ev : even) {
+            insertEvents(ev);
+        }
     }
 }

@@ -4,15 +4,22 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.model.Accounts;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditAkunActivity extends AppCompatActivity {
 
-    EditText etmail, etolpass, etnewpass, etnewpass2;
+    EditText etuser, etmail, etolpass, etnewpass, etnewpass2;
     SharedPreferences sp;
     SharedPreferences.Editor ed;
 
@@ -20,7 +27,7 @@ public class EditAkunActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_akun);
-        EditText etuser = findViewById(R.id.etUsername);
+        etuser = findViewById(R.id.etUsername);
         etuser.setEnabled(false);
 
         etmail = findViewById(R.id.etEmail);
@@ -58,32 +65,28 @@ public class EditAkunActivity extends AppCompatActivity {
             return;
         } else {
             new_pass = passnew1;
+            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+            Call<Accounts> call = apiInterface.putAccount(etuser.getText().toString(), new_pass, email);
+            call.enqueue(new Callback<Accounts>() {
+                @Override
+                public void onResponse(Call<Accounts> call, Response<Accounts> response) {
+                    Log.d("EditAkunActivity", "onResponse: " + response.body());
+                    success();
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Accounts> call, Throwable t) {
+                    Log.d("EditAkunActivity", "onFailure: " + t);
+                }
+            });
         }
-
-        //Accounts u = dbA.getAccount(sp.getString("user", ""), passold);
-        // if (u.getUsername() != null) {
-//            Accounts x = new Accounts();
-//            x.setEmail(email);
-//            if (!new_pass.isEmpty()) {
-//                x.setPassword(new_pass);
-//            }
-//            if (u.getPassword().equals(passold)) {
-//                dbA.updateAccounts(sp.getString("user", ""), x);
-//                ed = sp.edit();
-//                ed.putString("email", x.getEmail());
-//                ed.putBoolean("logged", true);
-//                ed.apply();
-//            }
-//            Toast.makeText(this, "Tersimpan", Toast.LENGTH_LONG).show();
-//            Intent i = getIntent();
-//            setResult(RESULT_OK, i);
-//            finish();
-//        } else {
-//            Toast.makeText(this, "Password Lama salah", Toast.LENGTH_LONG).show();
-//        }
-
-
     }
+
+    private void success() {
+        Toast.makeText(this, "Akun Diubah!", Toast.LENGTH_LONG).show();
+    }
+
 
     @Override
     protected void onDestroy() {

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,8 +16,16 @@ import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.helper.DbStatus;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Status;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddStatusActivity extends AppCompatActivity {
+
+    private static final String TAG = AddStatusActivity.class.getSimpleName();
+
 
     DbStatus dbS;
     DbUsers dbU;
@@ -48,8 +57,22 @@ public class AddStatusActivity extends AppCompatActivity {
         }
 
         S.setStatus(status);
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Status> call = apiInterface.postStatus(sp.getString("user", ""), S.getStatus(), S.getWaktu(), String.valueOf(S.getLike()));
         long a = dbS.insertStatus(S);
+
         if (a != -1) {
+            call.enqueue(new Callback<Status>() {
+                @Override
+                public void onResponse(Call<Status> call, Response<Status> response) {
+                    Log.d(TAG, "onResponse: " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Status> call, Throwable t) {
+                    Log.d(TAG, "onFailure: " + t);
+                }
+            });
             Toast.makeText(this, "Status Berhasil Diperbaharui", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Mohon maaf terjadi kesalahan", Toast.LENGTH_SHORT).show();

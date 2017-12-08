@@ -14,9 +14,15 @@ import android.widget.Toast;
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+    private static final String TAG = EditProfileActivity.class.getSimpleName();
     public static final int ACT2_REQUEST = 110;
 
     DbUsers dbU;
@@ -30,7 +36,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        backBtn = (ImageView)findViewById(R.id.back);
+        backBtn = findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,9 +161,23 @@ public class EditProfileActivity extends AppCompatActivity {
         u.setTelepon(telepon);
         u.setPekerjaan(pekerjaan);
 
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<Users> call = apiInterface.putUser(sp.getString("user", ""), nama, tempatL + "_" + tanggalL, alamat, rt, rw, desa, telepon, pekerjaan, null, null, "warga");
+
         Intent i = getIntent();
         try {
             dbU.updateUsers(sp.getString("user", ""), u);
+            call.enqueue(new Callback<Users>() {
+                @Override
+                public void onResponse(Call<Users> call, Response<Users> response) {
+                    Log.d(TAG, "onResponse: " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Users> call, Throwable t) {
+                    Log.d(TAG, "onFailure: " + t);
+                }
+            });
             setResult(RESULT_OK, i);
         } catch (Exception e) {
             setResult(RESULT_CANCELED, i);

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,8 +14,15 @@ import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Accounts;
 import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
+
+    private static final String TAG = SignupActivity.class.getSimpleName();
 
     private EditText editTextNama;
     private EditText editTextUsername;
@@ -75,15 +83,41 @@ public class SignupActivity extends AppCompatActivity {
 
 
         Accounts u1 = new Accounts(username, email, password);
-        Users u2 = new Users(username, nama);
+        //Users u2 = new Users(username, nama);
         //creating a new user
         try {
-            long rowInserted2 = dbU.insertUsers(u2);
-            if (rowInserted2 != -1) {
-                Toast.makeText(this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Username atau Password sudah ada", Toast.LENGTH_SHORT).show();
-            }
+            //long rowInserted2 = dbU.insertUsers(u2);
+            //if (rowInserted2 != -1) {
+            //  Toast.makeText(this, "Pendaftaran Berhasil", Toast.LENGTH_SHORT).show();
+            //} else {
+            //  Toast.makeText(this, "Username atau Password sudah ada", Toast.LENGTH_SHORT).show();
+            //}
+            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+            Call<Accounts> call = apiInterface.postAccount(username, password, email);
+            call.enqueue(new Callback<Accounts>() {
+                @Override
+                public void onResponse(Call<Accounts> call, Response<Accounts> response) {
+                    Log.d("PostAccounts", "onResponse: " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Accounts> call, Throwable t) {
+                    Log.d("PostAccounts", "onFailure: " + t);
+                }
+            });
+
+            Call<Users> call1 = apiInterface.postUser(username, nama);
+            call.enqueue(new Callback<Accounts>() {
+                @Override
+                public void onResponse(Call<Accounts> call, Response<Accounts> response) {
+                    Log.d(TAG, "onResponse: " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Accounts> call, Throwable t) {
+                    Log.d(TAG, "onFailure: " + t);
+                }
+            });
             dialog.dismiss();
         } catch (android.database.SQLException e) {
             dialog.dismiss();

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class ProfileFragment extends Fragment {
     public SharedPreferences sp;
     public SharedPreferences.Editor ed;
     public static final int ACT2_REQUEST = 101;
+    private TextView tvUser;
 //    private Users users;
 
     DbUsers dbU;
@@ -64,17 +66,15 @@ public class ProfileFragment extends Fragment {
                 editProfile(v);
             }
         });
-
+        ImageView img = v.findViewById(R.id.imageView2);
+        //Glide gl = new Glide(getActivity()).load(R.drawable.cover);
+        //Glide.with(mContext).load(imgID).asBitmap().override(1080, 600).into(mImageView);
         TextView tvNama = v.findViewById(R.id.tvNama);
         TextView tvTtl = v.findViewById(R.id.tvKerUmur);
         TextView tvAlamat = v.findViewById(R.id.tvAlamat);
         TextView tvTelepon = v.findViewById(R.id.tvPhone);
-        TextView tvUser = v.findViewById(R.id.tvUsername);
-//        tvNama.setText(users.getNama());
-//        tvTtl.setText(users.getTtl());
-//        tvAlamat.setText(users.getAlamat());
-//        tvTelepon.setText(users.getTelepon());
-//        tvUser.setText(getString(R.string.user_fill, users.getUsername()));
+        tvUser = v.findViewById(R.id.tvUsername);
+
         return v;
     }
 
@@ -126,6 +126,7 @@ public class ProfileFragment extends Fragment {
 
     public void editProfile(View v) {
         Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        intent.putExtra("username", tvUser.getText().toString());
         startActivityForResult(intent, ACT2_REQUEST);
     }
 
