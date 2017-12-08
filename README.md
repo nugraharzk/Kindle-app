@@ -18,7 +18,7 @@ the MobProg project
 ## bugs
 - app got crash for the first time installing when asking location request
 - layout fell laggy
-- imageview might cost to much memory, it crash on some device, partial fix : disable hardware acceleration and enable large heap
+- imageview might cost too much memory, it crash on some device, partial fix : disable hardware acceleration and enable large heap
 
 ## service-source
 The service can be found here at Rizky's REPO [Kindle-Service](https://github.com/nugraharzk/Kindle-service).
