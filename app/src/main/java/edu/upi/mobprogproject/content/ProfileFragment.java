@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,7 +54,17 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        ImageView img = v.findViewById(R.id.imageView2);
+        Glide.with(this)
+                .asBitmap()
+                .load(R.drawable.cover)
+                .into(img);
+        ImageView img2 = v.findViewById(R.id.circle);
+        Glide.with(this)
+                .asBitmap()
+                .apply(RequestOptions.circleCropTransform())
+                .load(R.drawable.profile_user)
+                .into(img2);
         Button BtLogout = v.findViewById(R.id.btLogout);
         BtLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +79,6 @@ public class ProfileFragment extends Fragment {
                 editProfile(v);
             }
         });
-        ImageView img = v.findViewById(R.id.imageView2);
         //Glide gl = new Glide(getActivity()).load(R.drawable.cover);
         //Glide.with(mContext).load(imgID).asBitmap().override(1080, 600).into(mImageView);
         TextView tvNama = v.findViewById(R.id.tvNama);

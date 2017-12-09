@@ -19,7 +19,6 @@ android {
 }
 
 dependencies {
-    //TODO please use 'implementation' since 'compile' is deprecated
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -38,13 +37,15 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.google.code.gson:gson:2.8.2'
 
+    //TODO please use 'implementation' since 'compile' is deprecated
+
     //to deal with image memory leak
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
     // bottom appbar plugin here
     implementation 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
-    // circle image
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    // circle image that support glide
+    implementation 'jp.wasabeef:glide-transformations:3.0.1'
 }
 
 
