@@ -32,7 +32,7 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
     // inflates the row layout from xml when needed
     @Override
     public AgendaAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.event_item, parent, false);
+        View view = mInflater.inflate(R.layout.listitems_event, parent, false);
         AgendaAdapter.ViewHolder viewHolder = new AgendaAdapter.ViewHolder(view);
         return viewHolder;
     }

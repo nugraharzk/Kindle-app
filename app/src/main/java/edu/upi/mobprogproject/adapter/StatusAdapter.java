@@ -32,7 +32,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     // inflates the row layout from xml when needed
     @Override
     public StatusAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.status_item, parent, false);
+        View view = mInflater.inflate(R.layout.listitems_status, parent, false);
         StatusAdapter.ViewHolder viewHolder = new StatusAdapter.ViewHolder(view);
         return viewHolder;
     }

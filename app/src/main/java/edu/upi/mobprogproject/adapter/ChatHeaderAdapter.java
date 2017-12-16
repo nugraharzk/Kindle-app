@@ -32,7 +32,7 @@ public class ChatHeaderAdapter extends RecyclerView.Adapter<ChatHeaderAdapter.Vi
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.message_header_items, parent, false);
+        View view = mInflater.inflate(R.layout.listitems_message_header, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
