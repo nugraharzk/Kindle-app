@@ -88,4 +88,10 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="name_fill">%1$s | %2$s</string>
     <string name="user_fill">Username : %1$s</string>
     <string name="edit_akun">Edit Akun</string>
+
+    <string name="ketua">Ketua RT</string>
+    <string name="alamat">JL yang pernah hilang</string>
+    <string name="kontak">Kontak :</string>
+    <string name="def_kontak">123456789</string>
+    <string name="detail_but">Selengkapnya</string>
 </resources>
