@@ -2,7 +2,7 @@
 the MobProg project
 > please drop/uninstall old App since there was lot of updates
 
-##Requirements
+## Requirements
 * SDK 27
 * Device With SDK \>19
 * latest gradle
