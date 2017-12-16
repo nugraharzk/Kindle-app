@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.picker.MyEditTextDatePicker;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.rest.ApiClient;
@@ -77,7 +78,8 @@ public class EditProfileActivity extends AppCompatActivity {
         t.setText(us.getTelepon());
         p.setText(us.getPekerjaan());
 
-
+        //TODO i just need this class instance, not really need it to be used. so dont delete this code
+        new MyEditTextDatePicker(this, R.id.etTglLahir);
     }
 
     public void editAkun(View v) {

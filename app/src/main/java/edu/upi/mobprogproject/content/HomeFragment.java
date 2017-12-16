@@ -2,6 +2,7 @@ package edu.upi.mobprogproject.content;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -36,6 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.ListTetanggaActivity;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.rest.ApiClient;
@@ -72,7 +75,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
 
     private DbUsers dbU;
-
+    ImageView toListT;
     //    private SupportMapFragment map;
 
 
@@ -103,6 +106,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        toListT = rootView.findViewById(R.id.listtetangga);
+        toListT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), ListTetanggaActivity.class);
+                startActivity(i);
+            }
+        });
         dbU = new DbUsers(getActivity());
         dbU.open();
 
