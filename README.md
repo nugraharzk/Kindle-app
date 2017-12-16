@@ -1,7 +1,11 @@
 # KINDLE
 the MobProg project
 > please drop/uninstall old App since there was lot of updates
-> please install SDK ver 27
+
+##Requirements
+* SDK 27
+* Device With SDK \>19
+* latest gradle
 
 ## Changelog
 * updated databases

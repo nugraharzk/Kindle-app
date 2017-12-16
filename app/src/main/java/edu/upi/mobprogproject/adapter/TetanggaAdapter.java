@@ -2,10 +2,10 @@ package edu.upi.mobprogproject.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,7 +13,9 @@ import java.util.Collections;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.ListTetanggaActivity;
 import edu.upi.mobprogproject.adapter.data.TetanggaList;
+import edu.upi.mobprogproject.popup.TetanggaPopUp;
 
 /**
  * Created by amaceh on 16/12/17.
@@ -22,11 +24,13 @@ import edu.upi.mobprogproject.adapter.data.TetanggaList;
 public class TetanggaAdapter extends RecyclerView.Adapter<TetanggaAdapter.ViewHolder> {
     private List<TetanggaList> mData = Collections.emptyList();
     private LayoutInflater mInflater;
+    private Context ctx;
 
     // data is passed into the constructor
     public TetanggaAdapter(Context context, List<TetanggaList> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        ctx = context;
     }
 
     // inflates the row layout from xml when needed
@@ -40,12 +44,18 @@ public class TetanggaAdapter extends RecyclerView.Adapter<TetanggaAdapter.ViewHo
     // binds the data to the textview in each row
     @Override
     public void onBindViewHolder(TetanggaAdapter.ViewHolder holder, int position) {
-        TetanggaList name = mData.get(position);
-        Log.i("stop", "onBindViewHolder: ");
+        final TetanggaList name = mData.get(position);
+        //Log.i("stop", "onBindViewHolder: ");
         holder.nama.setText(name.getNama());
         holder.alamat.setText(name.getAlamat());
         holder.kontak.setText(name.getKontak());
         holder.jabatan.setText(name.getJabatan());
+        holder.btDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new TetanggaPopUp(name.getUsername(), ctx, ListTetanggaActivity.getRelativeLayout()).show();
+            }
+        });
     }
 
     // total number of rows
@@ -58,13 +68,14 @@ public class TetanggaAdapter extends RecyclerView.Adapter<TetanggaAdapter.ViewHo
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nama, alamat, kontak, jabatan;
-
+        public Button btDetail;
         public ViewHolder(View itemView) {
             super(itemView);
             nama = itemView.findViewById(R.id.tvLTNama);
             alamat = itemView.findViewById(R.id.tvLTalamat);
             kontak = itemView.findViewById(R.id.tvLTkontak);
             jabatan = itemView.findViewById(R.id.tvLeader);
+            btDetail = itemView.findViewById(R.id.btLTlengkap);
         }
     }
 

@@ -15,8 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.activity.picker.MyEditTextDatePicker;
-import edu.upi.mobprogproject.activity.picker.MyEditTextTimePicker;
+import edu.upi.mobprogproject.picker.MyEditTextDatePicker;
+import edu.upi.mobprogproject.picker.MyEditTextTimePicker;
 import edu.upi.mobprogproject.helper.DbEvents;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Events;
