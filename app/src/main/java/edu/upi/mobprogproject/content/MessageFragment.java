@@ -1,6 +1,8 @@
 package edu.upi.mobprogproject.content;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.adapter.ChatHeaderAdapter;
 import edu.upi.mobprogproject.adapter.data.ChatHeader;
 
@@ -24,6 +27,7 @@ import edu.upi.mobprogproject.adapter.data.ChatHeader;
  */
 public class MessageFragment extends Fragment {
 
+    private Activity activity;
     public MessageFragment() {
         // Required empty public constructor
     }
@@ -54,7 +58,7 @@ public class MessageFragment extends Fragment {
         // set up the RecyclerView
         RecyclerView recyclerView = v.findViewById(R.id.rcMess);
         SearchView sc = v.findViewById(R.id.searchView);
-        adapter = new ChatHeaderAdapter(getActivity(), chats);
+        adapter = new ChatHeaderAdapter(activity, chats);
 
         sc.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -78,7 +82,7 @@ public class MessageFragment extends Fragment {
 
         });
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
@@ -103,5 +107,19 @@ public class MessageFragment extends Fragment {
 
         //calling a method of the adapter class and passing the filtered list
         adapter.filterList(filterdNames);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (activity == null && context instanceof HomeActivity) {
+            activity = (HomeActivity) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        this.activity = null;
+        super.onDetach();
     }
 }

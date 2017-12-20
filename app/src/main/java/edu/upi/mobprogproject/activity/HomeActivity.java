@@ -7,7 +7,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -42,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
     List<Events> eventlist;
     DbEvents dbE;
 
-    Button donate_button;
     private static final String TAG = HomeActivity.class.getSimpleName();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -149,6 +147,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
     private void getData() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Users>> call = apiService.getUsersList();
@@ -207,17 +206,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void setData() {
-//        for (Users acc : accountsList) {
-//            if (Objects.equals(username, acc.getUsername()) && acc.getPassword().equals(password)) {
-//                i = 1;
-//            }
-//        }
-        // dbU.update(userlist);
-
-    }
-
 
     @Override
     protected void onStart() {

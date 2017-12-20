@@ -23,7 +23,7 @@ the MobProg project
 * using glide to load large image to avoid memory leak
 
 20-des-17
-location request fixed
+* location request fixed
 
 ## bugs
 - layout fell laggy

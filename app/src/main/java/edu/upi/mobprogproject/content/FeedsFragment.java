@@ -1,9 +1,11 @@
 package edu.upi.mobprogproject.content;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.AddStatusActivity;
+import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.adapter.StatusAdapter;
 import edu.upi.mobprogproject.adapter.data.StatusList;
 import edu.upi.mobprogproject.helper.DbStatus;
@@ -31,12 +34,12 @@ import edu.upi.mobprogproject.model.Users;
  */
 public class FeedsFragment extends Fragment {
 
+    private Activity activity;
     DbStatus dbS;
     DbUsers dbU;
     RecyclerView recyclerView;
     StatusAdapter adapter;
     static ArrayList<StatusList> status;
-    Context context;
     View v;
 
     public static final int ACT2_REQUEST = 99;
@@ -47,7 +50,7 @@ public class FeedsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_feeds, container, false);
         return v;
@@ -68,24 +71,22 @@ public class FeedsFragment extends Fragment {
     public ArrayList<StatusList> setData(DbStatus dbs, DbUsers dbu) {
         ArrayList<StatusList> st = new ArrayList<>();
         ArrayList<Status> status = dbs.getAllStatus();
-        int i = 0;
         for (Status item : status) {
             Users user = dbu.getUser(item.getUsername());
             st.add(new StatusList(user.getNama(), item.getWaktu(), item.getStatus()));
-            i += 1;
         }
         return st;
     }
 
     @Override
-    public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         setRecView();
     }
 
     private void setRecView() {
-        dbU = new DbUsers(getActivity());
-        dbS = new DbStatus(getActivity());
+        dbU = new DbUsers(activity);
+        dbS = new DbStatus(activity);
 
         dbS.open();
         dbU.open();
@@ -101,19 +102,19 @@ public class FeedsFragment extends Fragment {
         status.add(new StatusList("Rizki", "10 november 2017", "Aku sudah lelah mananti dirimu"));
         status.add(new StatusList("Ryan", "9 november 2017", "Biarlah yang lalu biarlah berlalu"));
         */
-        adapter = new StatusAdapter(getActivity(), status);
+        adapter = new StatusAdapter(activity, status);
 
         ImageView addStat = v.findViewById(R.id.bell_status);
 
         addStat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), AddStatusActivity.class);
+                Intent i = new Intent(activity, AddStatusActivity.class);
                 startActivityForResult(i, ACT2_REQUEST);
             }
         });
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -132,5 +133,19 @@ public class FeedsFragment extends Fragment {
         super.onDestroy();
         dbU.close();
         dbS.close();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (activity == null && context instanceof HomeActivity) {
+            activity = (HomeActivity) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        this.activity = null;
+        super.onDetach();
     }
 }

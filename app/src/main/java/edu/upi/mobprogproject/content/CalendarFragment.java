@@ -1,8 +1,11 @@
 package edu.upi.mobprogproject.content;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,6 +22,7 @@ import java.util.HashMap;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.AddEventActivity;
+import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.adapter.AgendaAdapter;
 import edu.upi.mobprogproject.adapter.data.AgendaList;
 import edu.upi.mobprogproject.helper.DbEvents;
@@ -43,25 +47,27 @@ public class CalendarFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private Activity activity;
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_calendar, container, false);
         return v;
     }
 
     @Override
-    public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         setRecView();
         // Inflate the layout for this fragment
     }
 
     private void setRecView() {
-        dbE = new DbEvents(getActivity());
+        dbE = new DbEvents(activity);
         dbE.open();
-        dbU = new DbUsers(getActivity());
+        dbU = new DbUsers(activity);
         dbU.open();
 
         agenda = setData(dbE, dbU);
@@ -70,7 +76,7 @@ public class CalendarFragment extends Fragment {
         addAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), AddEventActivity.class);
+                Intent i = new Intent(activity, AddEventActivity.class);
                 startActivityForResult(i, ACT2_REQUEST);
             }
         });
@@ -89,9 +95,9 @@ public class CalendarFragment extends Fragment {
                 "GEEK", "11.00-12.00", "UPI"));
         */
         recyclerView = v.findViewById(R.id.rcEvent);
-        adapter = new AgendaAdapter(getActivity(), agenda);
+        adapter = new AgendaAdapter(activity, agenda);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -105,7 +111,6 @@ public class CalendarFragment extends Fragment {
     public ArrayList<AgendaList> setData(DbEvents dbe, DbUsers dbu) {
         ArrayList<AgendaList> ag = new ArrayList<>();
         ArrayList<Events> event = dbe.getAllEvents();
-        int i = 0;
         for (Events item : event) {
             Users user = dbu.getUser(item.getUsername());
             AgendaList one = new AgendaList();
@@ -135,7 +140,6 @@ public class CalendarFragment extends Fragment {
 
             ag.add(one);
             //st.add(new StatusList(user.getNama(), item.getWaktu(), item.getStatus()));
-            i += 1;
         }
         return ag;
     }
@@ -181,4 +185,17 @@ public class CalendarFragment extends Fragment {
     //public static ArrayList<AgendaList> getAgenda() {
     //    return agenda;
     //}
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (activity == null && context instanceof HomeActivity) {
+            activity = (HomeActivity) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        this.activity = null;
+        super.onDetach();
+    }
 }

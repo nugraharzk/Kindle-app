@@ -1,6 +1,8 @@
 package edu.upi.mobprogproject.content;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -39,6 +41,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.activity.ListTetanggaActivity;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
@@ -65,6 +68,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     Location mLastLocation;
     Marker mCurrLocationMarker;
     MapView mapView;
+    private Activity activity;
+
 
     private double lon, lat;
 
@@ -81,7 +86,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
 
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(activity)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -103,7 +108,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
@@ -111,31 +116,31 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         toListT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), ListTetanggaActivity.class);
+                Intent i = new Intent(activity, ListTetanggaActivity.class);
                 startActivity(i);
             }
         });
-        dbU = new DbUsers(getActivity());
+        dbU = new DbUsers(activity);
         dbU.open();
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Users>> call = apiInterface.getUsersList();
         call.enqueue(new Callback<List<Users>>() {
             @Override
-            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
+            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
                 Log.d(TAG, "onResponse: " + response.body());
                 usersList = response.body();
             }
 
             @Override
-            public void onFailure(Call<List<Users>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
                 Log.d(TAG, "onFailure: " + t);
             }
         });
 
         toolbar4 = rootView.findViewById(R.id.toolbar3);
         if (toolbar4 != null) {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar4);
+            ((AppCompatActivity) activity).setSupportActionBar(toolbar4);
         }
         //toolbar4.setTitle(null);
 
@@ -145,7 +150,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         mapView.onResume();
 
         try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
+            MapsInitializer.initialize(activity.getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -230,7 +235,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (ContextCompat.checkSelfPermission(activity,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -248,12 +253,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public boolean checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (ContextCompat.checkSelfPermission(activity,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Asking user if explanation is needed
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -261,14 +266,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 // sees the explanation, try again to request the permission.
 
                 //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(getActivity(),
+                ActivityCompat.requestPermissions(activity,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST);
 
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(getActivity(),
+                ActivityCompat.requestPermissions(activity,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST);
             }
@@ -311,7 +316,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         this.map = googleMap;
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getActivity(),
+            if (ContextCompat.checkSelfPermission(activity,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
@@ -334,7 +339,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
                     // permission was granted. Do the
                     // contacts-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(getActivity(),
+                    if (ContextCompat.checkSelfPermission(activity,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
@@ -347,7 +352,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 } else {
 
                     // Permission denied, Disable the functionality that depends on this permission.
-                    Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
@@ -371,5 +376,19 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
             }
         }*/
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (activity == null && context instanceof HomeActivity) {
+            activity = (HomeActivity) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        this.activity = null;
+        super.onDetach();
     }
 }

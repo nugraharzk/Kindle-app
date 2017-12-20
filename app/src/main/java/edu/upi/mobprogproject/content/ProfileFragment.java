@@ -1,9 +1,13 @@
 package edu.upi.mobprogproject.content;
 
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,6 +28,7 @@ import java.util.Date;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.EditProfileActivity;
+import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.activity.LoginActivity;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
@@ -42,6 +47,7 @@ public class ProfileFragment extends Fragment {
     public static final int ACT2_REQUEST = 101;
     private TextView tvUser;
 //    private Users users;
+private Activity activity;
 
     DbUsers dbU;
     View v;
@@ -51,7 +57,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_profile, container, false);
         ImageView img = v.findViewById(R.id.imageView2);
@@ -79,19 +85,15 @@ public class ProfileFragment extends Fragment {
                 editProfile(v);
             }
         });
-        //Glide gl = new Glide(getActivity()).load(R.drawable.cover);
+        //Glide gl = new Glide(activity).load(R.drawable.cover);
         //Glide.with(mContext).load(imgID).asBitmap().override(1080, 600).into(mImageView);
-        TextView tvNama = v.findViewById(R.id.tvNama);
-        TextView tvTtl = v.findViewById(R.id.tvKerUmur);
-        TextView tvAlamat = v.findViewById(R.id.tvAlamat);
-        TextView tvTelepon = v.findViewById(R.id.tvPhone);
         tvUser = v.findViewById(R.id.tvUsername);
 
         return v;
     }
 
     @Override
-    public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         setProfile();
     }
@@ -104,8 +106,8 @@ public class ProfileFragment extends Fragment {
         alamat = v.findViewById(R.id.tvAlamat);
         telepon = v.findViewById(R.id.tvPhone);
         username = v.findViewById(R.id.tvUsername);
-        sp = this.getActivity().getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
-        dbU = new DbUsers(getActivity());
+        sp = this.activity.getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
+        dbU = new DbUsers(activity);
         dbU.open();
         Users user = dbU.getUser(sp.getString("user", ""));
         if (user != null) {
@@ -128,16 +130,16 @@ public class ProfileFragment extends Fragment {
     }
 
     public void logout(View v) {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        Intent intent = new Intent(activity, LoginActivity.class);
         ed = sp.edit();
         ed.clear();
         ed.apply();
-        getActivity().finish();
+        activity.finish();
         startActivity(intent);
     }
 
     public void editProfile(View v) {
-        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        Intent intent = new Intent(activity, EditProfileActivity.class);
         intent.putExtra("username", tvUser.getText().toString());
         startActivityForResult(intent, ACT2_REQUEST);
     }
@@ -146,10 +148,10 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ACT2_REQUEST && resultCode != 0) {
-            Toast.makeText(getActivity(), "Profile Berhasil Di Perbaharui", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, "Profile Berhasil Di Perbaharui", Toast.LENGTH_LONG).show();
         } else {
             if (resultCode == 0)
-                Toast.makeText(getActivity(), "Profile tidak disimpan", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "Profile tidak disimpan", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -163,7 +165,7 @@ public class ProfileFragment extends Fragment {
         if (ttl != null) {
             String[] getTgl = ttl.split("_");
             if (getTgl.length > 0) {
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     Calendar born = Calendar.getInstance();
                     Calendar curr = Calendar.getInstance();
@@ -179,5 +181,19 @@ public class ProfileFragment extends Fragment {
             }
         }
         return "X";
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (activity == null && context instanceof HomeActivity) {
+            activity = (HomeActivity) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        this.activity = null;
+        super.onDetach();
     }
 }
