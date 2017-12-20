@@ -22,10 +22,14 @@ the MobProg project
 9-des-17
 * using glide to load large image to avoid memory leak
 
-## bugs
-- app got crash for the first time installing when asking location request
-- layout fell laggy
+20-des-17
+location request fixed
 
+## bugs
+- layout fell laggy
+- data not sycn realtime
+- chat is not working
+- imageuploading and storing not working
 
 ## service-source
 The service can be found here at Rizky's REPO [Kindle-Service](https://github.com/nugraharzk/Kindle-service).
