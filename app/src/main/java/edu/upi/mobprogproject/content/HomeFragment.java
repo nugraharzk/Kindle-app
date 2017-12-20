@@ -15,7 +15,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +44,6 @@ import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.activity.ListTetanggaActivity;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
-import edu.upi.mobprogproject.rest.ApiClient;
-import edu.upi.mobprogproject.rest.ApiInterface;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -74,8 +68,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     private double lon, lat;
 
     private List<Users> usersList;
-    //    private Users users;
-    //    static final LatLng GIK = new LatLng(-6.860426,107.589880);
     private Toolbar toolbar4;
 
 
@@ -91,16 +83,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-    }
-
-
-    protected void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        //10 detik sekali minta lokasi (10000ms = 10 detik)
-        mLocationRequest.setInterval(10000);
-        //tapi tidak boleh lebih cepat dari 5 detik
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     public HomeFragment() {
@@ -123,20 +105,20 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         dbU = new DbUsers(activity);
         dbU.open();
 
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<Users>> call = apiInterface.getUsersList();
-        call.enqueue(new Callback<List<Users>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
-                Log.d(TAG, "onResponse: " + response.body());
-                usersList = response.body();
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: " + t);
-            }
-        });
+//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+//        Call<List<Users>> call = apiInterface.getUsersList();
+//        call.enqueue(new Callback<List<Users>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
+//                Log.d(TAG, "onResponse: " + response.body());
+//                usersList = response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
+//                Log.d(TAG, "onFailure: " + t);
+//            }
+//        });
 
         toolbar4 = rootView.findViewById(R.id.toolbar3);
         if (toolbar4 != null) {
@@ -178,6 +160,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
                 map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 */
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(activity,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        buildGoogleApiClient();
+                        mMap.setMyLocationEnabled(true);
+                    }
+                } else {
+                    buildGoogleApiClient();
+                    mMap.setMyLocationEnabled(true);
+                }
             }
         });
 
@@ -303,7 +296,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
         //move map camera
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(11));
+        map.animateCamera(CameraUpdateFactory.zoomTo(17));
 
         //stop location updates
         if (mGoogleApiClient != null) {
@@ -311,21 +304,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    //overidden, dont use it
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.map = googleMap;
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                buildGoogleApiClient();
-                map.setMyLocationEnabled(true);
-            }
-        } else {
-            buildGoogleApiClient();
-            map.setMyLocationEnabled(true);
-        }
     }
 
     @Override
