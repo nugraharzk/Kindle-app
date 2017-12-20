@@ -71,7 +71,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     MapView mapView;
     private GoogleMap map;
 
-    private List<Users> userlist;
 
 
     private DbUsers dbU;
@@ -300,7 +299,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     }
 
     private void showTetangga(GoogleMap map) {
-        userlist = dbU.getAllUsers();
+        usersList = dbU.getAllUsers();
         /*for (Users us : usersList) {
             if (Double.valueOf(us.getLat()) != null && Double.valueOf(us.getLng()) != null) {
                 LatLng latLng = new LatLng(Double.valueOf(us.getLat()), Double.valueOf(us.getLng()));
