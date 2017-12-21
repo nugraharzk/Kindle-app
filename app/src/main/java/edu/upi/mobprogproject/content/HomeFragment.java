@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -15,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +25,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,6 +40,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
@@ -49,13 +55,14 @@ import edu.upi.mobprogproject.model.Users;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements OnMapReadyCallback,
-        LocationListener,
-        GoogleApiClient.ConnectionCallbacks,
+public class HomeFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = HomeFragment.class.getSimpleName();
 
     private static final int MY_PERMISSIONS_REQUEST = 99;
+
+    FusedLocationProviderClient mFusedLocationClient;
+
     private GoogleMap map;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
@@ -63,18 +70,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     Marker mCurrLocationMarker;
     MapView mapView;
     private Activity activity;
-
-
-    private double lon, lat;
-
     private List<Users> usersList;
     private Toolbar toolbar4;
-
-
-
     private DbUsers dbU;
     ImageView toListT;
-    //    private SupportMapFragment map;
 
 
     protected synchronized void buildGoogleApiClient() {
@@ -83,7 +82,35 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+        mGoogleApiClient.connect();
     }
+
+    LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            for (Location location : locationResult.getLocations()) {
+                Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
+                mLastLocation = location;
+                if (mCurrLocationMarker != null) {
+                    mCurrLocationMarker.remove();
+                }
+
+                //Place current location marker
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title("Current Position X");
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                mCurrLocationMarker = map.addMarker(markerOptions);
+
+                map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                map.animateCamera(CameraUpdateFactory.zoomTo(17));
+
+                //move map camera
+//                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+            }
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -104,6 +131,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         });
         dbU = new DbUsers(activity);
         dbU.open();
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
+
+//        checkForLocationRequest();
+//        checkForLocationSettings();
 
 //        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 //        Call<List<Users>> call = apiInterface.getUsersList();
@@ -128,9 +160,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
 
         mapView = rootView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-
         mapView.onResume();
-
         try {
             MapsInitializer.initialize(activity.getApplicationContext());
         } catch (Exception e) {
@@ -145,39 +175,53 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onMapReady(GoogleMap mMap) {
                 map = mMap;
-                LatLng bandung = new LatLng(-6.90389, 107.61861);
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(bandung).zoom(12).build();
-                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                showTetangga(map);
-                // For showing a move to my location button
-                //map.setMyLocationEnabled(true);
-                /*
-                // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-6.860426, 107.589880);
-                map.addMarker(new MarkerOptions().position(sydney).title("I'm Here!").snippet("Saya disini heem iyah."));
-
-                // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                */
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(activity,
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        buildGoogleApiClient();
-                        mMap.setMyLocationEnabled(true);
-                    }
+                getLastLocation();
+                if (mLastLocation != null) {
+                    LatLng all = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(all).zoom(17).build();
+                    map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 } else {
-                    buildGoogleApiClient();
-                    mMap.setMyLocationEnabled(true);
+                    LatLng bandung = new LatLng(-6.90389, 107.61861);
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(bandung).zoom(12).build();
+                    map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
+
+
             }
         });
-
-//        googleMap = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapView)).getMap();
-//        map.getMapAsync(this);
-
         return rootView;
+    }
+
+    private void getLastLocation() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(activity,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                buildGoogleApiClient();
+                mFusedLocationClient.getLastLocation()
+                        .addOnCompleteListener(activity, new OnCompleteListener<Location>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Location> task) {
+                                if (task.isSuccessful() && task.getResult() != null) {
+                                    mLastLocation = task.getResult();
+                                }
+                            }
+                        });
+                map.setMyLocationEnabled(true);
+            }
+        } else {
+            mFusedLocationClient.getLastLocation()
+                    .addOnCompleteListener(activity, new OnCompleteListener<Location>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Location> task) {
+                            if (task.isSuccessful() && task.getResult() != null) {
+                                mLastLocation = task.getResult();
+                            }
+                        }
+                    });
+            buildGoogleApiClient();
+            map.setMyLocationEnabled(true);
+        }
     }
 
     @Override
@@ -225,13 +269,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
+        mLocationRequest.setInterval(2000);
         mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(activity,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
         }
     }
 
@@ -276,39 +320,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        lat = location.getLatitude();
-        lon = location.getLongitude();
 
-        mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
-        }
-
-        //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = map.addMarker(markerOptions);
-
-        //move map camera
-        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(17));
-
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
-    }
-
-    //overidden, dont use it
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

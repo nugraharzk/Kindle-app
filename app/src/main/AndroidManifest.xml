@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.upi.mobprogproject">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:hardwareAccelerated="false"
@@ -53,7 +55,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".activity.EditAkunActivity" />
-        <activity android:name=".activity.ListTetanggaActivity"></activity>
+        <activity android:name=".activity.ListTetanggaActivity" />
     </application>
 
 </manifest>
