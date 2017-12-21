@@ -35,6 +35,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -68,12 +69,15 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     LocationRequest mLocationRequest;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    Marker tetanggaMarker;
     MapView mapView;
     private Activity activity;
     private List<Users> usersList;
     private Toolbar toolbar4;
     private DbUsers dbU;
     ImageView toListT;
+    int i = 0;
+
 
 
     protected synchronized void buildGoogleApiClient() {
@@ -103,8 +107,12 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                 mCurrLocationMarker = map.addMarker(markerOptions);
 
-                map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                map.animateCamera(CameraUpdateFactory.zoomTo(17));
+                if (i == 0) {
+                    map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    map.animateCamera(CameraUpdateFactory.zoomTo(17));
+                }
+
+                i = 1;
 
                 //move map camera
 //                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
@@ -185,10 +193,14 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                     CameraPosition cameraPosition = new CameraPosition.Builder().target(bandung).zoom(12).build();
                     map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
-
-
+                try {
+                    showTetangga(map);
+                } catch (Exception e) {
+                    Log.i("kokoko", e.toString());
+                }
             }
         });
+
         return rootView;
     }
 
@@ -359,16 +371,20 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
     private void showTetangga(GoogleMap map) {
         usersList = dbU.getAllUsers();
-        /*for (Users us : usersList) {
-            if (Double.valueOf(us.getLat()) != null && Double.valueOf(us.getLng()) != null) {
-                LatLng latLng = new LatLng(Double.valueOf(us.getLat()), Double.valueOf(us.getLng()));
+        for (Users us : usersList) {
+            if (us.getLat() != null && us.getLng() != null) {
+                Log.i("LatLng", Double.parseDouble(us.getLat()) + "+" + Double.parseDouble(us.getLng()));
+                LatLng latLng = new LatLng(Double.parseDouble(us.getLat()), Double.parseDouble(us.getLng()));
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title(us.getNama()).snippet(us.getAlamat());
-                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                mCurrLocationMarker = map.addMarker(markerOptions);
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                BitmapDescriptor iconx = BitmapDescriptorFactory.fromResource(R.drawable.home_icon);
+                markerOptions.icon(iconx);
+                tetanggaMarker = map.addMarker(markerOptions);
             }
-        }*/
+        }
 
     }
 
@@ -384,5 +400,11 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     public void onDetach() {
         this.activity = null;
         super.onDetach();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        dbU.close();
     }
 }

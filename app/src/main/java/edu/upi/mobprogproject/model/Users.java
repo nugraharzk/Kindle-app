@@ -1,72 +1,22 @@
-
 package edu.upi.mobprogproject.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-public class Users implements Serializable {
-
-    @SerializedName("username")
-    @Expose
+public class Users {
     private String username;
-    @SerializedName("nama")
-    @Expose
     private String nama;
-    @SerializedName("ttl")
-    @Expose
     private String ttl;
-    @SerializedName("alamat")
-    @Expose
     private String alamat;
-    @SerializedName("rt")
-    @Expose
     private String rt;
-    @SerializedName("rw")
-    @Expose
     private String rw;
-    @SerializedName("desa")
-    @Expose
     private String desa;
-    @SerializedName("telepon")
-    @Expose
     private String telepon;
-    @SerializedName("pekerjaan")
-    @Expose
     private String pekerjaan;
-    @SerializedName("lat")
-    @Expose
     private String lat;
-    @SerializedName("lng")
-    @Expose
     private String lng;
-    @SerializedName("jabatan")
-    @Expose
     private String jabatan;
-    private final static long serialVersionUID = -3945537379071229002L;
 
-    /**
-     * No args constructor for use in serialization
-     */
     public Users() {
     }
 
-    /**
-     *
-     * @param jabatan
-     * @param username
-     * @param telepon
-     * @param lng
-     * @param rt
-     * @param nama
-     * @param desa
-     * @param alamat
-     * @param ttl
-     * @param pekerjaan
-     * @param rw
-     * @param lat
-     */
     public Users(String username, String nama, String ttl, String alamat, String rt, String rw, String desa, String telepon, String pekerjaan, String lat, String lng, String jabatan) {
         super();
         this.username = username;

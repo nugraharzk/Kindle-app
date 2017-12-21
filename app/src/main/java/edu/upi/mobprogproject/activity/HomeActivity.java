@@ -167,7 +167,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
         Call<List<Status>> call2 = apiService.getStatusList();
         call2.enqueue(new Callback<List<Status>>() {
             @Override
