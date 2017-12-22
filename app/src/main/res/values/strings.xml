@@ -93,6 +93,7 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="edit_akun">Edit Akun</string>
     <string name="rtrw">%1$s/%2$s</string>
     <string name="formatTTL">%1$s,%2$s</string>
+    <string name="sample_phone">123456</string>
 
 
     <string name="ketua">Ketua RT</string>
@@ -102,4 +103,9 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="detail_but">Selengkapnya</string>
 
     <string name="separate">:</string>
+
+    <string name="but_op1">Detail</string>
+    <string name="but_op2">Chat</string>
+    <string name="but_op3">Telepon</string>
+
 </resources>

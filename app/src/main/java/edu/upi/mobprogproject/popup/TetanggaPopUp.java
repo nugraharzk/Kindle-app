@@ -1,17 +1,20 @@
 package edu.upi.mobprogproject.popup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.DetailTetanggaActivity;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
 
@@ -27,6 +30,8 @@ public class TetanggaPopUp {
     private Context mContext;
     private PopupWindow mPopupWindow;
     private RelativeLayout mRelativeLayout;
+    public final static String EXTRA_MESSAGE = "edu.upi.mobproject.maps.MESSAGE";
+
 
     public TetanggaPopUp(String username, Context mContext, RelativeLayout x) {
 //        this.data = data;
@@ -74,7 +79,7 @@ public class TetanggaPopUp {
         // Get a reference for the custom view close button
         ImageButton closeButton = null;
         if (customView != null) {
-//            setData(customView);
+            setData(customView);
             closeButton = customView.findViewById(R.id.ib_close);
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -110,27 +115,24 @@ public class TetanggaPopUp {
     }
 
     private void setData(View v) {
-        TextView username, nama, ttl, alamat, rtrw, desa, telepon, pekerjaan;
-        username = v.findViewById(R.id.tvTuser);
+        TextView nama, telepon;
         nama = v.findViewById(R.id.tvTNama);
-        ttl = v.findViewById(R.id.tvTTtl);
-        alamat = v.findViewById(R.id.tvTalamat);
-        rtrw = v.findViewById(R.id.tvTRtRw);
-        desa = v.findViewById(R.id.tvTDesa);
-        telepon = v.findViewById(R.id.tvTKontak);
-        pekerjaan = v.findViewById(R.id.tvTPekerjaan);
-        username.setText(data.getUsername());
+        telepon = v.findViewById(R.id.tvTtelepon);
         nama.setText(data.getNama());
-        String ttl_data = data.getTtl();
-        if (ttl_data != null) {
-            ttl_data = ttl_data.replace("_", ",");
-            ttl.setText(ttl_data);
-        }
-        alamat.setText(data.getAlamat());
-        String tw = mContext.getString(R.string.rtrw, data.getRt(), data.getRw());
-        rtrw.setText(tw);
-        desa.setText(data.getDesa());
         telepon.setText(data.getTelepon());
-        pekerjaan.setText(data.getPekerjaan());
+        Button bdetail, bchat, btelepon;
+        bdetail = v.findViewById(R.id.btTDetail);
+        bchat = v.findViewById(R.id.btTChat);
+        btelepon = v.findViewById(R.id.btTTelepon);
+
+        bdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String user = data.getUsername();
+                Intent info = new Intent(mContext, DetailTetanggaActivity.class);
+                info.putExtra(EXTRA_MESSAGE, user);
+                mContext.startActivity(info);
+            }
+        });
     }
 }
