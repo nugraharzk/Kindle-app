@@ -74,7 +74,7 @@ public class TetanggaPopUp {
         // Get a reference for the custom view close button
         ImageButton closeButton = null;
         if (customView != null) {
-            setData(customView);
+//            setData(customView);
             closeButton = customView.findViewById(R.id.ib_close);
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override

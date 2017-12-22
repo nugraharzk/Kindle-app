@@ -47,6 +47,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.DetailTetanggaActivity;
 import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.activity.ListTetanggaActivity;
 import edu.upi.mobprogproject.helper.DbUsers;
@@ -61,6 +62,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     private static final String TAG = HomeFragment.class.getSimpleName();
 
     private static final int MY_PERMISSIONS_REQUEST = 99;
+    public final static String EXTRA_MESSAGE = "edu.upi.mobproject.maps.MESSAGE";
 
     FusedLocationProviderClient mFusedLocationClient;
 
@@ -69,11 +71,8 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     LocationRequest mLocationRequest;
     Location mLastLocation;
     Marker mCurrLocationMarker;
-    Marker tetanggaMarker;
     MapView mapView;
     private Activity activity;
-    private List<Users> usersList;
-    private Toolbar toolbar4;
     private DbUsers dbU;
     ImageView toListT;
     int i = 0;
@@ -142,25 +141,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
-//        checkForLocationRequest();
-//        checkForLocationSettings();
-
-//        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        Call<List<Users>> call = apiInterface.getUsersList();
-//        call.enqueue(new Callback<List<Users>>() {
-//            @Override
-//            public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
-//                Log.d(TAG, "onResponse: " + response.body());
-//                usersList = response.body();
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
-//                Log.d(TAG, "onFailure: " + t);
-//            }
-//        });
-
-        toolbar4 = rootView.findViewById(R.id.toolbar3);
+        Toolbar toolbar4 = rootView.findViewById(R.id.toolbar3);
         if (toolbar4 != null) {
             ((AppCompatActivity) activity).setSupportActionBar(toolbar4);
         }
@@ -198,6 +179,17 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                 } catch (Exception e) {
                     Log.i("kokoko", e.toString());
                 }
+
+                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        String user = (String) marker.getTag();
+                        Intent info = new Intent(activity, DetailTetanggaActivity.class);
+                        info.putExtra(EXTRA_MESSAGE, user);
+                        startActivity(info);
+                    }
+                });
+
             }
         });
 
@@ -370,19 +362,20 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
 
     private void showTetangga(GoogleMap map) {
-        usersList = dbU.getAllUsers();
+        List<Users> usersList = dbU.getAllUsers();
         for (Users us : usersList) {
             if (us.getLat() != null && us.getLng() != null) {
+                Marker tetanggaMarker;
                 Log.i("LatLng", Double.parseDouble(us.getLat()) + "+" + Double.parseDouble(us.getLng()));
                 LatLng latLng = new LatLng(Double.parseDouble(us.getLat()), Double.parseDouble(us.getLng()));
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title(us.getNama()).snippet(us.getAlamat());
 //                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-
                 BitmapDescriptor iconx = BitmapDescriptorFactory.fromResource(R.drawable.home_icon);
                 markerOptions.icon(iconx);
                 tetanggaMarker = map.addMarker(markerOptions);
+                tetanggaMarker.setTag(us.getUsername());
             }
         }
 

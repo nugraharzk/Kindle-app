@@ -13,6 +13,7 @@
     <string name="profilecaps">PROFIL</string>
     <string name="editprofil">EDIT PROFIL</string>
     <string name="tetangga">List Tetangga</string>
+    <string name="det_tetangga">Detail Tetangga</string>
 
 
     <string name="log_but">Log in</string>

@@ -56,6 +56,7 @@
         <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".activity.EditAkunActivity" />
         <activity android:name=".activity.ListTetanggaActivity" />
+        <activity android:name=".activity.DetailTetanggaActivity"></activity>
     </application>
 
 </manifest>
