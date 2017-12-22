@@ -24,6 +24,14 @@ the MobProg project
 
 20-des-17
 * location request fixed
+* pop up added
+
+22-des-17
+* drop FusedLocationApi (deprecated) and use FusedLocationProviderClient
+* fixed maps Current Location behavior
+* add marker with drawable icon
+* marker with detail in activity
+* popup view changed
 
 ## bugs
 - layout fell laggy
