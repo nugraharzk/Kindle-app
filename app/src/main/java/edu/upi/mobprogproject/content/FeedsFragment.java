@@ -15,11 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.activity.AddStatusActivity;
 import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.adapter.StatusAdapter;
 import edu.upi.mobprogproject.adapter.data.StatusList;
@@ -27,6 +28,7 @@ import edu.upi.mobprogproject.helper.DbStatus;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Status;
 import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.popup.StatusPopUp;
 
 
 /**
@@ -41,6 +43,10 @@ public class FeedsFragment extends Fragment {
     StatusAdapter adapter;
     static ArrayList<StatusList> status;
     View v;
+    StatusPopUp mStatusPopUp;
+    RelativeLayout xView;
+
+
 
     public static final int ACT2_REQUEST = 99;
 
@@ -81,6 +87,27 @@ public class FeedsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        xView = v.findViewById(R.id.viewFeeds);
+        ImageView addStat = v.findViewById(R.id.bell_status);
+        mStatusPopUp = new StatusPopUp(activity, xView);
+        mStatusPopUp.getPopUP().setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setRecView();
+                //adapter.notifyDataSetChanged();
+                recyclerView.invalidate();
+                //karena dibalik indexnya
+                recyclerView.getLayoutManager().scrollToPosition(status.size() - 1);
+            }
+        });
+        addStat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent i = new Intent(activity, AddStatusActivity.class);
+//                startActivityForResult(i, ACT2_REQUEST);
+                mStatusPopUp.show();
+            }
+        });
         setRecView();
     }
 
@@ -104,15 +131,7 @@ public class FeedsFragment extends Fragment {
         */
         adapter = new StatusAdapter(activity, status);
 
-        ImageView addStat = v.findViewById(R.id.bell_status);
 
-        addStat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(activity, AddStatusActivity.class);
-                startActivityForResult(i, ACT2_REQUEST);
-            }
-        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         layoutManager.setReverseLayout(true);

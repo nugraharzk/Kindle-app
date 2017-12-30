@@ -75,11 +75,6 @@ public class AlertPopUp {
 //            }
 //        });
 
-
-
-        // Set a click listener for the popup window close button
-
-
                 /*
                     public void showAtLocation (View parent, int gravity, int x, int y)
                         Display the content view in a popup window at the specified location. If the
