@@ -1,6 +1,7 @@
 package edu.upi.mobprogproject.popup;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,6 +28,9 @@ public class AlertPopUp {
 //        this.data = data;
         this.mContext = mContext;
         mRelativeLayout = x;
+        //background = bg;
+//        mRelativeLayout.setVisibility(View.VISIBLE);
+//        mRelativeLayout.setVisibility(View.GONE);
 
         // Initialize a new instance of LayoutInflater service
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -56,26 +60,22 @@ public class AlertPopUp {
                 LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT
         );
-
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setBackgroundDrawable(new ColorDrawable());
+        mPopupWindow.setOutsideTouchable(true);
         // Set an elevation value for popup window
         // Call requires API level 21
         if (Build.VERSION.SDK_INT >= 21) {
             mPopupWindow.setElevation(5.0f);
         }
+//        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                background.setVisibility(View.GONE);
+//            }
+//        });
 
-        // Get a reference for the custom view close button
-//        ImageButton closeButton = null;
-//        if (customView != null) {
-//            setData(customView);
-//            //closeButton = customView.findViewById(R.id.ib_close);
-//            closeButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    // Dismiss the popup window
-//                    mPopupWindow.dismiss();
-//                }
-//            });
-//        }
+
 
         // Set a click listener for the popup window close button
 
@@ -98,6 +98,7 @@ public class AlertPopUp {
     }
 
     public void show() {
+        //background.setVisibility(View.VISIBLE);
         mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER, 0, 0);
     }
 }

@@ -112,6 +112,7 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="dg1">Biasa</string>
     <string name="dg2">Penting</string>
     <string name="dg3">Darurat</string>
+    <string name="pesan_hint">Tulis Pesan Anda</string>
 
 
 </resources>

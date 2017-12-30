@@ -134,6 +134,8 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         xView = rootView.findViewById(R.id.homeVIew);
+
+
         toListT = rootView.findViewById(R.id.listtetangga);
         toListT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +154,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
             ((AppCompatActivity) activity).setSupportActionBar(toolbar4);
         }
         //toolbar4.setTitle(null);
+
         mAlertPopPup = new AlertPopUp(activity, xView);
         Button btAlert = rootView.findViewById(R.id.urgentBtn);
         btAlert.setOnClickListener(new View.OnClickListener() {
