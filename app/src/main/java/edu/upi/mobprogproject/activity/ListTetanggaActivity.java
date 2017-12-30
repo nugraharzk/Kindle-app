@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -23,11 +22,7 @@ public class ListTetanggaActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TetanggaAdapter adapter;
     DbUsers dbU;
-    static RelativeLayout xView;
 
-    public static RelativeLayout getRelativeLayout() {
-        return xView;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +42,6 @@ public class ListTetanggaActivity extends AppCompatActivity {
         tetangga = setData(dbU);
         recyclerView = findViewById(R.id.rcTetangga);
         adapter = new TetanggaAdapter(this, tetangga);
-        xView = findViewById(R.id.viewTetangga);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);

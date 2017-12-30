@@ -1,6 +1,7 @@
 package edu.upi.mobprogproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.activity.ListTetanggaActivity;
+import edu.upi.mobprogproject.activity.DetailTetanggaActivity;
 import edu.upi.mobprogproject.adapter.data.TetanggaList;
-import edu.upi.mobprogproject.popup.TetanggaPopUp;
 
 /**
  * Created by amaceh on 16/12/17.
@@ -53,7 +53,10 @@ public class TetanggaAdapter extends RecyclerView.Adapter<TetanggaAdapter.ViewHo
         holder.btDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new TetanggaPopUp(name.getUsername(), ctx, ListTetanggaActivity.getRelativeLayout()).show();
+                final String EXTRA_MESSAGE = "edu.upi.mobproject.maps.MESSAGE";
+                Intent i = new Intent(ctx, DetailTetanggaActivity.class);
+                i.putExtra(EXTRA_MESSAGE, name.getUsername());
+                ctx.startActivity(i);
             }
         });
     }

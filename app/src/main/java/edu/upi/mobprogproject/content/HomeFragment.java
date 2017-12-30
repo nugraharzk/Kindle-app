@@ -20,7 +20,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -52,6 +54,7 @@ import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.activity.ListTetanggaActivity;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Users;
+import edu.upi.mobprogproject.popup.AlertPopUp;
 
 
 /**
@@ -76,6 +79,8 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     private DbUsers dbU;
     ImageView toListT;
     int i = 0;
+    AlertPopUp mAlertPopPup;
+    RelativeLayout xView;
 
 
 
@@ -128,6 +133,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        xView = rootView.findViewById(R.id.homeVIew);
         toListT = rootView.findViewById(R.id.listtetangga);
         toListT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +152,14 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
             ((AppCompatActivity) activity).setSupportActionBar(toolbar4);
         }
         //toolbar4.setTitle(null);
+        mAlertPopPup = new AlertPopUp(activity, xView);
+        Button btAlert = rootView.findViewById(R.id.urgentBtn);
+        btAlert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAlertPopPup.show();
+            }
+        });
 
         mapView = rootView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);

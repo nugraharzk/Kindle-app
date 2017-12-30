@@ -104,8 +104,14 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
 
     <string name="separate">:</string>
 
-    <string name="but_op1">Detail</string>
-    <string name="but_op2">Chat</string>
-    <string name="but_op3">Telepon</string>
+    <string name="but_op1">Kirim Pesan</string>
+    <string name="but_op2">Telepon</string>
+
+    <string name="alert">Umumkan Kejadian Mendesak</string>
+    <string name="pesan">Pesan</string>
+    <string name="dg1">Biasa</string>
+    <string name="dg2">Penting</string>
+    <string name="dg3">Darurat</string>
+
 
 </resources>
