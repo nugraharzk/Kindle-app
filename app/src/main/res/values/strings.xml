@@ -116,5 +116,26 @@ tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="status_new">Buat Status Baru</string>
     <string name="status_hint">Apa yang ada dipikiranmu?</string>
 
+    <!-- INTRO SLIDER STRING -->
+    <string name="next">LANJUT</string>
+    <string name="skip">LEWATI</string>
+    <string name="start">MASUK</string>
 
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">Aplikasi untuk membantu komunikasi antar warga dalam satu RW</string>
+
+    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2_desc">Disertai dengan fitur utama yaitu peta, jadwal acara, status dan pesan secara personal</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Fitur panic button yang siap untuk memberitahu warga sekitar dengan cepat.</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Kindle adalah sebuah solusi aplikasi all in one untuk kebutuhan bersosial</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <string name="verifikasi">Menunggu verifikasi dari RW / RT..</string>
+    <string name="verifikasi2">Akun anda masih dalam tahap verifikasi dan belum dapat digunakan. Kontak ketua RW atau ketua RT anda untuk memverifikasi akun anda.</string>
 </resources>
