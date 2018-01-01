@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
+        android:paddingBottom="50sp"
         android:orientation="vertical">
 
         <ImageView
@@ -35,6 +36,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="24sp"
+            android:fontFamily="@font/proxima_nova_medium"
             android:textStyle="bold"/>
 
     </LinearLayout>

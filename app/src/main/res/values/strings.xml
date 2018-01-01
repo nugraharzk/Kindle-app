@@ -12,15 +12,15 @@
     <string name="profile">Profil</string>
     <string name="profilecaps">PROFIL</string>
     <string name="editprofil">EDIT PROFIL</string>
-    <string name="tetangga">List Tetangga</string>
-    <string name="det_tetangga">Detail Tetangga</string>
+    <string name="tetangga">LIST TETANGGA</string>
+    <string name="det_tetangga">DETAIL TETANGGA</string>
 
 
-    <string name="log_but">Log in</string>
+    <string name="log_but">Masuk</string>
 
     <string name="sig_intro">Buat akun untuk mulai bersosial</string>
 
-    <string name="sig_but">Sign up</string>
+    <string name="sig_but">Daftar</string>
 
     <string name="hint_login">Username/Email</string>
     <string name="hint_mail">Email</string>
