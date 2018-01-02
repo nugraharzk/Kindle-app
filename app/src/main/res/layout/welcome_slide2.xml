@@ -25,6 +25,7 @@
             android:text="@string/slide_2_desc"
             android:textAlignment="center"
             android:textColor="@android:color/white"
+            android:fontFamily="@font/proxima_nova_medium"
             android:textSize="@dimen/slide_desc" />
 
     </LinearLayout>

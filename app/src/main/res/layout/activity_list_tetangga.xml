@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/menu"
             android:layout_gravity="center"
-            android:fontFamily="roboto"
+            android:fontFamily="@font/proxima_nova_medium"
             android:text="@string/tetangga"
             android:textAlignment="center"
             android:textColor="@color/white"
