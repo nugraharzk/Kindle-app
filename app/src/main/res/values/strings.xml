@@ -42,6 +42,9 @@
     <string name="hint_TTL">TTL</string>
     <string name="hintrtrw">RT/RW</string>
 
+    <!-- String di Events Activity -->
+    <string name="locPick">Tentukan Lokasinya!</string>
+
 
     <string name="tx_gantipass">Isi kedua form dibawah untuk ganti password, atau kosongkan saja bila tidak ingin mengganti password</string>
 

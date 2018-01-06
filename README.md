@@ -33,10 +33,11 @@ the MobProg project
 * marker with detail in activity
 * popup view changed
 
-7-jan-2018
+7-jan-2018 (by Rizki)
 * signup bugs has fixed
 * new account must beg RT for verification
 * change every project's file name started with "Calendar" to "Events", "Feeds" to "Status"
+* add place picker for add new event
 
 ## bugs
 - layout fell laggy

@@ -1,5 +1,6 @@
 package edu.upi.mobprogproject.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,9 +10,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -37,10 +45,29 @@ public class AddEventActivity extends AppCompatActivity {
     DbUsers dbU;
     Spinner urgen;
 
+    private Button pickLoc;
+    private static int PLACE_PICKER_REQUEST = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+
+        pickLoc = (Button) findViewById(R.id.locPicker);
+        pickLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                try{
+                    startActivityForResult(builder.build(AddEventActivity.this), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         dbE = new DbEvents(this);
         dbU = new DbUsers(this);
         dbE.open();
@@ -148,5 +175,17 @@ public class AddEventActivity extends AppCompatActivity {
         super.onDestroy();
         dbE.close();
         dbU.close();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST){
+            if (resultCode == RESULT_OK){
+                Place place = PlacePicker.getPlace(data, this);
+                LatLng latLng = place.getLatLng();
+                String toast = String.format("Place: %s .", place.getName() + "\n" + "Lat : " + latLng.latitude + "\n" + "Lng : " + latLng.longitude);
+                Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
