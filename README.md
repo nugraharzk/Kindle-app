@@ -33,6 +33,10 @@ the MobProg project
 * marker with detail in activity
 * popup view changed
 
+7-jan-2018
+* signup bugs has fixed
+* new account must beg RT for verification
+
 ## bugs
 - layout fell laggy
 - data not sycn realtime

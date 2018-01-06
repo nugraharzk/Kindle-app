@@ -13,8 +13,8 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
-import edu.upi.mobprogproject.content.CalendarFragment;
-import edu.upi.mobprogproject.content.FeedsFragment;
+import edu.upi.mobprogproject.content.EventsFragment;
+import edu.upi.mobprogproject.content.StatusFragment;
 import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.MessageFragment;
 import edu.upi.mobprogproject.content.ProfileFragment;
@@ -55,14 +55,14 @@ public class HomeActivity extends AppCompatActivity {
                             .commit();
                     return true;
                 case R.id.action_calendar:
-                    CalendarFragment calendarFragment = new CalendarFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, calendarFragment)
+                    EventsFragment eventsFragment = new EventsFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, eventsFragment)
                             .addToBackStack(null)
                             .commit();
                     return true;
                 case R.id.action_feeds:
-                    FeedsFragment feedsFragment = new FeedsFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, feedsFragment)
+                    StatusFragment statusFragment = new StatusFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, statusFragment)
                             .addToBackStack(null)
                             .commit();
                     return true;
@@ -111,14 +111,14 @@ public class HomeActivity extends AppCompatActivity {
                     .commit();
             navigation.getMenu().getItem(0).setChecked(true);
         }else if(position==1){
-            CalendarFragment calendarFragment = new CalendarFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, calendarFragment)
+            EventsFragment eventsFragment = new EventsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, eventsFragment)
                     .addToBackStack(null)
                     .commit();
             navigation.getMenu().getItem(1).setChecked(true);
         }else if(position==2){
-            FeedsFragment feedsFragment = new FeedsFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, feedsFragment)
+            StatusFragment statusFragment = new StatusFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, statusFragment)
                     .addToBackStack(null)
                     .commit();
             navigation.getMenu().getItem(2).setChecked(true);
@@ -235,8 +235,8 @@ public class HomeActivity extends AppCompatActivity {
 //    public String nama, ttl, alamat, telepon;
 //
 //    HomeFragment homeFragment;
-//    CalendarFragment chatFragment;
-//    FeedsFragment feedsFragment;
+//    EventsFragment chatFragment;
+//    StatusFragment feedsFragment;
 //    MessageFragment messageFragment;
 //    ProfileFragment profileFragment;
 //    Bundle bundle;
@@ -335,8 +335,8 @@ public class HomeActivity extends AppCompatActivity {
 ////            }
 //        };
 //        homeFragment = new HomeFragment(usersList.get(0));
-//        chatFragment = new CalendarFragment();
-//        feedsFragment = new FeedsFragment();
+//        chatFragment = new EventsFragment();
+//        feedsFragment = new StatusFragment();
 //        messageFragment = new MessageFragment();
 //        profileFragment = new ProfileFragment(usersList.get(0));
 //
