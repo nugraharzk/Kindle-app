@@ -36,6 +36,7 @@ the MobProg project
 7-jan-2018
 * signup bugs has fixed
 * new account must beg RT for verification
+* change every project's file name started with "Calendar" to "Events", "Feeds" to "Status"
 
 ## bugs
 - layout fell laggy
