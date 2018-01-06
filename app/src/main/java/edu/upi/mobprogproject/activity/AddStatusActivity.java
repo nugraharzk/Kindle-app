@@ -3,6 +3,7 @@ package edu.upi.mobprogproject.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,12 +65,12 @@ public class AddStatusActivity extends AppCompatActivity {
         if (a != -1) {
             call.enqueue(new Callback<Status>() {
                 @Override
-                public void onResponse(Call<Status> call, Response<Status> response) {
+                public void onResponse(@NonNull Call<Status> call, @NonNull Response<Status> response) {
                     Log.d(TAG, "onResponse: " + response.body());
                 }
 
                 @Override
-                public void onFailure(Call<Status> call, Throwable t) {
+                public void onFailure(@NonNull Call<Status> call, @NonNull Throwable t) {
                     Log.d(TAG, "onFailure: " + t);
                 }
             });

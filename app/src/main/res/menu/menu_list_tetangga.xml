@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/grp1">
+        <item
+            android:id="@+id/passive"
+
+            android:title="Urutkan Berdasarkan"
+
+            />
+
+    </group>
+    <group android:id="@+id/grp2">
+        <item
+            android:id="@+id/urutRT"
+            android:title="List RT" />
+
+        <item
+            android:id="@+id/urutAlfa"
+            android:title="Alfabet" />
+    </group>
+
+</menu>

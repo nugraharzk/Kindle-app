@@ -4,15 +4,20 @@ package edu.upi.mobprogproject.content;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-//import android.support.v7.widget.SearchView;
-import android.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +26,8 @@ import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.adapter.ChatHeaderAdapter;
 import edu.upi.mobprogproject.adapter.data.ChatHeader;
 
+//import android.support.v7.widget.SearchView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,18 +35,27 @@ import edu.upi.mobprogproject.adapter.data.ChatHeader;
 public class MessageFragment extends Fragment {
 
     private Activity activity;
+    ImageView menu;
     public MessageFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
 
         final ChatHeaderAdapter adapter;
         final ArrayList<ChatHeader> chats = new ArrayList<>();
+
         chats.add(new ChatHeader("Achmad", "Hey Bro", "07.00"));
         chats.add(new ChatHeader("Abdul", "I Am GuntanK", "12.00"));
         chats.add(new ChatHeader("Rofiq", "You Shall not Pass", "23.00"));
@@ -55,9 +71,38 @@ public class MessageFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_message, container, false);
 
+
         // set up the RecyclerView
         RecyclerView recyclerView = v.findViewById(R.id.rcMess);
         SearchView sc = v.findViewById(R.id.searchView);
+
+        // TODO to create menu, use this implementation instead of making toolbar as ActionBar
+        menu = v.findViewById(R.id.menu);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                activity.openOptionsMenu();
+                PopupMenu popup = new PopupMenu(activity, menu);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.menu_chat, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(
+                                activity,
+                                "You Clicked : " + item.getTitle(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
+            }
+        });
+
         adapter = new ChatHeaderAdapter(activity, chats);
 
         sc.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -75,12 +120,13 @@ public class MessageFragment extends Fragment {
                 return true;
             }
 
-            public void callSearch(String query) {
+            void callSearch(String query) {
                 //Do searching
                 filter(query, chats, adapter);
             }
 
         });
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
@@ -107,6 +153,8 @@ public class MessageFragment extends Fragment {
 
         //calling a method of the adapter class and passing the filtered list
         adapter.filterList(filterdNames);
+
+
     }
 
     @Override

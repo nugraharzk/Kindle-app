@@ -10,13 +10,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,7 +48,7 @@ public class FeedsFragment extends Fragment {
     View v;
     StatusPopUp mStatusPopUp;
     RelativeLayout xView;
-
+    ImageView menu;
 
 
     public static final int ACT2_REQUEST = 99;
@@ -88,6 +91,31 @@ public class FeedsFragment extends Fragment {
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         xView = v.findViewById(R.id.viewFeeds);
+        menu = v.findViewById(R.id.menu);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                activity.openOptionsMenu();
+                PopupMenu popup = new PopupMenu(activity, menu);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.menu_feed, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(
+                                activity,
+                                "You Clicked : " + item.getTitle(),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
+            }
+        });
         ImageView addStat = v.findViewById(R.id.bell_status);
         mStatusPopUp = new StatusPopUp(activity, xView);
         mStatusPopUp.getPopUP().setOnDismissListener(new PopupWindow.OnDismissListener() {
