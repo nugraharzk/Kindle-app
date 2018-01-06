@@ -10,10 +10,17 @@ package edu.upi.mobprogproject.model;
 
 public class Accounts {
     private String username, email, password;
-
+    private int verified;
 
     public Accounts() {
 
+    }
+
+    public Accounts(String username, String email, String password, int verified) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.verified = verified;
     }
 
     public Accounts(String username, String email, String password) {
@@ -44,5 +51,13 @@ public class Accounts {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getVerified() {
+        return verified;
+    }
+
+    public void setVerified(int verified) {
+        this.verified = verified;
     }
 }

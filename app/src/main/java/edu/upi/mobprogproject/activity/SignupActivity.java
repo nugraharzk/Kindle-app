@@ -107,18 +107,19 @@ public class SignupActivity extends AppCompatActivity {
             });
 
             Call<Users> call1 = apiInterface.postUser(username, nama);
-            call.enqueue(new Callback<Accounts>() {
+            call1.enqueue(new Callback<Users>() {
                 @Override
-                public void onResponse(Call<Accounts> call, Response<Accounts> response) {
+                public void onResponse(Call<Users> call1, Response<Users> response) {
                     Log.d(TAG, "onResponse: " + response.body());
                 }
 
                 @Override
-                public void onFailure(Call<Accounts> call, Throwable t) {
+                public void onFailure(Call<Users> call1, Throwable t) {
                     Log.d(TAG, "onFailure: " + t);
                 }
             });
             dialog.dismiss();
+            Toast.makeText(this, "Akun berhasil dibuat! Hubungi Pak RT untuk verifikasi.", Toast.LENGTH_LONG).show();
         } catch (android.database.SQLException e) {
             dialog.dismiss();
             Toast.makeText(this, "Ada yang salah, hubungi developer", Toast.LENGTH_LONG).show();

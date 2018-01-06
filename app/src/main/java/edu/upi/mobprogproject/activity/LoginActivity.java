@@ -107,17 +107,25 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<List<Accounts>> call, Response<List<Accounts>> response) {
                 accountsList = response.body();
                 dialog.dismiss();
-                if (response.body().size() != 0) {
-                    ed = sp.edit();
-                    ed.putString("user", accountsList.get(0).getUsername());
-                    ed.putString("email", accountsList.get(0).getEmail());
-                    ed.putBoolean("logged", true);
-                    ed.apply();
-                    Toast.makeText(c, "Logged In", Toast.LENGTH_LONG).show();
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
 
-                } else {
+                if (response.body().size() != 0){
+                    if (accountsList.get(0).getVerified() == 1) {
+                        ed = sp.edit();
+                        ed.putString("user", accountsList.get(0).getUsername());
+                        ed.putString("email", accountsList.get(0).getEmail());
+                        ed.putBoolean("logged", true);
+                        ed.apply();
+                        Toast.makeText(c, "Logged In", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
+                    }
+                    else{
+                        Intent intent = new Intent(getBaseContext(), WaitVerification.class);
+                        startActivity(intent);
+                    }
+                }
+                else{
                     Toast.makeText(c, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
                     //dialog.dismiss();
                     return;
