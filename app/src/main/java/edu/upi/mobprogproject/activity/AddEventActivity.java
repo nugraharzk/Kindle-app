@@ -3,6 +3,7 @@ package edu.upi.mobprogproject.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,7 +50,7 @@ public class AddEventActivity extends AppCompatActivity {
         pilihan.add("Biasa");
         pilihan.add("Penting");
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pilihan);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pilihan);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -108,12 +109,12 @@ public class AddEventActivity extends AppCompatActivity {
         if (a != -1) {
             call.enqueue(new Callback<Events>() {
                 @Override
-                public void onResponse(Call<Events> call, Response<Events> response) {
+                public void onResponse(@NonNull Call<Events> call, @NonNull Response<Events> response) {
                     Log.d(TAG, "onResponse: " + response.body());
                 }
 
                 @Override
-                public void onFailure(Call<Events> call, Throwable t) {
+                public void onFailure(@NonNull Call<Events> call, @NonNull Throwable t) {
                     Log.d(TAG, "onFailure: " + t);
                 }
             });

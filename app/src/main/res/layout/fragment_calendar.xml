@@ -42,22 +42,6 @@
             android:src="@drawable/add"
             tools:ignore="RtlSymmetry" />
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignBottom="@+id/toolbar5"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="11dp"
-            android:layout_marginEnd="11dp"
-            android:contentDescription="@string/app_name"
-            android:maxHeight="30dip"
-            android:minHeight="30dip"
-            android:src="@drawable/menu"
-            android:foregroundGravity="right"
-            android:layout_gravity="right"
-            android:layout_alignParentRight="true"/>
-
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
