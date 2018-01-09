@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/layoutNotif"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/urgensiNotif"
+        android:text="@string/urgensi"
+        android:textStyle="bold"
+        android:textSize="18pt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/userNotif"
+        android:text="@string/profile"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/urgensiNotif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pesanNotif"
+        android:text="@string/messages"
+        android:layout_below="@+id/userNotif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

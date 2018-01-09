@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.upi.mobprogproject.model.Accounts;
 import edu.upi.mobprogproject.model.Events;
+import edu.upi.mobprogproject.model.Notifications;
 import edu.upi.mobprogproject.model.Status;
 import edu.upi.mobprogproject.model.Users;
 import retrofit2.Call;
@@ -85,4 +86,15 @@ public interface ApiInterface {
                            @Field("lat") String lat,
                            @Field("lng") String lng,
                            @Field("konfirmasi") String konfirmasi);
+
+    /************************************************************************************************************/
+
+    @GET("notifications")
+    Call<List<Notifications>> getNotifList();
+
+    @FormUrlEncoded
+    @POST("notifications")
+    Call<Notifications> postNotif(@Field("username") String username,
+                           @Field("pesan") String pesan,
+                           @Field("urgensi") String urgensi);
 }

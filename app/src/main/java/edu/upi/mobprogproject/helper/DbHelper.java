@@ -82,6 +82,9 @@ public class DbHelper extends SQLiteOpenHelper {
             "CREATE TABLE EVENT(id_event INTEGER PRIMARY KEY, judul TEXT, username TEXT NOT NULL, " +
                     "waktu TEXT NOT NULL, priority TEXT NOT NULL, deskripsi TEXT NOT NULL, lat TEXT, lng TEXT, konfirmasi INTEGER NOT NULL," +
                     "FOREIGN KEY (username) REFERENCES USERS(username))";
+    private static final String CREATE_TABLE_NOTIF =
+            "CREATE TABLE NOTIF(id_notif INTEGER PRIMARY KEY, username TEXT, pesan TEXT, urgensi TEXT," +
+                    "FOREIGN KEY (username) REFERENCES ACCOUNT(username))";
 
     DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -94,6 +97,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_STATUS);
         db.execSQL(CREATE_TABLE_COMMENT);
         db.execSQL(CREATE_TABEL_EVENT);
+        db.execSQL(CREATE_TABLE_NOTIF);
     }
 
     @Override
@@ -105,6 +109,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS STATUS");
         db.execSQL("DROP TABLE IF EXISTS COMMENT");
         db.execSQL("DROP TABLE IF EXISTS EVENT");
+        db.execSQL("DROP TABLE IF EXISTS NOTIF");
 //        db.execSQL(scriptUpdate);
 //        db.needUpgrade(newVersion);
 
