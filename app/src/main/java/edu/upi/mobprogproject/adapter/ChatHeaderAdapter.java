@@ -1,11 +1,16 @@
 package edu.upi.mobprogproject.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,11 +27,12 @@ import edu.upi.mobprogproject.adapter.data.ChatHeader;
 public class ChatHeaderAdapter extends RecyclerView.Adapter<ChatHeaderAdapter.ViewHolder> {
     private List<ChatHeader> mData = Collections.emptyList();
     private LayoutInflater mInflater;
-
+    private Context ctx;
     // data is passed into the constructor
     public ChatHeaderAdapter(Context context, List<ChatHeader> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.ctx = context;
     }
 
     // inflates the row layout from xml when needed
@@ -34,6 +40,7 @@ public class ChatHeaderAdapter extends RecyclerView.Adapter<ChatHeaderAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.listitems_message_header, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
+
         return viewHolder;
     }
 
@@ -56,12 +63,20 @@ public class ChatHeaderAdapter extends RecyclerView.Adapter<ChatHeaderAdapter.Vi
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nama, chat, jam;
+        public ImageView img;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            img = itemView.findViewById(R.id.imPerson);
             nama = itemView.findViewById(R.id.tvNama);
             chat = itemView.findViewById(R.id.tvChat);
             jam = itemView.findViewById(R.id.tvHour);
+
+            Glide.with(ctx)
+                    .asBitmap()
+                    .apply(RequestOptions.circleCropTransform())
+                    .load(R.drawable.profile_user)
+                    .into(img);
         }
     }
 

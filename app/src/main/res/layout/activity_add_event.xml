@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.upi.mobprogproject.activity.AddEventActivity">
+    tools:context="edu.upi.mobprogproject.activity.EditProfileActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar3"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:background="@color/blue"
         android:minHeight="?attr/actionBarSize"
-        android:paddingRight="10dp"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tvEditProfil"
@@ -36,98 +36,222 @@
             android:layout_height="25dp"
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/tvEditProfil"
-            android:clickable="true"
             android:contentDescription="@string/app_name"
             android:maxHeight="30dip"
             android:minHeight="30dip"
             android:src="@drawable/back"
+            android:clickable="true"
             tools:ignore="RtlSymmetry" />
 
     </android.support.v7.widget.Toolbar>
 
-    <EditText
-        android:id="@+id/etJudul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/hint_judul"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar3">
 
-    <EditText
-        android:id="@+id/etDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/hint_desk"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etJudul" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="16dp">
 
-    <EditText
-        android:id="@+id/etWaktu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="@string/hint_waktu"
-        android:inputType="textPersonName"
-        android:focusable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDesc" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/calendar_add" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:onClick="saveEvent"
-        android:text="@string/save"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_urgensi" />
 
-    <EditText
-        android:id="@+id/etTgl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/hint_date"
-        android:focusable="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWaktu" />
+            <TextView
+                android:id="@+id/name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="JUDUL"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/imageView3"
+                />
 
-    <Spinner
-        android:id="@+id/spinner_urgensi"
-        android:layout_width="213dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTgl" />
+            <EditText
+                android:id="@+id/etJudul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="@string/hint_judul"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:inputType="textPersonName"
+                android:background="@drawable/capsule_edittext"
+                android:layout_below="@+id/name_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/locPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/locPick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_urgensi"
-        app:layout_constraintVertical_bias="0.81" />
+            <TextView
+                android:id="@+id/ttl_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="Waktu dan Tanggal Acara"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/etJudul"
+                />
 
-</android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/linLayout1"
+                android:weightSum="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/ttl_title">
+
+                <EditText
+                    android:id="@+id/etWaktu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.47"
+                    android:ems="10"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/capsule_edittext"
+                    android:inputType="textPersonName"
+                    android:hint="@string/hint_waktu"
+                    android:layout_below="@+id/etNamap"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etNamap" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.06"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/etTgl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.47"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="@string/hint_date"
+                    android:inputType="textPersonName"
+                    android:layout_below="@id/etTempatLahit"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/capsule_edittext"
+                    app:layout_constraintStart_toEndOf="@+id/etTempatLahit"
+                    app:layout_constraintTop_toBottomOf="@+id/etNamap" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/alamat_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="DESKRIPSI"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/linLayout1"
+                />
+
+            <EditText
+                android:id="@+id/etDesc"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="@string/hint_desk"
+                android:inputType="textPersonName"
+                android:layout_below="@+id/alamat_title"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:background="@drawable/capsule_edittext"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etTempatLahit" />
+
+            <TextView
+                android:id="@+id/prioritas"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:text="Prioritas"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"
+                android:layout_below="@+id/etDesc"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_urgensi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/capsule_edittext"
+                android:layout_below="@+id/prioritas"
+                android:padding="10dp"
+                android:textAlignment="center"
+                />
+
+            <Button
+                android:id="@+id/locPicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/locPick"
+                android:background="@drawable/capsule_edittext"
+                android:layout_below="@+id/spinner_urgensi"
+                android:padding="10dp"
+                android:textAlignment="center" />
+
+
+            <!--<EditText-->
+                <!--android:id="@+id/etPrioritas"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:ems="10"-->
+                <!--android:hint="@string/hint_phone"-->
+                <!--android:inputType="phone"-->
+                <!--android:layout_below="@+id/prioritas"-->
+                <!--android:padding="10dp"-->
+                <!--android:textAlignment="center"-->
+                <!--android:background="@drawable/capsule_edittext"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/etDesa" />-->
+
+            <Button
+                android:id="@+id/btEditProfil"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:onClick="saveProfile"
+                android:text="@string/save"
+                android:layout_below="@+id/locPicker"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:background="@drawable/capsule_btn"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPrioritas" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

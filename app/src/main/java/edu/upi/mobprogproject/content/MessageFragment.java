@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 
 import edu.upi.mobprogproject.R;
@@ -50,8 +53,6 @@ public class MessageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
 
         final ChatHeaderAdapter adapter;
         final ArrayList<ChatHeader> chats = new ArrayList<>();
