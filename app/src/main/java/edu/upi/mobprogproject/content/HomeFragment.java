@@ -47,12 +47,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
+import java.util.Objects;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.DetailEventActivity;
 import edu.upi.mobprogproject.activity.DetailTetanggaActivity;
 import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.activity.ListTetanggaActivity;
+import edu.upi.mobprogproject.helper.DbEvents;
 import edu.upi.mobprogproject.helper.DbUsers;
+import edu.upi.mobprogproject.model.Events;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.popup.AlertPopUp;
 
@@ -66,6 +70,8 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
     private static final int MY_PERMISSIONS_REQUEST = 99;
     public final static String EXTRA_MESSAGE = "edu.upi.mobproject.maps.MESSAGE";
+    public final static String EXTRA_MESSAGE2 = "edu.upi.mobproject.event.MESSAGE";
+
 
     FusedLocationProviderClient mFusedLocationClient;
 
@@ -77,6 +83,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
     MapView mapView;
     private Activity activity;
     private DbUsers dbU;
+    private DbEvents dbE;
     ImageView toListT;
     int i = 0;
     AlertPopUp mAlertPopPup;
@@ -105,11 +112,11 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
 
                 //Place current location marker
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title("Current Position X");
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                mCurrLocationMarker = map.addMarker(markerOptions);
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.position(latLng);
+//                markerOptions.title("Current Position X");
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//                mCurrLocationMarker = map.addMarker(markerOptions);
 
                 if (i == 0) {
                     map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -146,6 +153,8 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         });
         dbU = new DbUsers(activity);
         dbU.open();
+        dbE = new DbEvents(activity);
+        dbE.open();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
@@ -193,6 +202,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                 }
                 try {
                     showTetangga(map);
+                    showEvent(map);
                 } catch (Exception e) {
                     Log.i("kokoko", e.toString());
                 }
@@ -201,9 +211,21 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                     @Override
                     public void onInfoWindowClick(Marker marker) {
                         String user = (String) marker.getTag();
-                        Intent info = new Intent(activity, DetailTetanggaActivity.class);
-                        info.putExtra(EXTRA_MESSAGE, user);
-                        startActivity(info);
+                        if (user!=null) {
+                            String[] tag = user.split("_");
+                            if (tag.length > 0) {
+                                if (Objects.equals(tag[0], "tetangga")) {
+                                    Intent info = new Intent(activity, DetailTetanggaActivity.class);
+                                    info.putExtra(EXTRA_MESSAGE, tag[1]);
+                                    startActivity(info);
+                                } else if (Objects.equals(tag[0], "event")) {
+                                    Intent info = new Intent(activity, DetailEventActivity.class);
+                                    info.putExtra(EXTRA_MESSAGE2, Integer.parseInt(tag[1]));
+                                    startActivity(info);
+                                }
+                            }
+                        }
+
                     }
                 });
 
@@ -278,6 +300,7 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
         super.onDestroy();
         mapView.onDestroy();
         dbU.close();
+        dbE.close();
     }
 
     @Override
@@ -392,7 +415,27 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                 BitmapDescriptor iconx = BitmapDescriptorFactory.fromResource(R.drawable.home_icon);
                 markerOptions.icon(iconx);
                 tetanggaMarker = map.addMarker(markerOptions);
-                tetanggaMarker.setTag(us.getUsername());
+                tetanggaMarker.setTag("tetangga_"+us.getUsername());
+            }
+        }
+
+    }
+
+    private void showEvent(GoogleMap map) {
+        List<Events> eventList = dbE.getAllEvents();
+        for (Events ev : eventList) {
+            if (ev.getLat() != null && ev.getLng() != null) {
+                Marker tetanggaMarker;
+                Log.i("LatLng", Double.parseDouble(ev.getLat()) + "+" + Double.parseDouble(ev.getLng()));
+                LatLng latLng = new LatLng(Double.parseDouble(ev.getLat()), Double.parseDouble(ev.getLng()));
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title(ev.getJudul()).snippet(ev.getDeskripsi());
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+//                BitmapDescriptor iconx = BitmapDescriptorFactory.fromResource(R.drawable.home_icon);
+//                markerOptions.icon(iconx);
+                tetanggaMarker = map.addMarker(markerOptions);
+                tetanggaMarker.setTag("event_"+ev.getId_event());
             }
         }
 

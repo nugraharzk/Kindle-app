@@ -3,7 +3,6 @@
     android:id="@+id/eventContent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/capsule_edittext"
@@ -79,11 +78,13 @@
 
     <TextView
         android:id="@+id/tvTempat"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:layout_marginStart="8dp"
         android:text="@string/tempat_def"
         android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/tvEvent" />
 
@@ -126,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="Tempat :"
+        android:text="Detail :"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/tvTgl"
         app:layout_constraintTop_toBottomOf="@+id/tvEvent" />

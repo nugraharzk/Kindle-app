@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.upi.mobprogproject.activity.DetailEventActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/tvEditProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/menu"
+            android:layout_gravity="center"
+            android:fontFamily="@font/proxima_nova_medium"
+            android:text="DETAIL EVENT"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/tvEditProfil"
+            android:contentDescription="@string/app_name"
+            android:maxHeight="30dip"
+            android:minHeight="30dip"
+            android:src="@drawable/back"
+            android:clickable="true"
+            tools:ignore="RtlSymmetry" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tvEJudul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvEDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvEJudul"
+        android:layout_below="@+id/tvEJudul"
+        android:layout_marginTop="17dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvEWaktu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvEDetail"
+        android:layout_below="@+id/tvEDetail"
+        android:layout_marginTop="24dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvEPriotitas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvEWaktu"
+        android:layout_below="@+id/tvEWaktu"
+        android:layout_marginTop="24dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvEPenyelenggara"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvEPriotitas"
+        android:layout_below="@+id/tvEPriotitas"
+        android:layout_marginTop="33dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvELokasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvEPenyelenggara"
+        android:layout_below="@+id/tvEPenyelenggara"
+        android:layout_marginTop="15dp"
+        android:text="TextView" />
+</RelativeLayout>

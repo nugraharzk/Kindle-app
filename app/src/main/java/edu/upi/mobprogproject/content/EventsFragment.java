@@ -115,6 +115,7 @@ public class EventsFragment extends Fragment {
             Users user = dbu.getUser(item.getUsername());
             EventsList one = new EventsList();
             //judul desk, waktu, urgensi
+            one.setId_event(item.getId_event());
             one.setNamaAcara(item.getJudul());
             one.setPenyelenggara(user.getNama());
             one.setUrgensi(item.getPriority());

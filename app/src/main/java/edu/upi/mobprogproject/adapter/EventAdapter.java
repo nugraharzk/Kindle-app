@@ -1,6 +1,7 @@
 package edu.upi.mobprogproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.activity.DetailEventActivity;
 import edu.upi.mobprogproject.adapter.data.EventsList;
 
 /**
@@ -42,7 +44,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     // binds the data to the textview in each row
     @Override
     public void onBindViewHolder(final EventAdapter.ViewHolder holder, final int position) {
-        EventsList name = mData.get(position);
+        final EventsList name = mData.get(position);
         /*
         private int urgensi;
         private String tgl, bulan, namaAcara, tempat, waktu, penyelenggara;
@@ -51,7 +53,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.acara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mInflater.getContext(), "List ke - "+holder.getAdapterPosition()+".", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mInflater.getContext(), "List ke - "+holder.getAdapterPosition()+".", Toast.LENGTH_SHORT).show();
+                final String EXTRA_MESSAGE = "edu.upi.mobproject.event.MESSAGE";
+                Intent i = new Intent(mInflater.getContext(), DetailEventActivity.class);
+//                Intent i = new Intent(ctx, DetailTetanggaActivity.class);
+                i.putExtra(EXTRA_MESSAGE, name.getId_event());
+                mInflater.getContext().startActivity(i);
+//                ctx.startActivity(i);
             }
         });
         holder.urgensi.setText(name.getUrgensi());
@@ -95,6 +103,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             waktu = itemView.findViewById(R.id.etWaktu);
             penyelenggara = itemView.findViewById(R.id.tvPenyelenggara);
         }
+
     }
 
     // convenience method for getting data at click position

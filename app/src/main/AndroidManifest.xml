@@ -55,7 +55,8 @@
         <activity android:name=".activity.ListTetanggaActivity" />
         <activity android:name=".activity.DetailTetanggaActivity" />
         <activity android:name=".activity.WelcomeActivity" />
-        <activity android:name=".activity.WaitVerification"></activity>
+        <activity android:name=".activity.WaitVerification" />
+        <activity android:name=".activity.DetailEventActivity"></activity>
     </application>
 
 </manifest>

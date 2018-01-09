@@ -9,14 +9,14 @@ import android.support.constraint.ConstraintLayout;
 
 public class EventsList {
     private String urgensi, tgl, bulan, namaAcara, tempat, waktu, penyelenggara;
-    private ConstraintLayout acara;
+    private int id_event;
 
     public EventsList() {
 
     }
 
-    public EventsList(ConstraintLayout acara , String urgensi, String tgl, String bulan, String namaAcara, String tempat, String waktu, String penyelenggara) {
-        this.acara = acara;
+    public EventsList(int id_event, String urgensi, String tgl, String bulan, String namaAcara, String tempat, String waktu, String penyelenggara) {
+        this.id_event = id_event;
         this.urgensi = urgensi;
         this.tgl = tgl;
         this.bulan = bulan;
@@ -24,6 +24,14 @@ public class EventsList {
         this.tempat = tempat;
         this.waktu = waktu;
         this.penyelenggara = penyelenggara;
+    }
+
+    public int getId_event() {
+        return id_event;
+    }
+
+    public void setId_event(int id_event) {
+        this.id_event = id_event;
     }
 
     public String getUrgensi() {
