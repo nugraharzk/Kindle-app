@@ -131,8 +131,6 @@ public class StatusFragment extends Fragment {
         addStat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(activity, AddStatusActivity.class);
-//                startActivityForResult(i, ACT2_REQUEST);
                 mStatusPopUp.show();
             }
         });

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,10 +49,22 @@ public class AddEventActivity extends AppCompatActivity {
     private Button pickLoc;
     private static int PLACE_PICKER_REQUEST = 1;
 
+    ImageView backBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+
+        backBtn = findViewById(R.id.back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = getIntent();
+                setResult(RESULT_CANCELED, i);
+                finish();
+            }
+        });
 
         pickLoc = (Button) findViewById(R.id.locPicker);
         pickLoc.setOnClickListener(new View.OnClickListener() {

@@ -50,9 +50,6 @@
         <activity
             android:name=".activity.AddEventActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.AddStatusActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".activity.EditAkunActivity" />
         <activity android:name=".activity.ListTetanggaActivity" />
