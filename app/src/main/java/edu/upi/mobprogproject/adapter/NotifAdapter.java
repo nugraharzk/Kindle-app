@@ -47,7 +47,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.MyViewHolder
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, notifications.getPesan(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, notifications.getUsername() + ": " + notifications.getPesan(), Toast.LENGTH_SHORT).show();
             }
         });
     }

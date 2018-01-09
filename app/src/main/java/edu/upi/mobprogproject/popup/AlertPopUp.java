@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,17 +39,6 @@ public class AlertPopUp {
 
         // Initialize a new instance of LayoutInflater service
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-
-        /*Button biasa = activity.findViewById(R.id.btBiasa);
-        Button penting = activity.findViewById(R.id.btPenting);
-        Button darurat = activity.findViewById(R.id.btBiasa);*/
-
-        /*biasa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPopupWindow.dismiss();
-            }
-        });*/
 
         // Inflate the custom layout/view
         View customView = null;
