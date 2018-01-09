@@ -239,18 +239,18 @@ public class HomeActivity extends AppCompatActivity {
         call3.enqueue(new Callback<List<Events>>() {
             @Override
             public void onResponse(@NonNull Call<List<Events>> call, @NonNull Response<List<Events>> response) {
+                dialog.dismiss();
                 eventlist = response.body();
                 if (eventlist != null) {
                     //dbU.update(userlist);
                     dbE.update(eventlist);
                 }
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        // Actions to do after 10 seconds
-                        dialog.dismiss();
-                    }
-                }, 10000);
+//                Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    public void run() {
+//                        // Actions to do after 10 seconds
+//                    }
+//                }, 10000);
             }
 
             @Override
