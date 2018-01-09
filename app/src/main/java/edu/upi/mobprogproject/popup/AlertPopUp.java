@@ -2,18 +2,30 @@ package edu.upi.mobprogproject.popup;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import edu.upi.mobprogproject.R;
+import edu.upi.mobprogproject.helper.DbNotif;
+import edu.upi.mobprogproject.model.Notifications;
+import edu.upi.mobprogproject.rest.ApiClient;
+import edu.upi.mobprogproject.rest.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -22,20 +34,21 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
  */
 
 public class AlertPopUp {
-    private Context mContext;
+    private final Context context;
 //    private Activity activity;
     private PopupWindow mPopupWindow;
     private RelativeLayout mRelativeLayout;
-
+    private static String TAG = "UpNotif";
+    private SharedPreferences sp;
+    private DbNotif dbN;
 
     public AlertPopUp(Context mContext, RelativeLayout x) {
 //        this.data = data;
-        this.mContext = mContext;
+        this.context = mContext;
 //        this.activity = activity;
         mRelativeLayout = x;
-        //background = bg;
-//        mRelativeLayout.setVisibility(View.VISIBLE);
-//        mRelativeLayout.setVisibility(View.GONE);
+        dbN = new DbNotif(context);
+        dbN.open();
 
         // Initialize a new instance of LayoutInflater service
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -45,6 +58,74 @@ public class AlertPopUp {
         if (inflater != null) {
             customView = inflater.inflate(R.layout.popup_alert, null);
         }
+
+        Button biasa = customView.findViewById(R.id.btBiasa);
+        Button penting = customView.findViewById(R.id.btPenting);
+        Button darurat = customView.findViewById(R.id.Darurat);
+
+        final Notifications no = new Notifications();
+
+        final EditText etPesan = customView.findViewById(R.id.etPesan);
+
+        sp = mContext.getSharedPreferences("edu.upi.mobprogproject.user", Context.MODE_PRIVATE);
+        no.setUsername(sp.getString("user",""));
+
+        biasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cek = etPesan.getText().toString().trim();
+                if (TextUtils.isEmpty(cek)){
+                    Toast.makeText(context, "Isi Pesan Anda!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    no.setPesan(cek);
+                    no.setUrgensi("Biasa");
+                    setNotifAlert(no.getUsername(), no.getPesan(), no.getUrgensi());
+                    dbN.insertNotif(no);
+                    mPopupWindow.dismiss();
+                    Toast.makeText(context, "Data Tersimpan!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        penting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cek = etPesan.getText().toString().trim();
+                if (TextUtils.isEmpty(cek)){
+                    Toast.makeText(context, "Isi Pesan Anda!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    no.setPesan(cek);
+                    no.setUrgensi("Penting");
+                    setNotifAlert(no.getUsername(), no.getPesan(), no.getUrgensi());
+                    dbN.insertNotif(no);
+                    mPopupWindow.dismiss();
+                    Toast.makeText(context, "Data Tersimpan!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        darurat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cek = etPesan.getText().toString().trim();
+                if (TextUtils.isEmpty(cek)){
+                    Toast.makeText(context, "Isi Pesan Anda!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    no.setPesan(cek);
+                    no.setUrgensi("Darurat");
+                    setNotifAlert(no.getUsername(), no.getPesan(), no.getUrgensi());
+                    dbN.insertNotif(no);
+                    mPopupWindow.dismiss();
+                    Toast.makeText(context, "Data Tersimpan!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
                 /*
                     public PopupWindow (View contentView, int width, int height)
@@ -100,5 +181,21 @@ public class AlertPopUp {
     public void show() {
         //background.setVisibility(View.VISIBLE);
         mPopupWindow.showAtLocation(mRelativeLayout, Gravity.CENTER, 0, 0);
+    }
+
+    public void setNotifAlert(String username, String pesan, String urgensi){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<Notifications> call = apiService.postNotif(username,pesan,urgensi);
+        call.enqueue(new Callback<Notifications>() {
+            @Override
+            public void onResponse(Call<Notifications> call, Response<Notifications> response) {
+                Log.d(TAG, "onResponse: " + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Notifications> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t);
+            }
+        });
     }
 }

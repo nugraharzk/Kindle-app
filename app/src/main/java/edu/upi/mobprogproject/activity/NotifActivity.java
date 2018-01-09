@@ -2,9 +2,12 @@ package edu.upi.mobprogproject.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -33,9 +36,26 @@ public class NotifActivity extends AppCompatActivity {
         dbN.open();
         notificationsList = dbN.getAllNotif();
 
+        ImageView back = findViewById(R.id.backNotif);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         RecyclerView rvNotif = findViewById(R.id.rvNotif);
-        rvNotif.setLayoutManager(new LinearLayoutManager(this));
-        rvNotif.setAdapter(new NotifAdapter(getBaseContext(), notificationsList));
+        NotifAdapter notifAdapter = new NotifAdapter(getBaseContext(), notificationsList);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        rvNotif.setLayoutManager(layoutManager);
+        rvNotif.setAdapter(notifAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvNotif.getContext(),
+                layoutManager.getOrientation());
+        rvNotif.addItemDecoration(dividerItemDecoration);
     }
 
     @Override
