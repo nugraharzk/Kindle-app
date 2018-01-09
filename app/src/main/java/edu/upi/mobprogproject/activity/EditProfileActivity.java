@@ -3,13 +3,21 @@ package edu.upi.mobprogproject.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.picker.MyEditTextDatePicker;
@@ -21,6 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class EditProfileActivity extends AppCompatActivity {
 
     private static final String TAG = EditProfileActivity.class.getSimpleName();
@@ -31,6 +40,10 @@ public class EditProfileActivity extends AppCompatActivity {
     SharedPreferences sp;
 
     ImageView backBtn;
+    private static int PLACE_PICKER_REQUEST = 1;
+    private LatLng latLng;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +57,19 @@ public class EditProfileActivity extends AppCompatActivity {
                 Intent i = getIntent();
                 setResult(RESULT_CANCELED, i);
                 finish();
+            }
+        });
+
+        Button location = findViewById(R.id.btGetLokasi);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                try{
+                    startActivityForResult(builder.build(EditProfileActivity.this), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -95,10 +121,18 @@ public class EditProfileActivity extends AppCompatActivity {
         Intent i = getIntent();
         if (requestCode == ACT2_REQUEST && resultCode != 0) {
             setResult(RESULT_OK, i);
-        } else {
+            finish();
+        }else if (requestCode == PLACE_PICKER_REQUEST){
+            if (resultCode == RESULT_OK){
+                Place place = PlacePicker.getPlace(this, data);
+                latLng = place.getLatLng();
+                String toast = String.format("Tempat: %s .", place.getName());
+                Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+            }
+        }else{
             Toast.makeText(this, "Akun gagal diperbaharui", Toast.LENGTH_LONG).show();
+            finish();
         }
-        finish();
     }
 
     public void saveProfile(View v) {
@@ -162,7 +196,10 @@ public class EditProfileActivity extends AppCompatActivity {
         u.setDesa(desa);
         u.setTelepon(telepon);
         u.setPekerjaan(pekerjaan);
-
+        if (latLng != null){
+            u.setLat(Double.toString(latLng.latitude));
+            u.setLng(Double.toString(latLng.longitude));
+        }
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<Users> call = apiInterface.putUser(sp.getString("user", ""), nama, tempatL + "_" + tanggalL, alamat, rt, rw, desa, telepon, pekerjaan, null, null, "warga");
 

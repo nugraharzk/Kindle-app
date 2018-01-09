@@ -76,9 +76,7 @@ public class AddEventActivity extends AppCompatActivity {
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
                 try{
                     startActivityForResult(builder.build(AddEventActivity.this), PLACE_PICKER_REQUEST);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
+                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
                     e.printStackTrace();
                 }
             }
@@ -204,7 +202,7 @@ public class AddEventActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST){
             if (resultCode == RESULT_OK){
-                Place place = PlacePicker.getPlace(data, this);
+                Place place = PlacePicker.getPlace(this, data);
                 latLng = place.getLatLng();
                 String toast = String.format("Tempat: %s .", place.getName());
                 Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();

@@ -322,11 +322,27 @@
                 android:layout_marginTop="30dp"
                 android:onClick="saveProfile"
                 android:text="@string/save"
-                android:layout_below="@+id/linLayout2"
+                android:layout_below="@+id/btGetLokasi"
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:background="@drawable/capsule_btn"
                 android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPekerjaan" />
+
+            <Button
+                android:id="@+id/btGetLokasi"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linLayout2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/capsule_btn"
+                android:onClick="saveProfile"
+                android:padding="10dp"
+                android:text="Pilih Lokasi di Peta"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etPekerjaan" />

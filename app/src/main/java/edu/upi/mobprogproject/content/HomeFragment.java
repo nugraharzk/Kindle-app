@@ -42,6 +42,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -205,6 +207,15 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                 try {
                     showTetangga(map);
                     showEvent(map);
+                    LatLng position = new LatLng(-6.860572, 107.590195);
+                    Circle circle = map.addCircle(
+                            new CircleOptions()
+                                    .center(position)
+                                    .radius(200)
+                                    .strokeWidth(0f)
+                                    //TODO change to Transparent color u like
+                                    .fillColor(getActivity().getResources().getColor(R.color.bg_screen4))
+                    );
                 } catch (Exception e) {
                     Log.i("kokoko", e.toString());
                 }
