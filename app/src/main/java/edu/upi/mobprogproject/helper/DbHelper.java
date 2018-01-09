@@ -63,23 +63,23 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
     // Logcat tag
     private static final String LOG = "DBHelper";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "DBKindle.db";
 
     private static final String CREATE_TABLE_USERS =
             "CREATE TABLE USERS(username TEXT PRIMARY KEY, nama TEXT NOT NULL, ttl TEXT, " +
                     "alamat TEXT, rt TEXT, rw TEXT, desa TEXT,telepon TEXT, pekerjaan TEXT, jabatan TEXT,lat TEXT, lng TEXT)";
     private static final String CREATE_TABLE_STATUS =
-            "CREATE TABLE STATUS(id_status INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, " +
+            "CREATE TABLE STATUS(id_status INTEGER PRIMARY KEY, username TEXT NOT NULL, " +
                     "status TEXT NOT NULL, waktu TEXT NOT NULL, like INTEGER NOT NULL," +
                     "FOREIGN KEY (username) REFERENCES USERS(username))";
     private static final String CREATE_TABLE_COMMENT =
-            "CREATE TABLE COMMENT(id_komentar INTEGER PRIMARY KEY AUTOINCREMENT, id_status INTEGER NOT NULL, " +
+            "CREATE TABLE COMMENT(id_komentar INTEGER PRIMARY KEY, id_status INTEGER NOT NULL, " +
                     "username TEXT NOT NULL, comment TEXT," +
                     "FOREIGN KEY (username) REFERENCES ACCOUNT(username)," +
                     "FOREIGN KEY (id_status) REFERENCES USERS(id_status))";
     private static final String CREATE_TABEL_EVENT =
-            "CREATE TABLE EVENT(id_event INTEGER PRIMARY KEY AUTOINCREMENT, judul TEXT, username TEXT NOT NULL, " +
+            "CREATE TABLE EVENT(id_event INTEGER PRIMARY KEY, judul TEXT, username TEXT NOT NULL, " +
                     "waktu TEXT NOT NULL, priority TEXT NOT NULL, deskripsi TEXT NOT NULL, lat TEXT, lng TEXT, konfirmasi INTEGER NOT NULL," +
                     "FOREIGN KEY (username) REFERENCES USERS(username))";
 

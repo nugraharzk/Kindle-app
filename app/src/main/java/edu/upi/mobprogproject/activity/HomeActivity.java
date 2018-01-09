@@ -1,12 +1,18 @@
 package edu.upi.mobprogproject.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -40,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
 
     List<Events> eventlist;
     DbEvents dbE;
+    Context c=this;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -88,6 +95,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        dbU = new DbUsers(this);
+        dbE = new DbEvents(this);
+        dbS = new DbStatus(this);
+        dbU.open();
+        dbE.open();
+        dbS.open();
+        getData();
+
         HomeFragment homeFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, homeFragment).addToBackStack(null).commit();
 
@@ -149,43 +164,77 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void getData() {
+        userGrab();
+
+    }
+
+    private void userGrab(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.progress_user, null);
+        builder.setView(view);
+        builder.setCancelable(false);
+        final Dialog dialog = builder.create();
+        dialog.show();
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Users>> call = apiService.getUsersList();
         call.enqueue(new Callback<List<Users>>() {
             @Override
             public void onResponse(@NonNull Call<List<Users>> call, @NonNull Response<List<Users>> response) {
+                dialog.dismiss();
                 userlist = response.body();
                 if (userlist != null) {
                     dbU.update(userlist);
+                    statusGrab();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Users>> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: ", t);
-                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
-
+                dialog.dismiss();
+                Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void statusGrab(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.progress_status, null);
+        builder.setView(view);
+        builder.setCancelable(false);
+        final Dialog dialog = builder.create();
+        dialog.show();
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Status>> call2 = apiService.getStatusList();
         call2.enqueue(new Callback<List<Status>>() {
             @Override
             public void onResponse(@NonNull Call<List<Status>> call, @NonNull Response<List<Status>> response) {
+                dialog.dismiss();
                 statuslist = response.body();
                 if (statuslist != null) {
                     //dbU.update(userlist);
                     dbS.update(statuslist);
+                    eventGrab();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Status>> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: ", t);
-                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
-
+                dialog.dismiss();
+                Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    private void eventGrab(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.progress_events, null);
+        builder.setView(view);
+        builder.setCancelable(false);
+        final Dialog dialog = builder.create();
+        dialog.show();
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Events>> call3 = apiService.getEventList();
         call3.enqueue(new Callback<List<Events>>() {
             @Override
@@ -195,27 +244,22 @@ public class HomeActivity extends AppCompatActivity {
                     //dbU.update(userlist);
                     dbE.update(eventlist);
                 }
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        // Actions to do after 10 seconds
+                        dialog.dismiss();
+                    }
+                }, 10000);
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Events>> call, @NonNull Throwable t) {
                 Log.e(TAG, "onFailure: ", t);
-                //Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
-
+                dialog.dismiss();
+                Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        dbU = new DbUsers(this);
-        dbE = new DbEvents(this);
-        dbS = new DbStatus(this);
-        dbU.open();
-        dbE.open();
-        dbS.open();
-        getData();
     }
 
     @Override

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.progressbar, null);
         builder.setView(view);
-        builder.setCancelable(true);
+        builder.setCancelable(false);
         final Dialog dialog = builder.create();
 
         //checking if email and passwords are empty
@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Accounts>> call, Throwable t) {
                 Log.e(TAG, "onFailure: ", t);
+                Toast.makeText(c, "Ada Yang Salah", Toast.LENGTH_LONG).show();
             }
         });
 
