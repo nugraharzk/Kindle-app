@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/capsule_edittext"
+    android:layout_margin="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="20dp">
 
 
     <TextView
@@ -11,18 +16,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/ketua"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignStart="@+id/tvLeader"
         android:layout_below="@+id/tvLeader"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLeader"
         app:srcCompat="@drawable/user" />
 
     <TextView
@@ -30,19 +40,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageView4"
-        android:layout_marginStart="16dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/imageView4"
         android:text="@string/def_name"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#060606"
+        android:fontFamily="@font/proxima_nova_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvLTalamat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvLTNama"
+        android:layout_alignEnd="@+id/tvLTNama"
         android:layout_below="@+id/tvLTNama"
-        android:text="@string/alamat" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/alamat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvLjalan"
+        app:layout_constraintTop_toBottomOf="@+id/tvLTNama" />
 
     <TextView
         android:id="@+id/textView6"
@@ -50,18 +77,27 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/tvLTalamat"
         android:layout_below="@+id/tvLTalamat"
-        android:layout_marginTop="1dp"
-        android:text="@string/kontak" />
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/kontak"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/tvLjalan" />
 
     <Button
         android:id="@+id/btLTlengkap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="30dp"
         android:layout_alignStart="@+id/textView6"
         android:layout_below="@+id/textView6"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="1dp"
-        android:text="@string/detail_but" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/capsule_rwrt"
+        android:text="@string/detail_but"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/tvLTkontak" />
 
     <TextView
         android:id="@+id/tvLTkontak"
@@ -69,7 +105,23 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView6"
         android:layout_alignBottom="@+id/textView6"
-        android:layout_marginStart="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/textView6"
-        android:text="@string/def_kontak" />
-</RelativeLayout>
+        android:text="@string/def_kontak"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/tvLTalamat" />
+
+    <TextView
+        android:id="@+id/tvLjalan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Alamat :"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/tvLTNama" />
+</android.support.constraint.ConstraintLayout>

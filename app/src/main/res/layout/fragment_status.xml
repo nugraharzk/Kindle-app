@@ -3,6 +3,7 @@
     android:id="@+id/viewFeeds"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAFAFA"
     tools:context="edu.upi.mobprogproject.content.StatusFragment">
 
     <!-- TODO: Update blank fragment layout -->
