@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "492620161689",
+    "firebase_url": "https://mobprog-187614.firebaseio.com",
+    "project_id": "mobprog-187614",
+    "storage_bucket": "mobprog-187614.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492620161689:android:d9153c59d93be0c4",
+        "android_client_info": {
+          "package_name": "edu.upi.mobprogproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492620161689-7b2984qj0rh3cvgcfg25vv17u31urm0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.upi.mobprogproject",
+            "certificate_hash": "80ca00f827d9c9592a92a7413e4a35b1b48a7a7b"
+          }
+        },
+        {
+          "client_id": "492620161689-dddrmkhh2m4kt2a3j7v1bd1fvvt65j1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ8xuy7xNQEV6D6mEipQOGnaGtPUdnles"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492620161689-dddrmkhh2m4kt2a3j7v1bd1fvvt65j1t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

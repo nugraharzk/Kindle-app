@@ -48,6 +48,7 @@ public class AddEventActivity extends AppCompatActivity {
 
     private Button pickLoc;
     private static int PLACE_PICKER_REQUEST = 1;
+    private LatLng latLng;
 
     ImageView backBtn;
 
@@ -55,6 +56,8 @@ public class AddEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+
+        latLng = null;
 
         backBtn = findViewById(R.id.back);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -140,27 +143,34 @@ public class AddEventActivity extends AppCompatActivity {
         E.setKonfirmasi(0);
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
         E.setUsername(sp.getString("user", ""));
+        if (latLng == null){
+            Toast.makeText(getBaseContext(), "Pilih lokasi terlebih dahulu!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            E.setLat(Double.toString(latLng.latitude));
+            E.setLng(Double.toString(latLng.longitude));
 
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Events> call = apiInterface.postEvent(E.getJudul(), sp.getString("user", ""), E.getWaktu(), E.getPriority(), E.getDeskripsi(), E.getLat(), E.getLng(), String.valueOf(E.getKonfirmasi()));
+            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+            Call<Events> call = apiInterface.postEvent(E.getJudul(), sp.getString("user", ""), E.getWaktu(), E.getPriority(), E.getDeskripsi(), E.getLat(), E.getLng(), String.valueOf(E.getKonfirmasi()));
 
 
-        long a = dbE.insertEvents(E);
-        if (a != -1) {
-            call.enqueue(new Callback<Events>() {
-                @Override
-                public void onResponse(@NonNull Call<Events> call, @NonNull Response<Events> response) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                }
+            long a = dbE.insertEvents(E);
+            if (a != -1) {
+                call.enqueue(new Callback<Events>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Events> call, @NonNull Response<Events> response) {
+                        Log.d(TAG, "onResponse: " + response.body());
+                    }
 
-                @Override
-                public void onFailure(@NonNull Call<Events> call, @NonNull Throwable t) {
-                    Log.d(TAG, "onFailure: " + t);
-                }
-            });
-            Toast.makeText(this, "Event Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Mohon maaf terjadi kesalahan", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(@NonNull Call<Events> call, @NonNull Throwable t) {
+                        Log.d(TAG, "onFailure: " + t);
+                    }
+                });
+                Toast.makeText(this, "Event Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Mohon maaf terjadi kesalahan", Toast.LENGTH_SHORT).show();
+            }
         }
 
         /*
@@ -195,9 +205,9 @@ public class AddEventActivity extends AppCompatActivity {
         if (requestCode == PLACE_PICKER_REQUEST){
             if (resultCode == RESULT_OK){
                 Place place = PlacePicker.getPlace(data, this);
-                LatLng latLng = place.getLatLng();
-                String toast = String.format("Place: %s .", place.getName() + "\n" + "Lat : " + latLng.latitude + "\n" + "Lng : " + latLng.longitude);
-                Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
+                latLng = place.getLatLng();
+                String toast = String.format("Tempat: %s .", place.getName());
+                Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
             }
         }
     }
