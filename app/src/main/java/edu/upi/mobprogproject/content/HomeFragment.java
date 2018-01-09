@@ -433,9 +433,9 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title(ev.getJudul()).snippet(ev.getDeskripsi());
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-//                BitmapDescriptor iconx = BitmapDescriptorFactory.fromResource(R.drawable.home_icon);
-//                markerOptions.icon(iconx);
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                BitmapDescriptor iconx = BitmapDescriptorFactory.fromResource(R.drawable.event_icon);
+                markerOptions.icon(iconx);
                 tetanggaMarker = map.addMarker(markerOptions);
                 tetanggaMarker.setTag("event_"+ev.getId_event());
             }
