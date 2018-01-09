@@ -19,6 +19,8 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Locale;
+
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.picker.MyEditTextDatePicker;
 import edu.upi.mobprogproject.helper.DbUsers;
@@ -197,23 +199,25 @@ public class EditProfileActivity extends AppCompatActivity {
         u.setTelepon(telepon);
         u.setPekerjaan(pekerjaan);
         if (latLng != null){
-            u.setLat(Double.toString(latLng.latitude));
-            u.setLng(Double.toString(latLng.longitude));
+//            u.setLat(Double.toString(latLng.latitude));
+//            u.setLng(Double.toString(latLng.longitude));
+            u.setLat(String.format(Locale.US,"%.6f", latLng.latitude));
+            u.setLng(String.format(Locale.US,"%.6f", latLng.longitude));
         }
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Users> call = apiInterface.putUser(sp.getString("user", ""), nama, tempatL + "_" + tanggalL, alamat, rt, rw, desa, telepon, pekerjaan, null, null, "warga");
+        Call<Users> call = apiInterface.putUser(sp.getString("user", ""), nama, tempatL + "_" + tanggalL, alamat, rt, rw, desa, telepon, pekerjaan, u.getLat(), u.getLng(), "warga");
 
         Intent i = getIntent();
         try {
             dbU.updateUsers(sp.getString("user", ""), u);
             call.enqueue(new Callback<Users>() {
                 @Override
-                public void onResponse(Call<Users> call, Response<Users> response) {
+                public void onResponse(@NonNull Call<Users> call, @NonNull Response<Users> response) {
                     Log.d(TAG, "onResponse: " + response.body());
                 }
 
                 @Override
-                public void onFailure(Call<Users> call, Throwable t) {
+                public void onFailure(@NonNull Call<Users> call, @NonNull Throwable t) {
                     Log.d(TAG, "onFailure: " + t);
                 }
             });

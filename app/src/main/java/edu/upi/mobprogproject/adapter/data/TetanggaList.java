@@ -5,18 +5,27 @@ package edu.upi.mobprogproject.adapter.data;
  */
 
 public class TetanggaList {
-    private String username, nama, alamat, kontak, jabatan;
+    private String username, nama, alamat, kontak, jabatan, RT;
 
     public TetanggaList() {
 
     }
 
-    public TetanggaList(String username, String nama, String alamat, String kontak, String jabatan) {
+    public TetanggaList(String username, String nama, String alamat, String kontak, String jabatan, String RT) {
         this.username = username;
         this.nama = nama;
         this.alamat = alamat;
         this.kontak = kontak;
         this.jabatan = jabatan;
+        this.RT = RT;
+    }
+
+    public String getRT() {
+        return RT;
+    }
+
+    public void setRT(String RT) {
+        this.RT = RT;
     }
 
     public String getUsername() {

@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Objects;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.adapter.TetanggaAdapter;
@@ -70,11 +73,29 @@ public class ListTetanggaActivity extends AppCompatActivity {
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(
-                                ListTetanggaActivity.this,
-                                "You Clicked : " + item.getTitle(),
-                                Toast.LENGTH_SHORT
-                        ).show();
+                        if (Objects.equals(item.getTitle().toString(), "List RT")){
+                            Collections.sort(tetangga, new Comparator<TetanggaList>() {
+                                @Override
+                                public int compare(TetanggaList lhs, TetanggaList rhs) {
+                                    return rhs.getRT().compareTo(lhs.getRT());
+                                }
+                            });
+                        }else if (Objects.equals(item.getTitle().toString(), "Alfabet")){
+                            Collections.sort(tetangga, new Comparator<TetanggaList>() {
+                                @Override
+                                public int compare(TetanggaList lhs, TetanggaList rhs) {
+                                    return rhs.getNama().compareTo(lhs.getNama());
+                                }
+                            });
+                        }
+                        adapter.notifyDataSetChanged();
+
+//                        Toast.makeText(
+//                                    ListTetanggaActivity.this,
+//                                    "You Clicked : " + item.getTitle(),
+//                                    Toast.LENGTH_SHORT
+//                            ).show();
+
                         return true;
                     }
                 });
@@ -94,6 +115,7 @@ public class ListTetanggaActivity extends AppCompatActivity {
             g.setAlamat(item.getAlamat());
             g.setKontak(item.getTelepon());
             g.setJabatan(item.getJabatan());
+            g.setRT(item.getRt());
             data.add(g);
         }
         return data;

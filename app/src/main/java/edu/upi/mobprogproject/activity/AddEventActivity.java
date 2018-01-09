@@ -22,7 +22,10 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.picker.MyEditTextDatePicker;
@@ -145,8 +148,10 @@ public class AddEventActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(), "Pilih lokasi terlebih dahulu!", Toast.LENGTH_LONG).show();
         }
         else {
-            E.setLat(Double.toString(latLng.latitude));
-            E.setLng(Double.toString(latLng.longitude));
+//            E.setLat(Double.toString(latLng.latitude));
+//            E.setLng(Double.toString(latLng.longitude));
+            E.setLat(String.format(Locale.US,"%.6f", latLng.latitude));
+            E.setLng(String.format(Locale.US,"%.6f", latLng.longitude));
 
             ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
             Call<Events> call = apiInterface.postEvent(E.getJudul(), sp.getString("user", ""), E.getWaktu(), E.getPriority(), E.getDeskripsi(), E.getLat(), E.getLng(), String.valueOf(E.getKonfirmasi()));
