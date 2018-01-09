@@ -53,9 +53,9 @@ public class NotifActivity extends AppCompatActivity {
         rvNotif.setLayoutManager(layoutManager);
         rvNotif.setAdapter(notifAdapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvNotif.getContext(),
-                layoutManager.getOrientation());
-        rvNotif.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvNotif.getContext(),
+//                layoutManager.getOrientation());
+//        rvNotif.addItemDecoration(dividerItemDecoration);
     }
 
     @Override
