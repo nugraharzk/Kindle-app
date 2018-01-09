@@ -52,50 +52,144 @@
         android:layout_below="@+id/toolbar3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:textColor="#060606"
+        android:fontFamily="@font/proxima_nova_medium"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/descTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEJudul"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="12dp"
+        android:layout_marginTop="15dp"
+        android:text="Deskripsi Acara : "/>
 
     <TextView
         android:id="@+id/tvEDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/descTV"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/capsule_edittext"
+        android:textColor="#060606"
+        android:text="TextView"
+        android:textSize="16dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/waktuTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvEJudul"
-        android:layout_below="@+id/tvEJudul"
-        android:layout_marginTop="17dp"
-        android:text="TextView" />
+        android:layout_below="@+id/tvEDetail"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="12dp"
+        android:layout_marginTop="15dp"
+
+        android:text="Waktu dan Tanggal Acara : "/>
 
     <TextView
         android:id="@+id/tvEWaktu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/waktuTV"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="16dp"
+        android:background="@drawable/capsule_edittext"
+        android:textColor="#060606"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/prioTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvEDetail"
-        android:layout_below="@+id/tvEDetail"
-        android:layout_marginTop="24dp"
-        android:text="TextView" />
+        android:layout_below="@+id/tvEWaktu"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="12dp"
+        android:layout_marginTop="15dp"
+        android:text="Kepentingan : "/>
 
     <TextView
         android:id="@+id/tvEPriotitas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/prioTV"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="16dp"
+        android:background="@drawable/capsule_edittext"
+        android:textColor="#060606"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/penyelenggaraTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvEWaktu"
-        android:layout_below="@+id/tvEWaktu"
-        android:layout_marginTop="24dp"
-        android:text="TextView" />
+        android:layout_below="@+id/tvEPriotitas"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="12dp"
+        android:layout_marginTop="15dp"
+        android:text="Penyelenggara Acara : "/>
 
     <TextView
         android:id="@+id/tvEPenyelenggara"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvEPriotitas"
-        android:layout_below="@+id/tvEPriotitas"
-        android:layout_marginTop="33dp"
+        android:padding="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/penyelenggaraTV"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="16dp"
+        android:background="@drawable/capsule_edittext"
+        android:textColor="#060606"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/tvELokasi"
+        android:id="@+id/alamatTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvEPenyelenggara"
         android:layout_below="@+id/tvEPenyelenggara"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="12dp"
         android:layout_marginTop="15dp"
+        android:text="Tempat Acara : "/>
+
+    <TextView
+        android:id="@+id/tvELokasi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/alamatTV"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        android:background="@drawable/capsule_edittext"
+        android:textColor="#060606"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textSize="16dp"
         android:text="TextView" />
 </RelativeLayout>

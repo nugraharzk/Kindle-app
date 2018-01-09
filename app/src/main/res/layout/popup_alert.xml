@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     card_view:cardElevation="4dp"
     card_view:cardCornerRadius="4dp"
-    android:background="#C0000000">
+    android:background="@drawable/capsule_edittext">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,9 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="10dp"
             android:text="@string/alert"
             android:textSize="20sp"
+            android:fontFamily="@font/proxima_nova_medium"
             android:textStyle="bold" />
 
         <EditText
@@ -38,9 +39,11 @@
             android:layout_below="@+id/textView4"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="38dp"
             android:ems="10"
             android:hint="@string/pesan_hint"
+            android:textAlignment="center"
+            android:background="@drawable/capsule_edittext"
             android:inputType="textMultiLine" />
 
         <TextView
@@ -50,62 +53,89 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView4"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="15dp"
             android:text="@string/pesan" />
 
-        <Button
-            android:id="@+id/btBiasa"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/groupBtn"
+            android:weightSum="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView10"
-            android:layout_below="@+id/etPesan"
-            android:layout_marginTop="24dp"
-            android:text="A" />
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/etPesan">
 
-        <Button
-            android:id="@+id/btPenting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btBiasa"
-            android:layout_alignBottom="@+id/btBiasa"
-            android:layout_centerHorizontal="true"
-            android:text="A" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3">
 
-        <Button
-            android:id="@+id/Darurat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btPenting"
-            android:layout_alignBottom="@+id/btPenting"
-            android:layout_alignEnd="@+id/etPesan"
-            android:text="A" />
+                <Button
+                    android:id="@+id/btBiasa"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/biasa" />
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/btBiasa"
-            android:layout_below="@+id/btBiasa"
-            android:layout_marginStart="23dp"
-            android:text="@string/dg1" />
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btBiasa"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/dg1" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView11"
-            android:layout_alignBottom="@+id/textView11"
-            android:layout_centerHorizontal="true"
-            android:text="@string/dg2" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.05"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/Darurat"
-            android:layout_below="@+id/Darurat"
-            android:layout_marginEnd="19dp"
-            android:text="@string/dg3" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3">
+                <Button
+                    android:id="@+id/btPenting"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/penting" />
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btPenting"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/dg2" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.05"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3">
+                <Button
+                    android:id="@+id/Darurat"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/darurat" />
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Darurat"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/dg3" />
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

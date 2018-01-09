@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/capsule_edittext"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/tvTgl"
@@ -30,35 +31,37 @@
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="22dp"
         android:layout_marginStart="24dp"
-        android:text="@string/month_def"
-        android:textSize="16sp"
         android:fontFamily="@font/proxima_nova_medium"
+        android:text="@string/month_def"
         android:textColor="@color/blue"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView13"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTgl" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTgl"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tvEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/event"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="#060606"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/proxima_nova_medium"
+        android:text="@string/event"
+        android:textColor="#060606"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/tvTgl"
-        app:layout_constraintTop_toBottomOf="@+id/tvUrgent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
         android:text="@string/waktu"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/tvTgl"
@@ -69,12 +72,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="12dp"
         android:text="@string/Penyelenggara"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvTgl"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tvTempat"
@@ -82,9 +86,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tempat_def"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/tvEvent" />
 
@@ -93,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="12dp"
         android:text="@string/waktu_def"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/textView13"
@@ -104,11 +110,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:layout_marginStart="8dp"
         android:text="@string/Penyelenggara_def"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/etWaktu" />
+        app:layout_constraintTop_toBottomOf="@+id/etWaktu"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tvUrgent"
@@ -127,6 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:text="Detail :"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/tvTgl"
