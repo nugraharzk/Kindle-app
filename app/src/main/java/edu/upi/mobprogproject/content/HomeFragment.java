@@ -54,6 +54,7 @@ import edu.upi.mobprogproject.activity.DetailEventActivity;
 import edu.upi.mobprogproject.activity.DetailTetanggaActivity;
 import edu.upi.mobprogproject.activity.HomeActivity;
 import edu.upi.mobprogproject.activity.ListTetanggaActivity;
+import edu.upi.mobprogproject.activity.NotifActivity;
 import edu.upi.mobprogproject.helper.DbEvents;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Events;
@@ -170,6 +171,15 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
             @Override
             public void onClick(View view) {
                 mAlertPopPup.show();
+            }
+        });
+
+        ImageView notify = rootView.findViewById(R.id.notif);
+        notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent notifi = new Intent(activity, NotifActivity.class);
+                startActivity(notifi);
             }
         });
 

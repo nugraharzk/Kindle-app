@@ -25,9 +25,11 @@ import edu.upi.mobprogproject.content.HomeFragment;
 import edu.upi.mobprogproject.content.MessageFragment;
 import edu.upi.mobprogproject.content.ProfileFragment;
 import edu.upi.mobprogproject.helper.DbEvents;
+import edu.upi.mobprogproject.helper.DbNotif;
 import edu.upi.mobprogproject.helper.DbStatus;
 import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Events;
+import edu.upi.mobprogproject.model.Notifications;
 import edu.upi.mobprogproject.model.Status;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.rest.ApiClient;
@@ -46,6 +48,9 @@ public class HomeActivity extends AppCompatActivity {
 
     List<Events> eventlist;
     DbEvents dbE;
+
+    List<Notifications> notificationsList;
+    DbNotif dbN;
     Context c=this;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -98,9 +103,11 @@ public class HomeActivity extends AppCompatActivity {
         dbU = new DbUsers(this);
         dbE = new DbEvents(this);
         dbS = new DbStatus(this);
+        dbN = new DbNotif(this);
         dbU.open();
         dbE.open();
         dbS.open();
+        dbN.open();
         getData();
 
         HomeFragment homeFragment = new HomeFragment();
@@ -165,7 +172,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void getData() {
         userGrab();
-
+        notifGrab();
     }
 
     private void userGrab(){
@@ -262,12 +269,42 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private void notifGrab(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.progress_notif, null);
+        builder.setView(view);
+        builder.setCancelable(false);
+        final Dialog dialog = builder.create();
+        dialog.show();
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<Notifications>> call4 = apiService.getNotifList();
+        call4.enqueue(new Callback<List<Notifications>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Notifications>> call, @NonNull Response<List<Notifications>> response) {
+                dialog.dismiss();
+                notificationsList = response.body();
+                if (notificationsList != null) {
+                    dbN.update(notificationsList);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Notifications>> call, @NonNull Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+                dialog.dismiss();
+                Toast.makeText(c, "Connection Error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         dbU.close();
         dbE.close();
         dbS.close();
+        dbN.close();
     }
 
     /* KODINGAN IKI HEEERRREE */

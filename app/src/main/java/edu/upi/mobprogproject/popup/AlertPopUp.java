@@ -1,5 +1,6 @@
 package edu.upi.mobprogproject.popup;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -7,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
@@ -20,6 +22,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class AlertPopUp {
     private Context mContext;
+//    private Activity activity;
     private PopupWindow mPopupWindow;
     private RelativeLayout mRelativeLayout;
 
@@ -27,6 +30,7 @@ public class AlertPopUp {
     public AlertPopUp(Context mContext, RelativeLayout x) {
 //        this.data = data;
         this.mContext = mContext;
+//        this.activity = activity;
         mRelativeLayout = x;
         //background = bg;
 //        mRelativeLayout.setVisibility(View.VISIBLE);
@@ -34,6 +38,17 @@ public class AlertPopUp {
 
         // Initialize a new instance of LayoutInflater service
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        /*Button biasa = activity.findViewById(R.id.btBiasa);
+        Button penting = activity.findViewById(R.id.btPenting);
+        Button darurat = activity.findViewById(R.id.btBiasa);*/
+
+        /*biasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopupWindow.dismiss();
+            }
+        });*/
 
         // Inflate the custom layout/view
         View customView = null;
