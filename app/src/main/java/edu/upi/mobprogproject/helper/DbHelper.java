@@ -68,7 +68,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_USERS =
             "CREATE TABLE USERS(username TEXT PRIMARY KEY, nama TEXT NOT NULL, ttl TEXT, " +
-                    "alamat TEXT, rt TEXT, rw TEXT, desa TEXT,telepon TEXT, pekerjaan TEXT, jabatan TEXT,lat TEXT, lng TEXT)";
+                    "alamat TEXT, rt TEXT, rw TEXT, desa TEXT,telepon TEXT, pekerjaan TEXT, jabatan TEXT,lat TEXT, lng TEXT, profile_image TEXT)";
     private static final String CREATE_TABLE_STATUS =
             "CREATE TABLE STATUS(id_status INTEGER PRIMARY KEY, username TEXT NOT NULL, " +
                     "status TEXT NOT NULL, waktu TEXT NOT NULL, like INTEGER NOT NULL," +

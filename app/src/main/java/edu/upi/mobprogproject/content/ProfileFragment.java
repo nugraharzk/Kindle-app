@@ -6,10 +6,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -101,6 +106,11 @@ private Activity activity;
     private void setProfile() {
 
         TextView nama, kerja_umur, alamat, telepon, username;
+        ImageView circle;
+        circle = v.findViewById(R.id.circle);
+//        circle.setImageBitmap();
+        circle.setMaxWidth(300);
+        circle.setMaxHeight(300);
         nama = v.findViewById(R.id.tvNama);
         kerja_umur = v.findViewById(R.id.tvKerUmur);
         alamat = v.findViewById(R.id.tvAlamat);
@@ -110,6 +120,8 @@ private Activity activity;
         dbU = new DbUsers(activity);
         dbU.open();
         Users user = dbU.getUser(sp.getString("user", ""));
+        Glide.with(activity).asBitmap().apply(RequestOptions.circleCropTransform()).load(user.getProfile_image()).into(circle);
+        Log.d("userProf", "setProfile: " + user.getProfile_image());
         if (user != null) {
             nama.setText(user.getNama());
             if (user.getTtl() != null && user.getAlamat() != null
@@ -196,4 +208,14 @@ private Activity activity;
         this.activity = null;
         super.onDetach();
     }
+
+    /*public Bitmap getBitmapFromURL(String src){
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+        }
+    }*/
 }

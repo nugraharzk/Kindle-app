@@ -13,11 +13,12 @@ public class Users {
     private String lat;
     private String lng;
     private String jabatan;
+    private String profile_image;
 
     public Users() {
     }
 
-    public Users(String username, String nama, String ttl, String alamat, String rt, String rw, String desa, String telepon, String pekerjaan, String lat, String lng, String jabatan) {
+    public Users(String username, String nama, String ttl, String alamat, String rt, String rw, String desa, String telepon, String pekerjaan, String lat, String lng, String jabatan, String profile_image) {
         super();
         this.username = username;
         this.nama = nama;
@@ -31,6 +32,7 @@ public class Users {
         this.lat = lat;
         this.lng = lng;
         this.jabatan = jabatan;
+        this.profile_image = profile_image;
     }
 
 //    public Users(String username, String nama) {
@@ -136,4 +138,11 @@ public class Users {
         this.jabatan = jabatan;
     }
 
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
 }

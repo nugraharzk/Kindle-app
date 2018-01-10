@@ -62,7 +62,7 @@ public class DetailTetanggaActivity extends AppCompatActivity {
         Glide.with(this)
                 .asBitmap()
                 .apply(RequestOptions.circleCropTransform())
-                .load(R.drawable.profile_user)
+                .load(data.getProfile_image())
                 .into(img2);
 
         Button call = findViewById(R.id.btTPhone);

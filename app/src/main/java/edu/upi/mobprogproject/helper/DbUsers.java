@@ -49,6 +49,7 @@ public class DbUsers {
         newV.put("lat", k.getLat());
         newV.put("lng", k.getLng());
         newV.put("pekerjaan", k.getPekerjaan());
+        newV.put("profile_image", k.getProfile_image());
 
         return db.insert("users", null, newV);
     }
@@ -59,7 +60,7 @@ public class DbUsers {
 
         //kolom yang diambil
         String[] cols = new String[]{"nama", "ttl", "alamat", "rt",
-                "rw", "desa", "telepon", "pekerjaan", "jabatan", "lat", "lng"};
+                "rw", "desa", "telepon", "pekerjaan", "jabatan", "lat", "lng", "profile_image"};
         //parameter, akan mengganti ? pada NAMA=?
         String[] param = {username};
 
@@ -79,6 +80,7 @@ public class DbUsers {
             K.setJabatan(cur.getString(8));
             K.setLat(cur.getString(9));
             K.setLng(cur.getString(10));
+            K.setProfile_image(cur.getString(11));
         }
         cur.close();
         return K;
@@ -99,6 +101,7 @@ public class DbUsers {
         upV.put("lat", k.getLat());
         upV.put("lng", k.getLng());
         upV.put("pekerjaan", k.getPekerjaan());
+        upV.put("profile_image", k.getProfile_image());
 
         return db.update("users", upV, "username=?", param);
     }
@@ -129,6 +132,7 @@ public class DbUsers {
                 K.setJabatan(cur.getString(9));
                 K.setLat(cur.getString(10));
                 K.setLng(cur.getString(11));
+                K.setProfile_image(cur.getString(12));
                 out.add(K);
             } while (cur.moveToNext());
         }

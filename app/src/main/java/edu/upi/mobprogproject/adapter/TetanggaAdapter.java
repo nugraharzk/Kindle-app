@@ -7,7 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +20,7 @@ import java.util.List;
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.DetailTetanggaActivity;
 import edu.upi.mobprogproject.adapter.data.TetanggaList;
+import edu.upi.mobprogproject.helper.DbUsers;
 
 /**
  * Created by amaceh on 16/12/17.
@@ -25,12 +30,16 @@ public class TetanggaAdapter extends RecyclerView.Adapter<TetanggaAdapter.ViewHo
     private List<TetanggaList> mData = Collections.emptyList();
     private LayoutInflater mInflater;
     private Context ctx;
+    private DbUsers dbU;
 
     // data is passed into the constructor
     public TetanggaAdapter(Context context, List<TetanggaList> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         ctx = context;
+
+        dbU = new DbUsers(context);
+        dbU.open();
     }
 
     // inflates the row layout from xml when needed
@@ -59,6 +68,7 @@ public class TetanggaAdapter extends RecyclerView.Adapter<TetanggaAdapter.ViewHo
                 ctx.startActivity(i);
             }
         });
+        Glide.with(ctx).asBitmap().apply(RequestOptions.circleCropTransform()).load(dbU.getUser(name.getUsername()).getProfile_image()).into(holder.foto);
     }
 
     // total number of rows
@@ -71,9 +81,11 @@ public class TetanggaAdapter extends RecyclerView.Adapter<TetanggaAdapter.ViewHo
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nama, alamat, kontak, jabatan;
+        public ImageView foto;
         public Button btDetail;
         public ViewHolder(View itemView) {
             super(itemView);
+            foto = itemView.findViewById(R.id.imageView4);
             nama = itemView.findViewById(R.id.tvLTNama);
             alamat = itemView.findViewById(R.id.tvLTalamat);
             kontak = itemView.findViewById(R.id.tvLTkontak);
