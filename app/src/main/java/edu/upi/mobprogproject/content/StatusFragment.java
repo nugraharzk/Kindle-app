@@ -4,6 +4,7 @@ package edu.upi.mobprogproject.content;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upi.mobprogproject.R;
 import edu.upi.mobprogproject.activity.HomeActivity;
@@ -32,6 +34,8 @@ import edu.upi.mobprogproject.helper.DbUsers;
 import edu.upi.mobprogproject.model.Status;
 import edu.upi.mobprogproject.model.Users;
 import edu.upi.mobprogproject.popup.StatusPopUp;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -90,6 +94,10 @@ public class StatusFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        SharedPreferences sp;
+        sp = activity.getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
+
+        final String user = sp.getString("user", "");
         xView = v.findViewById(R.id.viewFeeds);
         menu = v.findViewById(R.id.menu);
         menu.setOnClickListener(new View.OnClickListener() {
@@ -104,12 +112,23 @@ public class StatusFragment extends Fragment {
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(
+                        /*Toast.makeText(
                                 activity,
                                 "You Clicked : " + item.getTitle(),
                                 Toast.LENGTH_SHORT
-                        ).show();
-                        return true;
+                        ).show();*/
+                        switch (item.getItemId()){
+                            case R.id.showAll :
+//                                Toast.makeText(activity, "Semua", Toast.LENGTH_SHORT).show();
+                                setRecView();
+                                return true;
+                            case R.id.showMe :
+//                                Toast.makeText(activity, "Saya", Toast.LENGTH_SHORT).show();
+                                setRecMe(user);
+                                return true;
+                            default:
+                                return true;
+                        }
                     }
                 });
 
@@ -141,8 +160,12 @@ public class StatusFragment extends Fragment {
         dbU = new DbUsers(activity);
         dbS = new DbStatus(activity);
 
+        List<Status> statusList;
+
         dbS.open();
         dbU.open();
+
+        statusList = dbS.getAllStatus();
         // Inflate the layout for this fragment
 
         recyclerView = v.findViewById(R.id.rcStatus);
@@ -155,7 +178,7 @@ public class StatusFragment extends Fragment {
         status.add(new StatusList("Rizki", "10 november 2017", "Aku sudah lelah mananti dirimu"));
         status.add(new StatusList("Ryan", "9 november 2017", "Biarlah yang lalu biarlah berlalu"));
         */
-        adapter = new StatusAdapter(activity, status);
+        adapter = new StatusAdapter(activity, statusList);
 
 
 
@@ -169,9 +192,27 @@ public class StatusFragment extends Fragment {
 //        recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    //public static ArrayList<StatusList> getStatus() {
-    //  return status;
-    //}
+    private void setRecMe(String param) {
+        dbU = new DbUsers(activity);
+        dbS = new DbStatus(activity);
+
+        List<Status> statusList;
+
+        dbS.open();
+        dbU.open();
+
+        statusList = dbS.getStatusByUname(param);
+
+        recyclerView = v.findViewById(R.id.rcStatus);
+        status = setData(dbS, dbU);
+        adapter = new StatusAdapter(activity, statusList);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
 
     @Override
     public void onDestroy() {

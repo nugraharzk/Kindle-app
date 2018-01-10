@@ -87,6 +87,25 @@ public class DbStatus {
         return out;
     }
 
+    public ArrayList<Status> getStatusByUname(String uname) {
+        Cursor cur = null;
+        ArrayList<Status> out = new ArrayList<>();
+        cur = db.rawQuery("SELECT * FROM STATUS WHERE username='"+uname+"'", null);
+        if (cur.moveToFirst()) {
+            do {
+                Status K = new Status();
+                K.setId_status(cur.getInt(0));
+                K.setUsername(cur.getString(1));
+                K.setStatus(cur.getString(2));
+                K.setWaktu(cur.getString(3));
+                K.setLike(cur.getInt(4));
+                out.add(K);
+            } while (cur.moveToNext());
+        }
+        cur.close();
+        return out;
+    }
+
     public void update(List<Status> stat) {
         db.delete("status", null, null);
         for (Status st : stat) {
