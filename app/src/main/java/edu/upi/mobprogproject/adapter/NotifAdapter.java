@@ -1,6 +1,7 @@
 package edu.upi.mobprogproject.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView urgen, pesan, usr;
-        public RelativeLayout layout;
+        public ConstraintLayout layout;
 
         public MyViewHolder(View itemView) {
             super(itemView);

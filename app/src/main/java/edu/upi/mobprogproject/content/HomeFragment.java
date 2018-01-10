@@ -224,7 +224,8 @@ public class HomeFragment extends Fragment implements GoogleApiClient.Connection
                                     .radius(200)
                                     .strokeWidth(0f)
                                     //TODO change to Transparent color u like
-                                    .fillColor(getActivity().getResources().getColor(R.color.bg_screen4))
+                                    .strokeColor(Color.BLACK)
+                                    .fillColor(Color.argb(100,255,255,255))
                     );
                 } catch (Exception e) {
                     Log.i("kokoko", e.toString());
