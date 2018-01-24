@@ -40,6 +40,9 @@ import retrofit2.Response;
 
 
 public class HomeActivity extends AppCompatActivity {
+
+    // Initialize the List<{Class}> item
+    // Initialize the Db Class
     List<Users> userlist;
     DbUsers dbU;
 
@@ -51,9 +54,12 @@ public class HomeActivity extends AppCompatActivity {
 
     List<Notifications> notificationsList;
     DbNotif dbN;
-    Context c=this;
+    Context c = this;
 
+    // TAG for logging
     private static final String TAG = HomeActivity.class.getSimpleName();
+
+    // Bottom Navigation Listener
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -100,32 +106,41 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Instantiate the Db
         dbU = new DbUsers(this);
         dbE = new DbEvents(this);
         dbS = new DbStatus(this);
         dbN = new DbNotif(this);
+
+        // Open db
         dbU.open();
         dbE.open();
         dbS.open();
         dbN.open();
+
+        // Get data from backend and parse to db
         getData();
 
+        // Initialize the fragment
         HomeFragment homeFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, homeFragment).addToBackStack(null).commit();
 
+        // Bottom navigation bounding
         BottomNavigationViewEx navigation = findViewById(R.id.navigation);
-//        donate_button = (Button) findViewById(R.id.donate_button);
-
         navigation.enableAnimation(false);
         navigation.enableShiftingMode(false);
         navigation.enableItemShiftingMode(false);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        // Get intent data from intent before
         Bundle extras = getIntent().getExtras();
         int position=0;
         if(extras != null) {
             position = extras.getInt("viewpager_position");
         }
+
+        // Fragment selection
         if(position==0){
             HomeFragment homeFragment1 = new HomeFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, homeFragment1)
@@ -169,9 +184,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
+    // Get data void for GET Method
     private void getData() {
+        // for user
         userGrab();
+        // for notification
         notifGrab();
     }
 

@@ -21,14 +21,21 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-
+    // Interface for Accounts
+    // URI Accounts
+    //                      Base URL               / URI
+    // complete URL : http://mobprog.atwebpages.com/accounts
+    // Same as the others
+    // GET Method
     @GET("accounts")
     Call<List<Accounts>> getUserLogin(@Query("username") String username, @Query("password") String password);
 
+    // POST Method
     @FormUrlEncoded
     @POST("accounts")
     Call<Accounts> postAccount(@Field("username") String username, @Field("password") String password, @Field("email") String email);
 
+    // PUT Method
     @FormUrlEncoded
     @PUT("accounts")
     Call<Accounts> putAccount(@Field("username") String username,

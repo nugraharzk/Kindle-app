@@ -44,29 +44,37 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*
-        dbU = new DbAccounts(getApplicationContext());
-        dbU.open();
-        */
+        // Open the SharedPreferences feature
+        // parse to sp
         sp = getSharedPreferences("edu.upi.mobprogproject.user", MODE_PRIVATE);
 
+        // Get current user and email from sp
         String user = sp.getString("user", "");
         String email = sp.getString("email", "");
+
+        // Get to know if user has login or not
         boolean logged = sp.getBoolean("logged", false);
+
+        // If user had login before
         if (!user.equals("") && !email.equals("") && logged) {
+            // Fin this activity
             finish();
             //opening profile activity
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
         }
+
         //initializing views
         editTextUsername = findViewById(R.id.editTextLogin);
         editTextPassword = findViewById(R.id.editTextPassword);
     }
 
+    // Void for Login Button
     public void userLogin(View v) {
+        // Parse from edit text to string
         username = editTextUsername.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
 
+        // Initialize the AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.progressbar, null);
         builder.setView(view);
@@ -85,30 +93,25 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         dialog.show();
-        /*Accounts u = dbU.getAccount(username, password);
-        if (u.getUsername() != null) {
-            ed = sp.edit();
-            ed.putString("user", u.getUsername());
-            ed.putString("email", u.getEmail());
-            ed.putBoolean("logged", true);
-            ed.apply();
-            Toast.makeText(this, "Logged In", Toast.LENGTH_LONG).show();
-            finish();
-            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-        } else {
-            Toast.makeText(this, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
-        }*/
 
+        // Retrofit for GET User Info
         final Context c = this;
+        // Initialize the Retrofit Interface
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        // Calling Method for Retrofit
+        // response : GET User from Accounts
         Call<List<Accounts>> call = apiService.getUserLogin(username, password);
         call.enqueue(new Callback<List<Accounts>>() {
             @Override
             public void onResponse(Call<List<Accounts>> call, Response<List<Accounts>> response) {
+                // Parse from body to List<Accounts>
                 accountsList = response.body();
                 dialog.dismiss();
 
+                // If on Web Db has an User from uname and pass input
                 if (response.body().size() != 0){
+                    // If this Accounts has verified by RT
                     if (accountsList.get(0).getVerified() == 1) {
                         ed = sp.edit();
                         ed.putString("user", accountsList.get(0).getUsername());
@@ -118,13 +121,16 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(c, "Logged In", Toast.LENGTH_LONG).show();
                         finish();
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-
                     }
+                    // Else
+                    // Show verification activity
                     else{
                         Intent intent = new Intent(getBaseContext(), WaitVerification.class);
                         startActivity(intent);
                     }
                 }
+                // Else
+                // Show Toast that uname or pass was wrong
                 else{
                     Toast.makeText(c, "Username, Email atau Password salah", Toast.LENGTH_LONG).show();
                     //dialog.dismiss();
@@ -134,16 +140,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Accounts>> call, Throwable t) {
+                // If callback fails log to error section
                 Log.e(TAG, "onFailure: ", t);
                 Toast.makeText(c, "Ada Yang Salah", Toast.LENGTH_LONG).show();
             }
         });
-
-
-        //dialog.dismiss();
-
     }
 
+    // Void for Regist Button
     public void daftar(View v) {
         Intent i = new Intent(this, SignupActivity.class);
         startActivity(i);
@@ -159,21 +163,5 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-    private void getData(){
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<List<Accounts>> call = apiService.getUserLogin(username, password);
-        call.enqueue(new Callback<List<Accounts>>() {
-            @Override
-            public void onResponse(Call<List<Accounts>> call, Response<List<Accounts>> response) {
-                accountsList = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<Accounts>> call, Throwable t) {
-                Log.e(TAG, "onFailure: ", t);
-            }
-        });
     }
 }
